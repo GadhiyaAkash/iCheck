@@ -8,6 +8,7 @@ import { ContainedBoxComponent } from './theme/layouts/contained-box/contained-b
 import { FullWidthSidenavComponent } from './theme/layouts/full-width-sidenav/full-width-sidenav.component';
 import { LoginComponent } from './core-modules/account/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { HeaderComponent } from './theme/header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     ContainedBoxComponent,
     FullWidthSidenavComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

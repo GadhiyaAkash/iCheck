@@ -27,11 +27,12 @@
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
   }
+  
   body{
-    font-family: 'Open Sans', sans-serif;
-    color: #2F3640;
-    font-size:15px;
-    background:#F7F9F9;
+    font-family: 'Open Sans', sans-serif !important;
+    color: #2F3640 !important;
+    font-size:15px !important;
+    background:#F7F9F9 !important;
   }
   body p,.form-check-label{
     font-size: 15px;
@@ -281,7 +282,7 @@ color: #fff
   .navbar{
     background:#fff;
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 15px !important;
   }
   li.nav-item.active .nav-link:after {
     content: '';
@@ -620,7 +621,7 @@ span.icon-bar {
 /*table*/
 .table{
   font-size: 14px;
-      color: #2F3640;
+  color: #2F3640 !important;
 }
 tr.active td:first-child:before{
     background: #2396E3;
@@ -740,12 +741,12 @@ span.stts.stts-progress:before {
     top: 0;
 }
 .table-responsive {
-    display: table;
+    display: table !important;
     
 }
 /*checkbox or radiobtn*/
 .round {
-  position: relative;
+  position: relative !important;
 }
 
 .round label {
