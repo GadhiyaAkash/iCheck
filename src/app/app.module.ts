@@ -9,6 +9,8 @@ import { FullWidthSidenavComponent } from './theme/layouts/full-width-sidenav/fu
 import { LoginComponent } from './core-modules/account/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HeaderComponent } from './theme/header/header.component';
+import { NG_TABLE_DIRECTIVES } from './core/components/ng-table/components/ng-table';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { HeaderComponent } from './theme/header/header.component';
     FullWidthSidenavComponent,
     LoginComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    NG_TABLE_DIRECTIVES
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

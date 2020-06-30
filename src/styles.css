@@ -441,10 +441,10 @@ button.btn.btn-theme-blue:hover {
   transition: .3s
 }
 .btn-theme-blue{
-  background: #50ADEB 0% 0% no-repeat padding-box;
-border-radius: 5px;
-font-size: 14px;
-color: #FFFFFF;
+  background: #50ADEB 0% 0% no-repeat padding-box !important;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #FFFFFF !important;
 }
 .logo{
   display: flex;align-items: center;
@@ -647,14 +647,14 @@ tr{
    border-left: 5px solid transparent;
 }
 .table thead th,.table td, .table th{
-  border:transparent;
+  border:transparent !important;
   position: relative;
 }
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #fff;
+    background-color: #fff !important;
 }
 .table-striped tbody tr:nth-of-type(even) {
-    background-color:#F5F4FB;
+    background-color:#F5F4FB !important;
 }
 table th,table th .btn{
   color: #81858B;

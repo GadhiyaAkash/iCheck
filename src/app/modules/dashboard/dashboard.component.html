@@ -4,56 +4,16 @@
         <section class="summery-section-top">
 
             <div class="row">
-                <div class="col-md-2">
-                    <div class="box-summery text-center mb-md-0 mb-4 active">
-                        <img src="https://via.placeholder.com/150" class="summery-img mb-3">
+                <div class="col-md-2" *ngFor="let summary of iCheckSummaries">
+                    <div class="box-summery text-center mb-md-0 mb-4" [ngClass]="{ 'active': summary.active }"
+                        (click)="selectIcheckSummary(summary)">
+                        <img [src]="summary.image" class="summery-img mb-3">
                         <div class="box-content">
-                            <h5 class="box-title mb-0">Pre-PSC</h5>
-                            <p class="box-text">Lorem ipsum text</p>
+                            <h5 class="box-title mb-0">{{ summary.title }}</h5>
+                            <p class="box-text">{{ summary.description }}</p>
                         </div>
                     </div>
                 </div>
-                <!------>
-                <div class="col-md-2">
-                    <div class="box-summery text-center mb-md-0 mb-4">
-                        <img src="https://via.placeholder.com/150" class="summery-img mb-3">
-                        <div class="box-content">
-                            <h5 class="box-title mb-0">Quarterly Inspection</h5>
-                            <p class="box-text">Lorem ipsum text</p>
-                        </div>
-                    </div>
-                </div>
-                <!------>
-                <div class="col-md-2">
-                    <div class="box-summery text-center mb-md-0 mb-4">
-                        <img src="https://via.placeholder.com/150" class="summery-img mb-3">
-                        <div class="box-content">
-                            <h5 class="box-title mb-0">Pre-vetting</h5>
-                            <p class="box-text">Lorem ipsum text</p>
-                        </div>
-                    </div>
-                </div>
-                <!------>
-                <div class="col-md-2">
-                    <div class="box-summery text-center mb-md-0 mb-4">
-                        <img src="https://via.placeholder.com/150" class="summery-img mb-3">
-                        <div class="box-content">
-                            <h5 class="box-title mb-0">Pre-CDI</h5>
-                            <p class="box-text">Lorem ipsum text</p>
-                        </div>
-                    </div>
-                </div>
-                <!------>
-                <div class="col-md-2">
-                    <div class="box-summery text-center">
-                        <img src="https://via.placeholder.com/150" class="summery-img mb-3">
-                        <div class="box-content">
-                            <h5 class="box-title mb-0">Audit</h5>
-                            <p class="box-text">Lorem ipsum text</p>
-                        </div>
-                    </div>
-                </div>
-                <!------>
             </div>
         </section>
         <section class="summery-bottom mt-5 pt-2">
@@ -68,7 +28,18 @@
                 </div>
             </div>
 
-            <div>
+            <ng-table [config]="config" 
+                (tableChanged)="onChangeTable(config)" 
+                [rows]="rows" 
+                [columns]="columns"
+            >
+            </ng-table>
+
+            <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length"
+                [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false"
+                (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+            </pagination>
+            <!-- <div>
                 <table class="table table-striped mt-4 table-responsive">
                     <thead>
                         <tr>
@@ -192,7 +163,7 @@
                     <a href="#" class="underline">Delete</a>
                     <a href="#" class="d-inline-block ml-3 underline">Archive</a>
                 </div>
-            </div>
+            </div> -->
         </section>
     </section>
 </div>
