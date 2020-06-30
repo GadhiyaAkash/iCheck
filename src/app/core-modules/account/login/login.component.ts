@@ -54,9 +54,10 @@ export class LoginComponent implements OnInit {
    */
   login() {
     console.log("Login form", this.entity);
-    
-    // this.baseService.post('/login', this.entity).subscribe(() => {
-    //   this.authService.redirectAfterLogin();
+    this.baseService.login('/login', this.entity);
+
+    // this.baseService.login('/login', this.entity).subscribe(() => {
+      //   this.authService.redirectAfterLogin();
     // }, err => {
     //   if (err && err.error) {
     //     // this.toastr.error(err.error.message);

@@ -21,7 +21,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     // return this.token && this.user ? true : false;
-    return false;
+    return this.user ? true : false;
   }
 
   public get user() {

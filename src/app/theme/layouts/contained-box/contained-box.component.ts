@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-contained-box',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainedBoxComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+    if (this.router.url == '/' && !this.authService.isLoggedIn()) {
+      this.router.navigate(['login']);
+    } else if (this.authService.isLoggedIn()) {
+      this.router.navigate(['dashboard']);
+    }
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

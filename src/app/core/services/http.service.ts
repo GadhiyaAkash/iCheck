@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import * as _ from 'lodash';
-import { HttpExtraParams } from '@app/core/interfaces/http'
+import { HttpExtraParams } from './../interfaces/http';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,7 @@ export class HttpService {
       headers['hide-loader'] = HttpHeadersEnum.HIDE_LOADER;
     }
     if (extraParams.params && extraParams.params.headers) {
-      _.each(extraParams.params.headers, function (o) {
+      extraParams.params.headers.forEach((o:any) => {
         headers[o.key] = o.value;
       });
     }
@@ -37,7 +36,7 @@ export class HttpService {
   }
 
   get(path: string, params: URLSearchParams = new URLSearchParams(), hideLoader: boolean = false): Observable<any> {
-    const httpParams = _.extend(this.getHeaders({ hideLoader: hideLoader }), {
+    const httpParams = Object.assign(this.getHeaders({ hideLoader: hideLoader }), {
       params: new HttpParams({ fromString: this.createGetParams(params) })
     });
     return this.http.get(`${path}`, httpParams)
@@ -54,7 +53,7 @@ export class HttpService {
   }
 
   delete(path: string, params: URLSearchParams = new URLSearchParams(), hideLoader: boolean = false): Observable<any> {
-    const httpParams = _.extend(this.getHeaders({ hideLoader: hideLoader }), {
+    const httpParams = Object.assign(this.getHeaders({ hideLoader: hideLoader }), {
       params: new HttpParams({ fromString: this.createGetParams(params) })
     });
     return this.http.delete(`${path}`, httpParams)
@@ -125,8 +124,6 @@ export class HttpService {
   private formatErrors(error: any) {
     return Observable.throw(error);
   }
-
-
 }
 
 

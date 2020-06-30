@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-full-width-sidenav',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullWidthSidenavComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    const publicRoute = this.activeRoute.snapshot.data.isPublic || false;
+    if (this.router.url == '/') {
+      if (!publicRoute && !this.authService.isLoggedIn()) {
+        this.router.navigate(['login']);
+      } else {
+        this.router.navigate(['dashboard']);
+      }
+    }
   }
 
 }

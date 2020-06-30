@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +7,11 @@ import { ApiService } from './api.service';
 export class BaseService {
 
   constructor(
-    private apiService: ApiService
+    private authService: AuthService
   ) { }
 
-  /**
-   * Post data to remote server to save data
-   */
-  post(URL:any, params:any):Observable<any> {
-    return this.apiService.post(URL, params);
+  login(URL:any, params:any) {
+    this.authService.setUser(params);
+    this.authService.redirectAfterLogin();
   }
 }
