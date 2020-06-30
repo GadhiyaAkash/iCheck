@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import * as _ from 'lodash';
-import { HttpHeadersEnum } from '@core/enums';
 import { HttpExtraParams } from '@app/core/interfaces/http'
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpService {
 
   constructor(
@@ -127,4 +127,11 @@ export class HttpService {
   }
 
 
+}
+
+
+export enum HttpHeadersEnum {
+  APPLICATION_JSON = 'application/json',
+  HIDE_LOADER = 'true',
+  APPLICATION_X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded'
 }

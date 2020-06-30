@@ -968,3 +968,7 @@ font-size: 14px;color: #8F8DB9}
   margin:15px;
 }
 }
+
+.required {
+  color: var(--red);
+}

@@ -8,43 +8,55 @@
                 </a>
                 <div class="row">
                     <div class="col-md-8 offset-md-2 col-10 offset-1">
-                        <form class="text-center d-block w-100">
-                            <div class="form-group d-flex justify-content-around">
-                                <div class="box box-1">
-                                    SHORE
+                        <form class="text-center d-block w-100" name="entityForm" #entityForm="ngForm"
+                            (ngSubmit)="entityForm.valid && login()" novalidate>
+                        <div class="form-group d-flex justify-content-around">
+                            <div class="box box-1">
+                                SHORE
+                            </div>
+                            <div class="box box-2">
+                                VESSEL
+                            </div>
+                        </div>
+                        <div class="form-group text-center mb-4">
+                            <select name="ship" required class="form-control text-center"
+                                [(ngModel)]="entity.ship_id">
+                                <option value="">Select ship</option>
+                                <option *ngFor="let ship of ships" value={{ship.id}}>
+                                    {{ship.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="entityForm.submitted && !entity.ship_id" class="float-left required mb-2">
+                                <div>This is a required field</div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center mb-4">
+                            <select name="link" required class="form-control text-center"
+                                [(ngModel)]="entity.rank_id">
+                                <option value="">Select rank</option>
+                                <option *ngFor="let rank of ranks" value={{rank.id}}>
+                                    {{rank.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="entityForm.submitted && !entity.rank_id" class="float-left required mb-2">
+                                <div>This is a required field</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="entity.password" name="password"
+                                required #password="ngModel" />
+                            <div *ngIf="entityForm.submitted && password.invalid" class="float-left required">
+                                <div *ngIf="password.errors.required">
+                                    This is a required field
                                 </div>
-                                <div class="box box-2">
-                                    VESSEL
-                                </div>
                             </div>
-                            <div class="form-group">
-                                <select class="form-control mb-4 text-center" name="ship" id="ship">
-                                    <option>Select ship</option>
-                                    <option>Ship1</option>
-                                    <option>Ship2</option>
-                                    <option>Ship3</option>
-                                </select>
-                            </div>
-                            <!------->
-                            <div class="form-group">
-                                <select class="form-control text-center" id="rank">
-                                    <option>Select rank</option>
-                                    <option>rank1</option>
-                                    <option>rank2</option>
-                                    <option>rank3</option>
-                                </select>
-                            </div>
-                            <!------->
-                            <div class="form-group text-center">
-                                <input class="form-control" type="password" placeholder="Password">
-                            </div>
-                            <!------->
-                            <div class="form-group pt-md-3 text-center">
-                                <a href="icheck-summery.html" class="btn btn-theme">LOGIN</a>
-                            </div>
-                            <div class="form-group text-center">
-                                <a href="javascript:void(0)" class="link-theme">forgot password?</a>
-                            </div>
+                        </div>
+                        <div class="form-group pt-md-3 text-center">
+                            <button class="btn btn-theme" type="submit">LOGIN</button>
+                        </div>
+                        <div class="form-group text-center">
+                            <a href="javascript:void(0)" class="link-theme">forgot password?</a>
+                        </div>
                         </form>
                     </div>
                 </div>
