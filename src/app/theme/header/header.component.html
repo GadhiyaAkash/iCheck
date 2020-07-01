@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg">
-    <a href="icheck-summery.html" class="logo">
+    <a href="javascript:void(0);" [routerLink]="['/dashboard']" class="logo">
         <img src="./../../../assets/images/logo.png" alt="" title="" class="" />
         <span>iCheck</span>
     </a>
@@ -33,7 +33,7 @@
 
         <span>
             <span class="account-user-name">John Doe</span>
-            <a class="account-position" href="#">Logout</a>
+            <a class="account-position" href="javascript:void(0)" (click)="logout()">Logout</a>
         </span>
     </span>
 </nav>

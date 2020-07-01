@@ -11,6 +11,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HeaderComponent } from './theme/header/header.component';
 import { NG_TABLE_DIRECTIVES } from './core/components/ng-table/components/ng-table';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { IcheckInspectionComponent } from './modules/icheck-inspection/icheck-inspection.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
-    NG_TABLE_DIRECTIVES
+    NG_TABLE_DIRECTIVES,
+    IcheckInspectionComponent
   ],
   imports: [
     BrowserModule,

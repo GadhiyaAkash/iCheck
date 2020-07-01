@@ -858,6 +858,9 @@ transform: translateX(-50%);
 .form-inspection .form-control {
     margin-top: -12px;
 }
+.form-inspection .form-group {
+  margin-bottom: 1.7rem !important;
+}
 .line-row{
   margin:0 5px;
 }
@@ -972,6 +975,8 @@ font-size: 14px;color: #8F8DB9}
 
 .required {
   color: var(--red);
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 .table-footer {
   margin-top: 10px;

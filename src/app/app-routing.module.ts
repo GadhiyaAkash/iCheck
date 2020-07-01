@@ -6,6 +6,7 @@ import { ContainedBoxComponent } from './theme/layouts/contained-box/contained-b
 import { LoginComponent } from './core-modules/account/login/login.component';
 import { FullWidthSidenavComponent } from './theme/layouts/full-width-sidenav/full-width-sidenav.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { IcheckInspectionComponent } from './modules/icheck-inspection/icheck-inspection.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,12 @@ const routes: Routes = [
     children: [{
       path: 'dashboard',
       component: DashboardComponent,
+      canActivate: [AuthGuard],
+      data: { isPublic: false }
+    },
+    {
+      path: 'icheck-inspection',
+      component: IcheckInspectionComponent,
       canActivate: [AuthGuard],
       data: { isPublic: false }
     }]
