@@ -5,7 +5,7 @@
 
             <div class="row">
                 <div class="col-md-2" *ngFor="let summary of iCheckInspectionList">
-                    <div class="box-summery text-center mb-md-0 mb-4" [ngClass]="{ 'active': summary.active }">
+                    <div class="box-summery text-center mb-md-0 mb-4" (click)="selectIcheckInspection(summary)" [ngClass]="{ 'active': summary.active }">
                         <div class="box-content">
                             <h5 class="box-title mb-0">{{ summary.title }}</h5>
                             <p class="box-text">{{ summary.description }}</p>
@@ -53,8 +53,7 @@
                                     <input type="text" class="form-control" id="" [(ngModel)]="entity.deadweight"
                                         name="deadweight" required #deadweight="ngModel"
                                         placeholder="Summer Deadweight of the Vessel">
-                                    <div *ngIf="entityForm.submitted && deadweight.invalid"
-                                        class="float-left required">
+                                    <div *ngIf="entityForm.submitted && deadweight.invalid" class="float-left required">
                                         <div *ngIf="deadweight.errors.required">
                                             This is a required field
                                         </div>
@@ -69,12 +68,9 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">IMO</label>
-                                    <input type="text" class="form-control" id=""
-                                    [(ngModel)]="entity.imo"
-                                        name="imo" required #imo="ngModel"
-                                        placeholder="IMO Number of the Vessel">
-                                    <div *ngIf="entityForm.submitted && imo.invalid"
-                                        class="float-left required">
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.imo" name="imo"
+                                        required #imo="ngModel" placeholder="IMO Number of the Vessel">
+                                    <div *ngIf="entityForm.submitted && imo.invalid" class="float-left required">
                                         <div *ngIf="imo.errors.required">
                                             This is a required field
                                         </div>
@@ -83,11 +79,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Gross Tonnage</label>
-                                    <input type="text" class="form-control" id=""
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.gross_tonnage"
+                                        name="gross_tonnage" required #gross_tonnage="ngModel"
                                         placeholder="Registered Gross Tonnage of the Vessel">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <div *ngIf="entityForm.submitted && gross_tonnage.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="gross_tonnage.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -95,11 +92,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Displacement</label>
-                                    <input type="text" class="form-control" id=""
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.displacement"
+                                        name="displacement" required #displacement="ngModel"
                                         placeholder="Summer Displacement of the Vessel">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <div *ngIf="entityForm.submitted && displacement.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="displacement.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -113,10 +111,12 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Call Sign</label>
-                                    <input type="text" class="form-control" id="" placeholder="Call Sign of the Vessel">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.call_sign"
+                                        name="call_sign" required #call_sign="ngModel"
+                                        placeholder="Call Sign of the Vessel">
+                                    <div *ngIf="entityForm.submitted && call_sign.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="call_sign.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -124,11 +124,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Nett Tonnage</label>
-                                    <input type="text" class="form-control" id=""
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.nett_tonnage"
+                                        name="nett_tonnage" required #nett_tonnage="ngModel"
                                         placeholder="Nett Registered Tonnage of the Vessel">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <div *ngIf="entityForm.submitted && nett_tonnage.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="nett_tonnage.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -136,11 +137,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Summer Draught</label>
-                                    <input type="text" class="form-control" id=""
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.summer_draught"
+                                        name="summer_draught" required #summer_draught="ngModel"
                                         placeholder="Summer Draught of the Vessel">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <div *ngIf="entityForm.submitted && summer_draught.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="summer_draught.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -162,10 +164,12 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Master</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of Master">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.master"
+                                        name="master" required #master="ngModel"
+                                        placeholder="Name of Master">
+                                    <div *ngIf="entityForm.submitted && master.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="master.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -173,10 +177,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Chief Officer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of Chief Officer">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chief_officer"
+                                        name="chief_officer" required #chief_officer="ngModel" id=""
+                                        placeholder="Name of Chief Officer">
+                                    <div *ngIf="entityForm.submitted && chief_officer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="chief_officer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -184,10 +190,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">2nd Officer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of 2nd Officer">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.second_officer"
+                                        name="second_officer" required #second_officer="ngModel" id=""
+                                        placeholder="Name of 2nd Officer">
+                                    <div *ngIf="entityForm.submitted && second_officer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="second_officer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -195,10 +203,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">3rd Officer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of 3rd Officer">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.third_officer"
+                                        name="third_officer" required #third_officer="ngModel" id=""
+                                        placeholder="Name of 3rd Officer">
+                                    <div *ngIf="entityForm.submitted && third_officer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="third_officer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -211,10 +221,12 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Chief Engineer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of Chief Engineer">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chief_engineer"
+                                        name="chief_engineer" required #chief_engineer="ngModel" id=""
+                                        placeholder="Name of Chief Engineer">
+                                    <div *ngIf="entityForm.submitted && chief_engineer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="chief_engineer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -222,10 +234,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">2nd Engineer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of the Master">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chilf_second_officer"
+                                        name="chilf_second_officer" required #chilf_second_officer="ngModel" id=""
+                                        placeholder="Name of the Master">
+                                    <div *ngIf="entityForm.submitted && chilf_second_officer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="chilf_second_officer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -233,10 +247,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">3rd Engineer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of 3rd Engineer">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chilf_third_officer"
+                                        name="chilf_third_officer" required #chilf_third_officer="ngModel" id=""
+                                        placeholder="Name of 3rd Engineer">
+                                    <div *ngIf="entityForm.submitted && chilf_third_officer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="chilf_third_officer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -244,10 +260,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">4th Engineer</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of the Master">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chilf_fourth_officer"
+                                        name="chilf_fourth_officer" required #chilf_fourth_officer="ngModel" id=""
+                                        placeholder="Name of the Master">
+                                    <div *ngIf="entityForm.submitted && chilf_fourth_officer.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="chilf_fourth_officer.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -260,10 +278,12 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Electro-Technical Officer (E.T.O.)</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of E.T.O.">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.eto"
+                                        name="eto" required #eto="ngModel" id=""
+                                        placeholder="Name of E.T.O.">
+                                    <div *ngIf="entityForm.submitted && eto.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="eto.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -271,10 +291,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Chief Cook</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of Chief Officer">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chief_cook"
+                                        name="chief_cook" required #chief_cook="ngModel" id=""
+                                        placeholder="Name of Chief Officer">
+                                    <div *ngIf="entityForm.submitted && chief_cook.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="chief_cook.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -282,10 +304,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Bosun</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of Bosun">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.bosun"
+                                        name="bosun" required #bosun="ngModel" id=""
+                                        placeholder="Name of Bosun">
+                                    <div *ngIf="entityForm.submitted && bosun.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="bosun.errors.required">
                                             This is a required field
                                         </div>
                                     </div>
@@ -293,10 +317,12 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">No.1 Oiler (Fitter)</label>
-                                    <input type="text" class="form-control" id="" placeholder="Name of No.1 Oiler">
-                                    <div *ngIf="entityForm.submitted && vessel_name.invalid"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.oiler"
+                                        name="oiler" required #oiler="ngModel" id=""
+                                        placeholder="Name of No.1 Oiler">
+                                    <div *ngIf="entityForm.submitted && oiler.invalid"
                                         class="float-left required">
-                                        <div *ngIf="vessel_name.errors.required">
+                                        <div *ngIf="oiler.errors.required">
                                             This is a required field
                                         </div>
                                     </div>

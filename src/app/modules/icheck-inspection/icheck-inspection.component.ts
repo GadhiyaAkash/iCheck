@@ -24,4 +24,11 @@ export class IcheckInspectionComponent implements OnInit {
   submit() {
     console.log("entity::", this.entity);
   }
+
+  selectIcheckInspection(summary:any) {
+    this.iCheckInspectionList.forEach((s) => {
+      s.active = (s.id == summary.id) ? true : false
+    });
+    this.entity.check_summary_id = summary.id;
+  }
 }
