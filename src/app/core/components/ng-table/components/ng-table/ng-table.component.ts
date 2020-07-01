@@ -88,5 +88,6 @@ export class NgTableComponent implements OnInit {
 
   selectRow(row:any, event:any) {
     // Add logic for checkbox
+    console.log("selectRow::", row);
   }
 }

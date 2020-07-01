@@ -21,149 +21,32 @@
                 <h5 class="title-sm">Pre-PSC Questionnaire</h5>
                 <div class="d-md-flex">
                     <form class="search-container mr-md-4">
-                        <input type="text" id="search-bar" placeholder="">
+                        <!-- <input type="text"  placeholder=""> -->
+                        <input *ngIf="config.filtering" id="search-bar" placeholder=""
+                            [ngTableFiltering]="config.filtering"
+                            class=""
+                            (tableChanged)="onChangeTable(config)"/>
                         <a href="#"><i data-feather="search" class="search-icon"></i></a>
                     </form>
                     <button class="btn btn-theme-blue mt-md-0 mt-2">New Inspection Checklist</button>
                 </div>
             </div>
 
-            <ng-table [config]="config" 
-                (tableChanged)="onChangeTable(config)" 
-                [rows]="rows" 
-                [columns]="columns"
-            >
+            <ng-table [config]="config" (tableChanged)="onChangeTable(config)" [rows]="rows" [columns]="columns">
             </ng-table>
 
-            <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length"
-                [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false"
-                (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
-            </pagination>
-            <!-- <div>
-                <table class="table table-striped mt-4 table-responsive">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Checklist ID</th>
-                            <th scope="col">Checklist Name</th>
-                            <th scope="col">Attachments</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created</th>
-                            <th scope="col">Last Updated</th>
-                            <th scope="col"><i data-feather="more-horizontal" class="more-icon"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox" />
-                                    <label for="checkbox"></label>
-                                </div>
-                            </td>
-                            <td scope="row">#743985738</td>
-                            <td>Checklist Name</td>
-                            <td><a href="#" class="view-link">View</a></td>
-                            <td class="">
-                                <span class="stts stts-complete">
-                                    <span>COMPLETE</span>
-                                </span>
-                                <span class="lock-unlock">
-                                    <i class="fa fa-unlock unlock" aria-hidden="true"></i>
-                                </span>
-                            </td>
-                            <td>Apr 22,2020</td>
-                            <td>Jun 10,2020</td>
-                            <td><i data-feather="more-horizontal" class="more-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox6" />
-                                    <label for="checkbox6"></label>
-                                </div>
-                            </td>
-                            <td scope="row">#743985738</td>
-                            <td>Checklist Name</td>
-                            <td><a href="#" class="view-link">View</a></td>
-                            <td class=""><span class="stts stts-success"><span>SUBMITTED</span></span><span
-                                    class="lock-unlock"><i class="fa fa-lock lock" aria-hidden="true"></i></span></td>
-                            <td>Apr 22,2020</td>
-                            <td>Jun 10,2020</td>
-                            <td><i data-feather="more-horizontal" class="more-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </td>
-                            <td scope="row">#743985738</td>
-                            <td>Checklist Name</td>
-                            <td><a href="#" class="view-link">View</a></td>
-                            <td class=""><span class="stts stts-progress"><span>IN PROGRESS</span></span><span
-                                    class="lock-unlock"><i class="fa fa-lock lock" aria-hidden="true"></i></span></td>
-                            <td>Apr 22,2020</td>
-                            <td>Jun 10,2020</td>
-                            <td><i data-feather="more-horizontal" class="more-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox2" />
-                                    <label for="checkbox2"></label>
-                                </div>
-                            </td>
-                            <td scope="row">#743985738</td>
-                            <td>Checklist Name</td>
-                            <td><a href="#" class="view-link">View</a></td>
-                            <td class=""><span class="stts stts-complete"><span>COMPLETE</span></span><span
-                                    class="lock-unlock"><i class="fa fa-lock lock" aria-hidden="true"></i></span></td>
-                            <td>Apr 22,2020</td>
-                            <td>Jun 10,2020</td>
-                            <td><i data-feather="more-horizontal" class="more-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox3" />
-                                    <label for="checkbox3"></label>
-                                </div>
-                            </td>
-                            <td scope="row">#743985738</td>
-                            <td>Checklist Name</td>
-                            <td><a href="#" class="view-link">View</a></td>
-                            <td class=""><span class="stts stts-complete"><span>COMPLETE</span></span><span
-                                    class="lock-unlock"><i class="fa fa-lock lock" aria-hidden="true"></i></span></td>
-                            <td>Apr 22,2020</td>
-                            <td>Jun 10,2020</td>
-                            <td><i data-feather="more-horizontal" class="more-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox4" />
-                                    <label for="checkbox4"></label>
-                                </div>
-                            </td>
-                            <td scope="row">#743985738</td>
-                            <td>Checklist Name</td>
-                            <td><a href="#" class="view-link">View</a></td>
-                            <td class=""><span class="stts stts-complete"><span>COMPLETE</span></span><span
-                                    class="lock-unlock"><i class="fa fa-lock lock" aria-hidden="true"></i></span></td>
-                            <td>Apr 22,2020</td>
-                            <td>Jun 10,2020</td>
-                            <td><i data-feather="more-horizontal" class="more-icon"></i></td>
-                        </tr>
+            <div class="table-footer">
 
-                    </tbody>
-                </table>
-                <div class="text-right mt-5">
+                <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length"
+                    [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false"
+                    (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+                </pagination>
+
+                <div class="">
                     <a href="#" class="underline">Delete</a>
                     <a href="#" class="d-inline-block ml-3 underline">Archive</a>
                 </div>
-            </div> -->
+            </div>
         </section>
     </section>
 </div>

@@ -64,12 +64,12 @@ export class NgTableService {
   ];
 
   allUserRows = [
-    { id: '#743985738', name: 'Checklist Name 1', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '#743985739', name: 'Checklist Name 2', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '#743985740', name: 'Checklist Name 3', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '#743985741', name: 'Checklist Name 4', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '#743985742', name: 'Checklist Name 5', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '#743985743', name: 'Checklist Name 6', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '#743985744', name: 'Checklist Name 7', attachment: 'view', status: 'completed', created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' }
+    { id: '#743985738', name: 'Checklist Name 1', attachment: 'view', status: 'COMPLETE', statusClass:"complete", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '#743985739', name: 'Checklist Name 2', attachment: 'view', status: 'SUBMITTED', statusClass:"success", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '#743985740', name: 'Checklist Name 3', attachment: 'view', status: 'IN PROGRESS', statusClass:"progress", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '#743985741', name: 'Checklist Name 4', attachment: 'view', status: 'COMPLETE', statusClass:"complete", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '#743985742', name: 'Checklist Name 5', attachment: 'view', status: 'SUBMITTED', statusClass:"success", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '#743985743', name: 'Checklist Name 6', attachment: 'view', status: 'COMPLETE', statusClass:"complete", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '#743985744', name: 'Checklist Name 7', attachment: 'view', status: 'SUBMITTED', statusClass:"success", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' }
   ]
 }

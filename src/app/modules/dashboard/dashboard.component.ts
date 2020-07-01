@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from 'src/app/core/services/base.service';
 import { NgTableService } from 'src/app/core/components/ng-table/services/ng-table.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-dashboard',
@@ -84,10 +85,12 @@ export class DashboardComponent implements OnInit {
 
   public changeFilter(data:any, config:any):any {
     let filteredData:Array<any> = data;
+    
     this.columns.forEach((column:any) => {
       if (column.filtering) {
         filteredData = filteredData.filter((item:any) => {
-          return item[column.name].match(column.filtering.filterString);
+          let itemColumn = _.toLower(item[column.name]);
+          return itemColumn.match(column.filtering.filterString);
         });
       }
     });
@@ -97,15 +100,18 @@ export class DashboardComponent implements OnInit {
     }
 
     if (config.filtering.columnName) {
-      return filteredData.filter((item:any) =>
-        item[config.filtering.columnName].match(this.config.filtering.filterString));
+      return filteredData.filter((item:any) => {
+        let itemColumn = _.toLower(item[config.filtering.columnName]);
+        return itemColumn.match(this.config.filtering.filterString);
+      });
     }
 
     let tempArray:Array<any> = [];
     filteredData.forEach((item:any) => {
       let flag = false;
       this.columns.forEach((column:any) => {
-        if (item[column.name].toString().match(this.config.filtering.filterString)) {
+        let itemColumn = _.toLower(item[column.name]);
+        if (itemColumn.match(this.config.filtering.filterString)) {
           flag = true;
         }
       });

@@ -973,3 +973,8 @@ font-size: 14px;color: #8F8DB9}
 .required {
   color: var(--red);
 }
+.table-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}

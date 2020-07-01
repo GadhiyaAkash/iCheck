@@ -15,8 +15,8 @@
                         (sortChanged)="onChangeTable($event)">
                         <div class="d-flex">
                             <span>{{column.title}}</span>
-                            <i *ngIf="config && column.sort" class="float-right fa"
-                                [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+                            <!-- <i *ngIf="config && column.sort" class="float-right fa"
+                                [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i> -->
                         </div>
                     </th>
                 </ng-container>
@@ -35,7 +35,7 @@
                 <td>{{ row.name }}</td>
                 <td><a href="#" class="view-link">{{ row.attachment }}</a></td>
                 <td class="">
-                    <span class="stts stts-complete">
+                    <span class="stts stts-{{ row.statusClass }}">
                         <span>{{ row.status }}</span>
                     </span>
                     <span class="lock-unlock">
