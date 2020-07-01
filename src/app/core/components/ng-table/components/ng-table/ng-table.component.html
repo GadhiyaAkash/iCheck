@@ -29,14 +29,18 @@
             <tr *ngFor="let row of rows">
                 <td scope="row">
                     <div class="round">
-                        <input type="checkbox" name="rows_{{ row.id }}" id="checkbox" [checked]="row.checked"
+                        <input type="checkbox" name="rows_{{ row.id }}" id="rows_{{ row.id }}" [checked]="row.checked"
                             (change)="selectRow(row, $event)">
-                        <label for="checkbox"></label>
+                        <label for="rows_{{ row.id }}"></label>
                     </div>
                 </td>
-                <td scope="row">{{ row.id }}</td>
+                <td scope="row">#{{ row.id }}</td>
                 <td>{{ row.name }}</td>
-                <td><a href="#" class="view-link">{{ row.attachment }}</a></td>
+                <td>
+                    <a [routerLink]="['/icheck-checklist', row.id]" class="view-link">
+                        {{ row.attachment }}
+                    </a>
+                </td>
                 <td class="">
                     <span class="stts stts-{{ row.statusClass }}">
                         <span>{{ row.status }}</span>

@@ -7,6 +7,7 @@ import { LoginComponent } from './core-modules/account/login/login.component';
 import { FullWidthSidenavComponent } from './theme/layouts/full-width-sidenav/full-width-sidenav.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { IcheckInspectionComponent } from './modules/icheck-inspection/icheck-inspection.component';
+import { IcheckChecklistComponent } from './modules/icheck-checklist/icheck-checklist.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,12 @@ const routes: Routes = [
     {
       path: 'icheck-inspection',
       component: IcheckInspectionComponent,
+      canActivate: [AuthGuard],
+      data: { isPublic: false }
+    },
+    {
+      path: 'icheck-checklist/:id',
+      component: IcheckChecklistComponent,
       canActivate: [AuthGuard],
       data: { isPublic: false }
     }]

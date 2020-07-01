@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from 'src/app/core/services/base.service';
 import { NgTableService } from 'src/app/core/components/ng-table/services/ng-table.service';
 import * as _ from 'lodash';
+import { ModulesService } from '../modules.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,8 +19,8 @@ export class DashboardComponent implements OnInit {
   seletedRecords: Array<any> = [];
 
   public rows:Array<any> = [];
-  public columns:Array<any> = this.ngTableService.allUserColumns;
-  private data:Array<any> = this.ngTableService.allUserRows;
+  public columns:Array<any> = this.moduleService.iCheckSummariesColumns;
+  private data:Array<any> = this.moduleService.iCheckSummariesRows;
   
   public page:number = 1;
   public itemsPerPage:number = 5;
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit {
   };
   
   constructor(
+    private moduleService: ModulesService,
     private baseService: BaseService,
     private ngTableService: NgTableService
   ) {
