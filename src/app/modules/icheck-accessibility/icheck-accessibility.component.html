@@ -157,42 +157,19 @@
                             <p class="pl-4 ml-2">
                                 <small class="link-mute">
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    14h 30m</small>
+                                    {{ details.total_reading_time }}
+                                </small>
                             </p>
                         </div>
                         <ul>
-                            <li class="active">
-                                <a href="#">Chapter 1</a>
-                            </li>
-                            <li>
-                                <a href="#" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
-                                    aria-controls="collapse2">
-                                    Chapter 2
-                                </a>
-                            </li>
-                            <ul class="inside ml-4" id="">
-                                <li><a href="">Section 2.1</a></li>
-                                <li><a href="">Section 2.2</a></li>
-                                <li><a href="">Section 2.3</a></li>
-                                <li><a href="">Section 2.4</a></li>
-                            </ul>
-                            <li>
-                                <a href="#">Chapter 3</a>
-                            </li>
-                            <li>
-                                <a href="#">Chapter 4</a>
-                            </li>
-                            <li>
-                                <a href="#">Chapter 5</a>
-                            </li>
-                            <li>
-                                <a href="#">Chapter 6</a>
-                            </li>
-                            <li>
-                                <a href="#">Chapter 7</a>
-                            </li>
-                            <li>
-                                <a href="#">Chapter 8</a>
+                            <li [ngClass]="{'active' : chapter.active, 'has_child':chapter.childrens }" *ngFor="let chapter of details.chapters">
+                                <a href="#">{{ chapter.title }}</a>
+
+                                <ul class="inside" id="" *ngIf="chapter.childrens">
+                                    <li *ngFor="let child of chapter.childrens" [ngClass]="{'active' : child.active }">
+                                        <a>{{ child.title }}</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>

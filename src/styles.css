@@ -74,17 +74,36 @@
     top: 15px;
     transform: none;
 }
-.sidebar li:nth-child(2)::before {
-    content: '';
+
+.has_child {
+  padding-bottom: 0 !important;
+}
+.sidebar .has_child::before {
+    /* content: '';
     transform: rotate(-35deg);
     left: 16px;
-    top: 14px;
+    top: 14px; */
+
+    content: '';
+    transform: rotate(-43deg);
+    left: 16px;
+    top: 7px;
+    height: 39px;
+}
+.sidebar .inside li:last-child {
+  padding-bottom: 0 !important;
 }
 body .sidebar .inside li:last-child::before {
-    content: '';
+    /* content: '';
     transform: rotate(35deg);
     left: -8px;
-    top: 14px;
+    top: 14px; */
+
+    content: '';
+    transform: rotate(42deg);
+    left: -10px;
+    top: 12px;
+    height: 35px;
 }
 .sidebar li {
   /* You need to turn on relative positioning so the line is placed relative to the item rather than absolutely on the page */

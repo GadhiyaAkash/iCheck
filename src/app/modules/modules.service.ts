@@ -51,17 +51,34 @@ export class ModulesService {
       title: 'icheck: Version 1.0',
       chapters: [
         { id: 1, title: 'Chapters 1' },
-        { id: 2, title: 'Chapters 2' },
+        { 
+          id: 2, 
+          title: 'Chapters 2',
+          childrens: [
+            { id: 1, parent_id: 2, title: 'section 2.1' },
+            { id: 2, parent_id: 2, title: 'section 2.2' },
+            { id: 3, parent_id: 2, title: 'section 2.3' },
+            { id: 4, parent_id: 2, title: 'section 2.4' },
+          ]
+        },
         { id: 3, title: 'Chapters 3' },
         { id: 4, title: 'Chapters 4' },
-        { id: 5, title: 'Chapters 5' },
+        { 
+          id: 5, 
+          title: 'Chapters 5',
+          childrens: [
+            { id: 1, parent_id: 5, title: 'section 5.1' },
+            { id: 2, parent_id: 5, title: 'section 5.2' }
+          ] 
+        },
         { id: 6, title: 'Chapters 6' },
         { id: 7, title: 'Chapters 7' },
         { id: 8, title: 'Chapters 8' },
       ],
       completed_chapter: 2,
       total_chapter: 8,
-      completion_percentage: 9
+      completion_percentage: 9,
+      total_reading_time: '14h 30m'
     }
   }
 }
