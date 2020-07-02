@@ -58,7 +58,7 @@
     min-width: 250px;
   }
   .sidebar li.active::after{
-border-color: #39C4A4
+    border-color: #39C4A4
   }
    .sidebar ul{
     list-style: none;
@@ -198,7 +198,7 @@ position: relative;
 
 .c100 {
   position: relative;
-  font-size: 60px;
+  font-size: 60px !important;
   width: 1em;
   height: 1em;
   -webkit-border-radius: 50%;

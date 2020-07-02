@@ -105,7 +105,11 @@
                                     <label for="{{ details.reference }}"></label>
                                 </div>
                             </td>
-                            <td scope="row">{{ details.id }}</td>
+                            <td scope="row">
+                                <a [routerLink]="['/icheck-accessibility', details.id]" class="view-link">
+                                    {{ details.id }}
+                                </a>
+                            </td>
                             <td>{{ details.reference }}</td>
                             <td>{{ details.question_number }}</td>
                             <td class="">{{ details.attachment_type }}</td>

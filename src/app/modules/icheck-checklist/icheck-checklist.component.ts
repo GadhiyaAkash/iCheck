@@ -22,7 +22,6 @@ export class IcheckChecklistComponent implements OnInit {
   ngOnInit(): void {
     this.checkListId = this.activeRoute.snapshot.paramMap.get('id');
     this.checklistDetails = this.moduleService.getIchecklistDetails(this.checkListId);
-    console.log("this.checklistDetails::", this.checklistDetails);
   }
 
   deleteTableRow(id:any) {

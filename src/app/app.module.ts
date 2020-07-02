@@ -13,6 +13,7 @@ import { NG_TABLE_DIRECTIVES } from './core/components/ng-table/components/ng-ta
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { IcheckInspectionComponent } from './modules/icheck-inspection/icheck-inspection.component';
 import { IcheckChecklistComponent } from './modules/icheck-checklist/icheck-checklist.component';
+import { IcheckAccessibilityComponent } from './modules/icheck-accessibility/icheck-accessibility.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { IcheckChecklistComponent } from './modules/icheck-checklist/icheck-chec
     HeaderComponent,
     NG_TABLE_DIRECTIVES,
     IcheckInspectionComponent,
-    IcheckChecklistComponent
+    IcheckChecklistComponent,
+    IcheckAccessibilityComponent
   ],
   imports: [
     BrowserModule,

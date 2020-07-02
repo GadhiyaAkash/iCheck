@@ -8,6 +8,7 @@ import { FullWidthSidenavComponent } from './theme/layouts/full-width-sidenav/fu
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { IcheckInspectionComponent } from './modules/icheck-inspection/icheck-inspection.component';
 import { IcheckChecklistComponent } from './modules/icheck-checklist/icheck-checklist.component';
+import { IcheckAccessibilityComponent } from './modules/icheck-accessibility/icheck-accessibility.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,12 @@ const routes: Routes = [
     {
       path: 'icheck-checklist/:id',
       component: IcheckChecklistComponent,
+      canActivate: [AuthGuard],
+      data: { isPublic: false }
+    },
+    {
+      path: 'icheck-accessibility/:id',
+      component: IcheckAccessibilityComponent,
       canActivate: [AuthGuard],
       data: { isPublic: false }
     }]
