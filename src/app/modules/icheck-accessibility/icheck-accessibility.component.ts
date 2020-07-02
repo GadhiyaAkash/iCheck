@@ -9,9 +9,10 @@ import { ModulesService } from '../modules.service';
 })
 export class IcheckAccessibilityComponent implements OnInit {
 
-  accessbilityId:any = '';
-  details:any
-  
+  accessbilityId: any = '';
+  details: any
+  chapterDetails: any;
+
   constructor(
     private route: Router,
     private activeRoute: ActivatedRoute,
@@ -21,6 +22,12 @@ export class IcheckAccessibilityComponent implements OnInit {
   ngOnInit(): void {
     this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
     this.details = this.moduleService.getIAccessbilityDetails(this.accessbilityId);
+    if (this.details && this.details.chapters) {
+      this.getChapterDetails(this.details.chapters[0].id);
+    }
   }
 
+  getChapterDetails(id: any) {
+    this.chapterDetails = this.moduleService.getChapterDetails(id);
+  }
 }

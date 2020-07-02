@@ -853,7 +853,7 @@ margin-right: 15px;
   font-size: 14px;
 }
 .form-check-inline{
-      margin-right: 1.2rem;
+      margin-right: 1.2rem !important;
 }
 .line{
   box-shadow: 0px 3px 10px #00000012;

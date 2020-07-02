@@ -162,7 +162,8 @@
                             </p>
                         </div>
                         <ul>
-                            <li [ngClass]="{'active' : chapter.active, 'has_child':chapter.childrens }" *ngFor="let chapter of details.chapters">
+                            <li [ngClass]="{'active' : chapter.active, 'has_child':chapter.childrens }"
+                                *ngFor="let chapter of details.chapters">
                                 <a href="#">{{ chapter.title }}</a>
 
                                 <ul class="inside" id="" *ngIf="chapter.childrens">
@@ -177,11 +178,13 @@
             </div>
             <div class="section-access">
                 <div class="bg-white py-3 px-4 mt-3 pb-5 mb-4 isummery">
-                    <h1 class="title">2.2.1: Accessibility: How to Design for All</h1>
+                    <h1 class="title">
+                        2.2.1: {{ chapterDetails.title }}
+                    </h1>
                     <div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Chapter 2</a></li>
+                                <li class="breadcrumb-item"><a href="#">Chapter {{ chapterDetails.id }}</a></li>
                                 <li class="breadcrumb-item"><a href="#">Section 1</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Question 1</li>
                             </ol>
@@ -198,47 +201,41 @@
                                 <circle cx="5" cy="12" r="1"></circle>
                             </svg>
                         </div>
-                        <p>What should you do with accessibility checker tools?</p>
-                        <p><b>Guidance:</b> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-                            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                            sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed diamundefined</p>
-                    </div>
+                        <div class="question-list" *ngFor="let question of chapterDetails.questions">
+                            <p>{{ question.title }}</p>
+                            <p *ngIf="question.guidance">
+                                <b>Guidance:</b>
+                                {{ question.guidance }}
+                            </p>
 
-                    <div class="mt-5">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">Checked - Satisfactory</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">Checked - Not Satisfactory</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                value="option3">
-                            <label class="form-check-label" for="inlineRadio3">Checked - Not Satisfactory</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
-                                value="option4">
-                            <label class="form-check-label" for="inlineRadio4">Not Seen</label>
+                            <div class="mt-4">
+                                <div *ngFor="let option of question.options">
+                                    <div *ngIf="option.type == 'radio'">
+                                        <div *ngFor="let text of option.text" class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="{{ text.slug }}">
+                                            <label class="form-check-label" for="inlineRadio1">
+                                                {{ text.title }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="remarks-section mt-4">
+                    <div class="remarks-section mt-4" *ngIf="chapterDetails.remark">
                         <p class="mb-2"><b>Remarks</b></p>
                         <div class="box-remark card p-2">
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores et ea rebum. Stet clita kasd.</p>
+                            <p>{{ chapterDetails.remark }}</p>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <a href="#" class="underline d-inline-block mr-4"><small>Attachment</small></a><i><small
-                                class="link-mute">Guidance for the type of Objective Evidence required.</small></i>
+                        <a href="#" class="underline d-inline-block mr-4">
+                            <small>Attachment</small>
+                        </a>
+                        <i>
+                            <small class="link-mute"> Guidance for the type of Objective Evidence required.</small>
+                        </i>
                     </div>
                     <!---->
                     <div class="d-flex flex-wrap">
