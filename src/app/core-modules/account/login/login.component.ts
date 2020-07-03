@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
    */
   getShipsRecords() {
     return [
-      { id: 1, name: 'Ship 1' },
-      { id: 2, name: 'Ship 2' },
-      { id: 3, name: 'Ship 3' }
+      { id: 1, name: 'MV Alexia' },
+      { id: 2, name: 'USS Alderamin (AK-116)' },
+      { id: 3, name: 'USS Ara (AK-136)' }
     ]
   }
 
@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
    */
   getRanksRecords() {
     return [
-      { id: 1, name: 'Rank 1' },
-      { id: 2, name: 'Rank 2' },
-      { id: 3, name: 'Rank 3' }
+      { id: 1, name: 'Lieutenant General' },
+      { id: 2, name: 'Major General' },
+      { id: 3, name: 'Brigadier' }
     ]
   }
 
