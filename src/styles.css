@@ -673,8 +673,14 @@ tr{
     background-color: #fff !important;
 }
 .table-striped tbody tr:nth-of-type(even) {
-    background-color:#F5F4FB !important;
+  background-color:#F5F4FB !important;
 }
+.table-striped tbody tr:nth-of-type(even) .icheck-dropdown button {
+  background-color:#F5F4FB !important;
+} 
+.table-striped tbody tr:nth-of-type(odd) .icheck-dropdown button {
+  background-color:#fff !important;
+} 
 table th,table th .btn{
   color: #81858B;
   background:#F5F4FB;
@@ -694,6 +700,9 @@ border-radius: 100%
 }
 .download-icon,.delete-icon,.list-icon{
   opacity: .7;
+}
+.download-icon {
+  color: black;
 }
 .pagination-custom li a{
   margin :3px;
@@ -768,6 +777,9 @@ span.stts.stts-progress:before {
   position: relative !important;
 }
 
+.round:focus {
+  outline: none;
+}
 .round label {
   background-color: #fff;
       border: 2px solid rgba(129, 133, 139, 0.25);
@@ -1001,4 +1013,19 @@ font-size: 14px;color: #8F8DB9}
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.icheck-dropdown .dropdown-toggle::after {
+  content: none !important;
+  border: none;
+}
+.icheck-dropdown button {
+  border: none;
+}
+.icheck-dropdown button:focus {
+  border: none;
+  outline: none
+}
+.icheck-dropdown .dropdown-menu a {
+  cursor: pointer;
 }

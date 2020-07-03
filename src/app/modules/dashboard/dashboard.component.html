@@ -7,10 +7,11 @@
                 <div class="col-md-2" *ngFor="let summary of iCheckSummaries">
                     <div class="box-summery text-center mb-md-0 mb-4" [ngClass]="{ 'active': summary.active }"
                         (click)="selectIcheckSummary(summary)">
-                        <img [src]="summary.image" class="summery-img mb-3">
+                        <canvas baseChart [data]="pieChartData" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="colors">
+                        </canvas>
                         <div class="box-content">
                             <h5 class="box-title mb-0">{{ summary.title }}</h5>
-                            <p class="box-text">{{ summary.description }}</p>
+                            <p class="box-text" *ngIf="summary.description">{{ summary.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -18,16 +19,18 @@
         </section>
         <section class="summery-bottom mt-5 pt-2">
             <div class="d-md-flex justify-content-between">
-                <h5 class="title-sm">Pre-PSC Questionnaire</h5>
+                <h5 class="title-sm">{{ entity.summary_title }} Questionnaire</h5>
                 <div class="d-md-flex">
                     <form class="search-container mr-md-4">
-                        <!-- <input type="text"  placeholder=""> -->
                         <input *ngIf="config.filtering" id="search-bar" placeholder=""
-                            [ngTableFiltering]="config.filtering"
-                            class=""
-                            (tableChanged)="onChangeTable(config)"/>
+                            [ngTableFiltering]="config.filtering" class="" (tableChanged)="onChangeTable(config)" />
                         <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-search search-icon">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
                             <i data-feather="search" class="search-icon"></i>
                         </a>
                     </form>
@@ -48,8 +51,7 @@
                 </pagination>
 
                 <div class="">
-                    <a href="#" class="underline">Delete</a>
-                    <a href="#" class="d-inline-block ml-3 underline">Archive</a>
+                    <a href="javascript:void(0);" class="underline" (click)="deleteMultiple()">Delete</a>
                 </div>
             </div>
         </section>

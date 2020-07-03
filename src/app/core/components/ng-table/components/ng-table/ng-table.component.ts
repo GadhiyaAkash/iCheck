@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { PaginationLimit } from './../../interface/pagination';
+import { AlertService } from 'src/app/core/services/alert.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ng-table',
@@ -48,7 +49,9 @@ export class NgTableComponent implements OnInit {
   private _columns: Array<any> = [];
   private _config: any = {};
 
-  constructor() { }
+  constructor(
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -87,7 +90,26 @@ export class NgTableComponent implements OnInit {
   }
 
   selectRow(row:any, event:any) {
-    // Add logic for checkbox
-    console.log("selectRow::", row);
+    let index = _.findIndex(this.config.selectedRows, (r:any) => r.id == row.id);
+    if (event.target.checked) {
+      if (index == -1) {
+        this.config.selectedRows.push(row);
+      }
+    } else {
+      if (index !== -1) {
+        this.config.selectedRows.splice(index, 1);
+      }
+    }
+  }
+
+  deleteRow(row:any) {
+    this.alertService.confirm('You are about to delete this checklist!').then((response) => {
+      if (response.isConfirmed) {
+        let index = _.findIndex(this.rows, (r) => r.id == row.id);
+        if (index !== -1) {
+          this.rows.splice(index, 1);
+        }
+      }
+    });
   }
 }

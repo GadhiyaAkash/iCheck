@@ -18,13 +18,13 @@ export class ModulesService {
   ];
 
   iCheckSummariesRows = [
-    { id: '743985738', name: 'Checklist Name 1', attachment: 'view', status: 'COMPLETE', statusClass: "complete", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '743985739', name: 'Checklist Name 2', attachment: 'view', status: 'SUBMITTED', statusClass: "success", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '743985740', name: 'Checklist Name 3', attachment: 'view', status: 'IN PROGRESS', statusClass: "progress", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '743985741', name: 'Checklist Name 4', attachment: 'view', status: 'COMPLETE', statusClass: "complete", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '743985742', name: 'Checklist Name 5', attachment: 'view', status: 'SUBMITTED', statusClass: "success", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '743985743', name: 'Checklist Name 6', attachment: 'view', status: 'COMPLETE', statusClass: "complete", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' },
-    { id: '743985744', name: 'Checklist Name 7', attachment: 'view', status: 'SUBMITTED', statusClass: "success", created_at: 'Apr 22,2020', updated_at: 'Jun 10,2020' }
+    { id: '743985738', name: 'Vessel Operation at the time of the inspection', attachment: 'view', status: 'COMPLETE', statusClass: "complete", created_at: 'Apr 22,2020', updated_at: 'Jun 05,2020' },
+    { id: '743985739', name: 'Vessel IMO Number', attachment: 'view', status: 'SUBMITTED', statusClass: "success", created_at: 'May 05,2020', updated_at: 'Jun 10,2020' },
+    { id: '743985740', name: 'Company IMO Number', attachment: 'view', status: 'IN PROGRESS', statusClass: "progress", created_at: 'Apr 13,2020', updated_at: 'Jun 08,2020' },
+    { id: '743985741', name: 'Port Of Inspection', attachment: 'view', status: 'COMPLETE', statusClass: "complete", created_at: 'Apr 08,2020', updated_at: 'Jun 13,2020' },
+    { id: '743985742', name: 'Deadweight: (metric tonnes)', attachment: 'view', status: 'SUBMITTED', statusClass: "success", created_at: 'May 22,2020', updated_at: 'Jun 10,2020' },
+    { id: '743985743', name: 'Gross Tonnage', attachment: 'view', status: 'COMPLETE', statusClass: "complete", created_at: 'Apr 10,2020', updated_at: 'Jun 10,2020' },
+    { id: '743985744', name: 'Date the vessel was delivered', attachment: 'view', status: 'SUBMITTED', statusClass: "success", created_at: 'May 11,2020', updated_at: 'Jun 22,2020' }
   ]
 
   getIchecklistDetails(id: any) {

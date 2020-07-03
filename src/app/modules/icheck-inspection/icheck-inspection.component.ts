@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from 'src/app/core/services/base.service';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-icheck-inspection',
@@ -14,7 +16,9 @@ export class IcheckInspectionComponent implements OnInit {
   }
 
   constructor(
-    private baseService: BaseService
+    private baseService: BaseService,
+    private alertService: AlertService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +27,11 @@ export class IcheckInspectionComponent implements OnInit {
 
   submit() {
     console.log("entity::", this.entity);
+    this.alertService.success('Successfully created I-Check Inspection.').then((response) => {
+      if (response.isConfirmed) {
+        this.router.navigate(['dashboard']);
+      }
+    });
   }
 
   selectIcheckInspection(summary:any) {

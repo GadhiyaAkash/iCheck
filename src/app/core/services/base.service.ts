@@ -20,11 +20,11 @@ export class BaseService {
    */
   public get IcheckSummariesList() {
     return [
-      {id: 1, image: 'https://via.placeholder.com/150', title: 'Pre-PSC', description: 'Lorem ipsum text', active: true},
-      {id: 2, image: 'https://via.placeholder.com/150', title: 'Quarterly Inspection', description: 'Lorem ipsum text', active: false},
-      {id: 3, image: 'https://via.placeholder.com/150', title: 'Pre-vetting', description: 'Lorem ipsum text', active: false},
-      {id: 4, image: 'https://via.placeholder.com/150', title: 'Pre-CDI', description: 'Lorem ipsum text', active: false},
-      {id: 5, image: 'https://via.placeholder.com/150', title: 'Audit', description: 'Lorem ipsum text', active: false},
+      {id: 1, image: 'https://via.placeholder.com/150', title: 'Pre-PSC', description: '', active: true},
+      {id: 2, image: 'https://via.placeholder.com/150', title: 'Quarterly Inspection', description: '', active: false},
+      {id: 3, image: 'https://via.placeholder.com/150', title: 'Pre-vetting', description: '', active: false},
+      {id: 4, image: 'https://via.placeholder.com/150', title: 'Pre-CDI', description: '', active: false},
+      {id: 5, image: 'https://via.placeholder.com/150', title: 'Audit', description: '', active: false},
     ]
   }
 
@@ -33,11 +33,11 @@ export class BaseService {
    */
   public get IcheckInspectionList() {
     return [
-      {id: 1, title: 'Pre-PSC', description: 'Lorem ipsum text', active: true},
-      {id: 2, title: 'Quarterly Inspection', description: 'Lorem ipsum text', active: false},
-      {id: 3, title: 'Pre-vetting', description: 'Lorem ipsum text', active: false},
-      {id: 4, title: 'Pre-CDI', description: 'Lorem ipsum text', active: false},
-      {id: 5, title: 'Audit', description: 'Lorem ipsum text', active: false},
+      {id: 1, title: 'Pre-PSC', description: 'Duties of Port State Control', active: true},
+      {id: 2, title: 'Quarterly Inspection', description: 'Hygiene of the crew quarters', active: false},
+      {id: 3, title: 'Pre-vetting', description: 'During a Pre-vetting Inspection', active: false},
+      {id: 4, title: 'Pre-CDI', description: 'Cdi Inspections | Shipping | Water Transport', active: false},
+      {id: 5, title: 'Audit', description: 'Audit Inspections', active: false},
     ]
   }
 }

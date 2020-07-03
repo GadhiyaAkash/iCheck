@@ -3,6 +3,10 @@ import { BaseService } from 'src/app/core/services/base.service';
 import { NgTableService } from 'src/app/core/components/ng-table/services/ng-table.service';
 import * as _ from 'lodash';
 import { ModulesService } from '../modules.service';
+import { ChartOptions, ChartType } from 'chart.js';
+import { Label, SingleDataSet } from 'ng2-charts';
+import 'chart.piecelabel.js';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +15,15 @@ import { ModulesService } from '../modules.service';
 })
 export class DashboardComponent implements OnInit {
 
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  // public pieChartLabels: Label[] = ['Download', 'In', 'Mail Sales'];
+  public pieChartData: SingleDataSet = [25, 35, 40];
+  public pieChartType: ChartType = 'pie';
+  public pieChartPlugins = [];
+  public colors: any[] = [{ backgroundColor: ["#39C4A4", "#2396E3", "#F5B133"] }];
+  
   iCheckSummaries:Array<any> = [];
   entity:any = {
     check_summary_id: ''
@@ -31,20 +44,22 @@ export class DashboardComponent implements OnInit {
   public config:any = {
     paging: true,
     sorting: {columns: this.columns},
-    filtering: {filterString: ''}
+    filtering: {filterString: ''},
+    selectedRows: []
   };
   
   constructor(
     private moduleService: ModulesService,
     private baseService: BaseService,
-    private ngTableService: NgTableService
+    private ngTableService: NgTableService,
+    private alertService: AlertService
   ) {
     this.length = this.data.length;
   }
 
   ngOnInit(): void {
     this.iCheckSummaries = this.baseService.IcheckSummariesList;
-
+    this.entity.summary_title = this.iCheckSummaries[0].title;
     this.onChangeTable(this.config);
   }
 
@@ -133,6 +148,7 @@ export class DashboardComponent implements OnInit {
       s.active = (s.id == summary.id) ? true : false
     });
     this.entity.check_summary_id = summary.id;
+    this.entity.summary_title = summary.title;
   }
 
   public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
@@ -157,5 +173,22 @@ export class DashboardComponent implements OnInit {
   onCheckboxCallback(seletedRecords: Array<any>) {
     this.seletedRecords = seletedRecords || [];
     this.showActionButton = this.seletedRecords.length ? true : false;
+  }
+
+  deleteMultiple() {
+    this.alertService.confirm('You are about to delete selected this checklist!').then((response) => {
+      if (response.isConfirmed) {
+        _.forEach(this.config.selectedRows, (sr) => {
+          this.deleteSingleRow(sr);
+        })
+      }
+    });
+  }
+
+  deleteSingleRow(row) {
+    let index = _.findIndex(this.rows, (r) => r.id == row.id);
+    if (index !== -1) {
+      this.rows.splice(index, 1);
+    }
   }
 }
