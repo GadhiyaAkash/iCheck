@@ -12,6 +12,7 @@ export class IcheckAccessibilityComponent implements OnInit {
   accessbilityId: any = '';
   details: any
   chapterDetails: any;
+  ranks: Array<any> = [];
 
   constructor(
     private route: Router,
@@ -25,6 +26,7 @@ export class IcheckAccessibilityComponent implements OnInit {
     if (this.details && this.details.chapters) {
       this.getChapterDetails(this.details.chapters[0].id);
     }
+    this.ranks = this.moduleService.getRanksRecords();
   }
 
   getChapterDetails(id: any) {

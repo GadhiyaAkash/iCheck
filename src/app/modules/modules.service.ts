@@ -8,6 +8,17 @@ export class ModulesService {
 
   constructor() { }
 
+  /**
+   * Return ranks record
+   */
+  getRanksRecords() {
+    return [
+      { id: 1, name: 'Lieutenant General' },
+      { id: 2, name: 'Major General' },
+      { id: 3, name: 'Brigadier' }
+    ]
+  }
+  
   iCheckSummariesColumns = [
     { title: 'Checklist ID', name: 'id' },
     { title: 'Checklist Name', name: 'name', sort: 'asc' },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from 'src/app/core/services/base.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ModulesService } from 'src/app/modules/modules.service';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +20,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private baseService: BaseService,
-    private authService: AuthService
+    private authService: AuthService,
+    private moduleService: ModulesService
   ) { }
 
   ngOnInit(): void {
     this.ships = this.getShipsRecords();
-    this.ranks = this.getRanksRecords();
+    this.ranks = this.moduleService.getRanksRecords();
   }
 
   /**
@@ -35,17 +37,6 @@ export class LoginComponent implements OnInit {
       { id: 1, name: 'MV Alexia' },
       { id: 2, name: 'USS Alderamin (AK-116)' },
       { id: 3, name: 'USS Ara (AK-136)' }
-    ]
-  }
-
-  /**
-   * Return ranks record
-   */
-  getRanksRecords() {
-    return [
-      { id: 1, name: 'Lieutenant General' },
-      { id: 2, name: 'Major General' },
-      { id: 3, name: 'Brigadier' }
     ]
   }
 

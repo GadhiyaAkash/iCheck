@@ -40,25 +40,24 @@
             </div>
             <div class="d-flex justify-content-md-start justify-content-center">
                 <div class="dropdown drp-normal border-right-1">
-                    <button class=" pl-0 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    <button style="color:white" class="pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Rank
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Rank</a>
-                        <a class="dropdown-item" href="#">Rank</a>
-                        <a class="dropdown-item" href="#">Rank</a>
+                        <a class="dropdown-item" *ngFor="let rank of ranks" href="javascript:void(0)">
+                            {{rank.name}}
+                        </a>
                     </div>
                 </div>
                 <div class="dropdown drp-normal">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    <button style="color:white" class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Location
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Rank</a>
-                        <a class="dropdown-item" href="#">Rank</a>
-                        <a class="dropdown-item" href="#">Rank</a>
+                        <a class="dropdown-item" href="#">PACIFIC ADVENTURER</a>
+                        <a class="dropdown-item" href="#">EEMS TRADER</a>
                     </div>
                 </div>
             </div>
