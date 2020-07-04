@@ -18,7 +18,7 @@ export class ModulesService {
       { id: 3, name: 'Brigadier' }
     ]
   }
-  
+
   iCheckSummariesColumns = [
     { title: 'Checklist ID', name: 'id' },
     { title: 'Checklist Name', name: 'name', sort: 'asc' },
@@ -57,68 +57,139 @@ export class ModulesService {
     ]
   }
 
-  getChapterDetails(id:any) {
-    return {
-      parent_id: (id == 2 || id == 5) ? id : null,
-      id: 1,
-      title: 'Accessibility: How to Design for All',
-      questions: [
-        {
-          id: 1,
-          chapter_id: id,
-          title: 'What should you do with accessibility checker tools?',
-          guidance: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diamundefined',
-          options: [{
-            type: 'radio',
-            text: [
-              { slug: 'satisfactory', title: 'Satisfactory' },
-              { slug: 'not_satisfactory', title: 'Not Satisfactory' },
-              { slug: 'half_satisfactory', title: 'Half Satisfactory' },
-              { slug: 'none', title: 'None' },
+  getChapterDetails(id: any) {
+    let allChapters = this.allChapters();
+
+    return _.find(allChapters, (cp) => cp.id == id);
+    // return {
+    //   parent_id: (id == 2 || id == 5) ? id : null,
+    //   id: 1,
+    //   title: 'Accessibility: How to Design for All',
+    //   questions: [
+    //     {
+    //       id: 1,
+    //       chapter_id: id,
+    //       title: 'What should you do with accessibility checker tools?',
+    //       guidance: 'Web accessibility evaluation tools are software programs or online services that help you determine if web content meets accessibility guidelines. This page provides a list of evaluation tools that you can filter to find ones that match your particular needs.',
+    //       remark: '',
+    //       options: [{
+    //         type: 'radio',
+    //         text: [
+    //           { slug: 'satisfactory', title: 'Satisfactory', value: false },
+    //           { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
+    //           { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+    //           { slug: 'not_seen', title: 'Not Seen' },
+    //         ]
+    //       }],
+    //       attachments: [
+    //         { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
+    //         { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
+    //       ]
+    //     }
+    //   ],
+    // }
+  }
+
+  allChapters() {
+    return [
+      {
+        parent_id: null,
+        id: 1,
+        title: 'Accessibility: How to Design for All',
+        questions: [
+          {
+            id: 1,
+            chapter_id: 1,
+            title: 'What should you do with accessibility checker tools?',
+            guidance: 'Web accessibility evaluation tools are software programs or online services that help you determine if web content meets accessibility guidelines. This page provides a list of evaluation tools that you can filter to find ones that match your particular needs.',
+            remark: '',
+            options: [{
+              type: 'radio',
+              text: [
+                { slug: 'satisfactory', title: 'Satisfactory', value: false },
+                { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
+                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                { slug: 'not_seen', title: 'Not Seen' },
+              ]
+            }],
+            attachments: [
+              { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
+              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
             ]
-          }]
-        }
-      ],
-      remark: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd.',
-      attachments: [
-        { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
-        { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
-      ]
-    }
+          },
+          {
+            id: 2,
+            chapter_id: 1,
+            title: 'What is accessibility checker tools?',
+            guidance: 'Web accessibility evaluation tools are software programs. This page provides a list of evaluation tools that you can filter to find ones that match your particular needs.',
+            remark: '',
+            options: [{
+              type: 'radio',
+              text: [
+                { slug: 'satisfactory', title: 'Satisfactory', value: false },
+                { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
+                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                { slug: 'not_seen', title: 'Not Seen' },
+              ]
+            }],
+            attachments: [
+              { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '20kb', src: '' },
+              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '40kb', src: '' }
+            ]
+          }
+        ],
+      },
+      {
+        parent_id: null,
+        id: 2,
+        title: 'Web Accessibility',
+        questions: [
+          {
+            id: 1,
+            chapter_id: 2,
+            title: 'What Is Web Accessibility?',
+            guidance: 'Web accessibility evaluation tools are software programs or online services that help you determine if web content meets accessibility guidelines. This page provides a list of evaluation tools that you can filter to find ones that match your particular needs.',
+            remark: '',
+            options: [{
+              type: 'radio',
+              text: [
+                { slug: 'satisfactory', title: 'Satisfactory', value: false },
+                { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
+                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                { slug: 'not_seen', title: 'Not Seen' },
+              ]
+            }],
+            attachments: [
+              { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
+              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
+            ]
+          }
+        ],
+      }
+    ];
   }
 
   getIAccessbilityDetails(id: any) {
     return {
       id: id,
-      title: 'icheck: Version 1.0',
+      title: 'I-Check: Version 1.0',
       chapters: [
-        { id: 1, title: 'Chapters 1' },
+        { id: 1, title: 'Accessibility: How to Design for All' },
         {
           id: 2,
-          title: 'Chapters 2',
+          title: 'Web Accessibility',
           childrens: [
-            { id: 1, parent_id: 2, title: 'section 2.1' },
-            { id: 2, parent_id: 2, title: 'section 2.2' },
-            { id: 3, parent_id: 2, title: 'section 2.3' },
-            { id: 4, parent_id: 2, title: 'section 2.4' },
+            { id: 1, parent_id: 2, title: 'Captions for audio' },
+            { id: 2, parent_id: 2, title: 'Device independence' },
           ]
         },
-        { id: 3, title: 'Chapters 3' },
-        { id: 4, title: 'Chapters 4' },
-        {
-          id: 5,
-          title: 'Chapters 5',
-          childrens: [
-            { id: 1, parent_id: 5, title: 'section 5.1' },
-            { id: 2, parent_id: 5, title: 'section 5.2' }
-          ]
-        },
-        { id: 6, title: 'Chapters 6' },
-        { id: 7, title: 'Chapters 7' },
-        { id: 8, title: 'Chapters 8' },
+        { id: 3, title: 'Conformance to Standards' },
+        { id: 4, title: 'Responsibility of Web' },
+        { id: 5, title: 'Expensive and Hard' },
+        { id: 6, title: 'Dull and Boring' },
       ],
       completed_chapter: 2,
-      total_chapter: 8,
+      total_chapter: 6,
       completion_percentage: 9,
       total_reading_time: '14h 30m'
     }

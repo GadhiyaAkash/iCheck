@@ -1029,3 +1029,16 @@ font-size: 14px;color: #8F8DB9}
 .icheck-dropdown .dropdown-menu a {
   cursor: pointer;
 }
+
+.textarea:focus {
+  border-color: gainsboro;
+  outline: none;
+}
+.textarea {
+  color: #2F3640 !important;
+  font-size: 15px;
+  width: 100%;
+  border-color: gainsboro;
+  border-radius: 4px;
+  resize: none;
+}

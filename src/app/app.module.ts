@@ -15,6 +15,7 @@ import { IcheckInspectionComponent } from './modules/icheck-inspection/icheck-in
 import { IcheckChecklistComponent } from './modules/icheck-checklist/icheck-checklist.component';
 import { IcheckAccessibilityComponent } from './modules/icheck-accessibility/icheck-accessibility.component';
 import { ChartsModule } from 'ng2-charts';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ChartsModule } from 'ng2-charts';
     AppRoutingModule,
     FormsModule,
     PaginationModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    NgPipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
