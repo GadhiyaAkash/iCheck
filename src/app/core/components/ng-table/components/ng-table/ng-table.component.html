@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let row of rows">
-                <td scope="row">
+                <td scope="row" [routerLink]="['/icheck-checklist', row.id]">
                     <div class="round">
                         <input type="checkbox" name="rows_{{ row.id }}" id="rows_{{ row.id }}" [checked]="row.checked"
                             (change)="selectRow(row, $event)">
@@ -63,10 +63,10 @@
                             </svg>
                         </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item disabled">Edit</a>
-                        <a class="dropdown-item" (click)="deleteRow(row)">Delete</a>
-                        <a class="dropdown-item disabled">Communication Log</a>
-                        <a class="dropdown-item disabled">Send for review</a>
+                        <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' }">Edit</a>
+                        <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' || row.status == 'SUBMITTED' }" (click)="deleteRow(row)">Delete</a>
+                        <a class="dropdown-item">Communication Log</a>
+                        <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' || row.status == 'SUBMITTED' || row.status == 'IN PROGRESS' }">Send for review</a>
                     </div>
                 </span>
                 </td>

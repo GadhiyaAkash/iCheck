@@ -20,11 +20,11 @@ export class BaseService {
    */
   public get IcheckSummariesList() {
     return [
-      {id: 1, image: 'https://via.placeholder.com/150', title: 'Pre-PSC', description: '', active: true},
-      {id: 2, image: 'https://via.placeholder.com/150', title: 'Quarterly Inspection', description: '', active: false},
-      {id: 3, image: 'https://via.placeholder.com/150', title: 'Pre-vetting', description: '', active: false},
-      {id: 4, image: 'https://via.placeholder.com/150', title: 'Pre-CDI', description: '', active: false},
-      {id: 5, image: 'https://via.placeholder.com/150', title: 'Audit', description: '', active: false},
+      {id: 1, image: 'https://via.placeholder.com/150', pieChartData: [25, 35, 40], pieChartLabels: ['COMPLETE', 'SUBMITTED', 'IN PROGRESS'],  title: 'Pre-PSC', description: '', active: true},
+      {id: 2, image: 'https://via.placeholder.com/150', pieChartData: [20, 30, 50], pieChartLabels: ['COMPLETE', 'SUBMITTED', 'IN PROGRESS'], title: 'Quarterly Inspection', description: '', active: false},
+      {id: 3, image: 'https://via.placeholder.com/150', pieChartData: [15, 25, 60], pieChartLabels: ['COMPLETE', 'SUBMITTED', 'IN PROGRESS'], title: 'Pre-vetting', description: '', active: false},
+      {id: 4, image: 'https://via.placeholder.com/150', pieChartData: [10, 20, 70], pieChartLabels: ['COMPLETE', 'SUBMITTED', 'IN PROGRESS'],title: 'Pre-CDI', description: '', active: false},
+      {id: 5, image: 'https://via.placeholder.com/150', pieChartData: [5, 15, 80], pieChartLabels: ['COMPLETE', 'SUBMITTED', 'IN PROGRESS'], title: 'Audit', description: '', active: false},
     ]
   }
 

@@ -6,6 +6,7 @@ import { ModulesService } from '../modules.service';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import 'chart.piecelabel.js';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
@@ -17,11 +18,12 @@ export class DashboardComponent implements OnInit {
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    legend: {
+      display: false
+    }
   };
-  // public pieChartLabels: Label[] = ['Download', 'In', 'Mail Sales'];
-  public pieChartData: SingleDataSet = [25, 35, 40];
   public pieChartType: ChartType = 'pie';
-  public pieChartPlugins = [];
+  public pieChartPlugins = [pluginDataLabels];
   public colors: any[] = [{ backgroundColor: ["#39C4A4", "#2396E3", "#F5B133"] }];
   
   iCheckSummaries:Array<any> = [];

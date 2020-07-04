@@ -1012,9 +1012,12 @@ font-size: 14px;color: #8F8DB9}
 .table-footer {
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
+.table-footer .pagination {
+  margin-bottom: 0 !important;
+}
 .icheck-dropdown .dropdown-toggle::after {
   content: none !important;
   border: none;
@@ -1044,4 +1047,7 @@ a:hover {
   border-color: gainsboro;
   border-radius: 4px;
   resize: none;
+}
+.Datatable-2 td:focus {
+  outline: none;
 }
