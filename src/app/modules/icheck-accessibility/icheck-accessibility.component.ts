@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModulesService } from '../modules.service';
 import * as _ from 'lodash';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-icheck-accessibility',
@@ -24,9 +25,10 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   constructor(
-    private route: Router,
+    private router: Router,
     private activeRoute: ActivatedRoute,
-    private moduleService: ModulesService
+    private moduleService: ModulesService,
+    private alertService: AlertService
   ) {
     this.moduleService.allChapters();
   }
@@ -180,5 +182,13 @@ export class IcheckAccessibilityComponent implements OnInit {
         return this.allQuetions[index];
         break;
     }
+  }
+
+  submitQuestion() {
+    this.alertService.confirm('congratulations! you have successfully completed all chapters.').then((response) => {
+      if (response.isConfirmed) {
+        this.router.navigate(['dashboard']);
+      }
+    });
   }
 }

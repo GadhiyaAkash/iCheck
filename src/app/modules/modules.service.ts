@@ -95,26 +95,6 @@ export class ModulesService {
               { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
               { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
             ]
-          },
-          {
-            id: 2,
-            chapter_id: 1,
-            title: 'What is accessibility checker tools?',
-            guidance: 'Web accessibility evaluation tools are software programs. This page provides a list of evaluation tools that you can filter to find ones that match your particular needs.',
-            remark: '',
-            options: [{
-              type: 'radio',
-              text: [
-                { slug: 'satisfactory', title: 'Satisfactory', value: false },
-                { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
-                { slug: 'not_seen', title: 'Not Seen' },
-              ]
-            }],
-            attachments: [
-              { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '20kb', src: '' },
-              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '40kb', src: '' }
-            ]
           }
         ],
       },
