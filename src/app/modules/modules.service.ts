@@ -58,13 +58,19 @@ export class ModulesService {
   }
 
   getChapterDetails(id: any) {
-    let allChapters = this.allChapters();
-
-    return _.find(allChapters, (cp) => cp.id == id);
+    return _.find(this.chapters, (cp) => cp.id == id);
   }
 
+  updateChapter(chapter) {
+    let index = _.findIndex(this.chapters, (cp:any) => cp.id == chapter.id);
+    if (index !== -1) {
+      this.allChapters[index] = chapter;
+    }
+  }
+
+  chapters:any = [];
   allChapters() {
-    return [
+    this.chapters = [
       {
         parent_id: null,
         id: 1,

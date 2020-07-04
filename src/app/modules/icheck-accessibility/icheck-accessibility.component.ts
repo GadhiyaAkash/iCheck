@@ -27,7 +27,9 @@ export class IcheckAccessibilityComponent implements OnInit {
     private route: Router,
     private activeRoute: ActivatedRoute,
     private moduleService: ModulesService
-  ) { }
+  ) {
+    this.moduleService.allChapters();
+  }
 
   ngOnInit(): void {
     this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
@@ -134,12 +136,14 @@ export class IcheckAccessibilityComponent implements OnInit {
       } else {
         let hasNextChapter = this.hasNext('chapters', ++indexes.chapter);
         if (hasNextChapter) {
+          this.moduleService.updateChapter(this.activeChapter);
           this.getChapterDetails(hasNextChapter);
         }
       }
     } else {
       let hasNextChapter = this.hasNext('chapters', ++indexes.chapter);
       if (hasNextChapter) {
+        this.moduleService.updateChapter(this.activeChapter);
         this.getChapterDetails(hasNextChapter);
       }
     }
@@ -147,12 +151,11 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   nextChapter(chapter) {
-    console.log("chapter:", chapter);
+    this.moduleService.updateChapter(this.activeChapter);
     this.getChapterDetails(chapter);
   }
 
   nextSection(section) {
-    console.log("section:", section)
     this.activeChapter = this.moduleService.getChapterDetails(section.parent_id);
     console.log("this.activeChapter::", this.activeChapter);
     this.updateIndex('chapters', this.activeChapter.id)
