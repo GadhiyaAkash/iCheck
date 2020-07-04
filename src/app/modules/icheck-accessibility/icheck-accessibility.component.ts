@@ -56,11 +56,13 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   getChapterDetails(chapter: any) {
-    console.log("chapter::", chapter);
+    this.activeSection = {};
+
     this.activeChapter = this.moduleService.getChapterDetails(chapter.id);
+    console.log("this.activeChapter::", this.activeChapter);
     this.updateIndex('chapters', this.activeChapter.id)
     if (this.activeChapter && this.activeChapter.sections) {
-      this.activeSection = this.activeChapter.sections(this.activeChapter.sections[0].id)
+      this.activeSection = this.activeChapter.sections[0];
       this.updateIndex('sections', this.activeSection.id)
       this.transformQuestions(this.activeSection.questions)
     } else {
@@ -97,6 +99,23 @@ export class IcheckAccessibilityComponent implements OnInit {
     if (hasNextQuestion) {
       --this.indexes.question;
       this.activeQuestion = hasNextQuestion;
+    } else if (this.activeSection.id) {
+      let hasNextSection = this.hasNext('sections', --indexes.section);
+      if (hasNextSection) {
+        --this.indexes.section;
+        this.activeSection = hasNextSection;
+        this.transformQuestions(this.activeSection.questions)
+      } else {
+        let hasNextChapter = this.hasNext('chapters', --indexes.chapter);
+        if (hasNextChapter) {
+          this.getChapterDetails(hasNextChapter);
+        }
+      }
+    } else {
+      let hasNextChapter = this.hasNext('chapters', --indexes.chapter);
+      if (hasNextChapter) {
+        this.getChapterDetails(hasNextChapter);
+      }
     }
   }
 
@@ -111,12 +130,18 @@ export class IcheckAccessibilityComponent implements OnInit {
       if (hasNextSection) {
         ++this.indexes.section;
         this.activeSection = hasNextSection;
-      }
-    } else {
-      let hasNextChapter = this.hasNext('chapters', ++indexes.chapter);
+        this.transformQuestions(this.activeSection.questions)
+      } else {
+        let hasNextChapter = this.hasNext('chapters', ++indexes.chapter);
         if (hasNextChapter) {
           this.getChapterDetails(hasNextChapter);
         }
+      }
+    } else {
+      let hasNextChapter = this.hasNext('chapters', ++indexes.chapter);
+      if (hasNextChapter) {
+        this.getChapterDetails(hasNextChapter);
+      }
     }
     console.log("indezxedd::", this.indexes);
   }
@@ -126,6 +151,20 @@ export class IcheckAccessibilityComponent implements OnInit {
     this.getChapterDetails(chapter);
   }
 
+  nextSection(section) {
+    console.log("section:", section)
+    this.activeChapter = this.moduleService.getChapterDetails(section.parent_id);
+    console.log("this.activeChapter::", this.activeChapter);
+    this.updateIndex('chapters', this.activeChapter.id)
+    if (this.activeChapter && this.activeChapter.sections) {
+      let index = _.findIndex(this.activeChapter.sections, (ss: any) => ss.id == section.id);
+      this.activeSection = this.activeChapter.sections[index];
+      this.updateIndex('sections', this.activeSection.id)
+      this.transformQuestions(this.activeSection.questions)
+    } else {
+      this.transformQuestions(this.activeChapter.questions)
+    }
+  }
   hasNext(key, index) {
     switch (key) {
       case 'chapters':

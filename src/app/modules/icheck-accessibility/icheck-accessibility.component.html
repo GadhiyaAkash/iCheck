@@ -162,11 +162,11 @@
                         </div>
                         <ul>
                             <li [ngClass]="{'active' : (activeChapter.id == chapter.id ), 'has_child':chapter.childrens }"
-                                *ngFor="let chapter of details.chapters" (click)="nextChapter(chapter)">
-                                <a href="javscript:void(0)">{{ chapter.title }}</a>
+                                *ngFor="let chapter of details.chapters">
+                                <a (click)="nextChapter(chapter)">{{ chapter.title }}</a>
 
                                 <ul class="inside" id="" *ngIf="chapter.childrens">
-                                    <li *ngFor="let child of chapter.childrens" [ngClass]="{'active' : (activeSection.id == child.id) }">
+                                    <li *ngFor="let child of chapter.childrens" (click)="nextSection(child)" [ngClass]="{'active' : (activeSection.id == child.id) }">
                                         <a>{{ child.title }}</a>
                                     </li>
                                 </ul>
@@ -182,7 +182,7 @@
                             <span>{{ activeChapter.id }}</span>
                             <span *ngIf="activeSection.id">.{{ activeSection.id }}</span>
                             <span *ngIf="activeQuestion.id">.{{ activeQuestion.id }}</span>
-                            : {{ activeChapter.title }}
+                            : {{ activeSection.id ? activeSection.title : activeChapter.title }}
                         </h1>
                         <nav aria-label=" breadcrumb">
                             <ol class="breadcrumb">
