@@ -1071,3 +1071,7 @@ th .dropdown .btn {
 .sidebar .inside .active .child {
   font-weight: 600;
 }
+
+.Datatable-2 th .fa {
+  margin-top: 2px;
+}
