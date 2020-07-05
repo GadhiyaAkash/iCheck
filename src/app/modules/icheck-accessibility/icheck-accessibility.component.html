@@ -152,22 +152,14 @@
                         <i data-feather="chevron-down" class="ml-2 d-inline-block d-md-none" style="opacity:.6;"></i>
                     </h4>
                     <div class="collapse show" id="collapseExample">
-                        <div>
-                            <p class="pl-4 ml-2">
-                                <small class="link-mute">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    {{ details.total_reading_time }}
-                                </small>
-                            </p>
-                        </div>
                         <ul>
                             <li [ngClass]="{'active' : (activeChapter.id == chapter.id ), 'has_child':chapter.childrens }"
                                 *ngFor="let chapter of details.chapters">
-                                <a (click)="nextChapter(chapter)">{{ chapter.title }}</a>
+                                <a class="parent" (click)="nextChapter(chapter)">{{ chapter.title }}</a>
 
                                 <ul class="inside" id="" *ngIf="chapter.childrens">
                                     <li *ngFor="let child of chapter.childrens" (click)="nextSection(child)" [ngClass]="{'active' : (activeSection.id == child.id) }">
-                                        <a>{{ child.title }}</a>
+                                        <a class="child">{{ child.title }}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -235,11 +227,12 @@
                         </div>
                         <div class="remarks-section mt-4">
                             <p class="mb-2"><b>Remarks</b></p>
-                            <div class="box-remark p-2">
+                            <div class="box-remark">
                                 <textarea rows="3" class="textarea" id="mailtext" required [(ngModel)]="question.remark" name="mailtext" #mailtextvalidityMsg="ngModel"></textarea>
                             </div>
                         </div>
                         <div class="mt-3">
+                            <i class="fa fa-paperclip mr-2"></i>
                             <a href="javascript:void(0);" class="underline d-inline-block mr-4">
                                 <small>Attachment</small>
                             </a>

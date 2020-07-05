@@ -42,9 +42,7 @@
     font-weight: 500;
         font-size: 1.3rem;
   }
-  .time-text{
 
-  }
   .list-icon{
     color: #2F3640 
   }
@@ -94,16 +92,10 @@
   padding-bottom: 0 !important;
 }
 body .sidebar .inside li:last-child::before {
-    /* content: '';
-    transform: rotate(35deg);
-    left: -8px;
-    top: 14px; */
-
     content: '';
     transform: rotate(42deg);
-    left: -10px;
-    top: 12px;
-    height: 35px;
+    left: -8px;
+    top: 14px;
 }
 .sidebar li {
   /* You need to turn on relative positioning so the line is placed relative to the item rather than absolutely on the page */
@@ -782,7 +774,7 @@ span.stts.stts-progress:before {
 }
 .round label {
   background-color: #fff;
-      border: 2px solid rgba(129, 133, 139, 0.25);
+  border: 2px solid rgba(129, 133, 139, 0.25);
   border-radius: 50%;
   cursor: pointer;
   height: 28px;
@@ -1012,7 +1004,7 @@ font-size: 14px;color: #8F8DB9}
 .table-footer {
   margin-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .table-footer .pagination {
@@ -1050,4 +1042,32 @@ a:hover {
 }
 .Datatable-2 td:focus {
   outline: none;
+}
+
+th .round label {
+  border-color: #81858B;
+  top: -4px;
+}
+th .round label:after {
+  border-color: #81858B;
+}
+th .dropdown .btn {
+  padding: 0 !important
+} 
+
+.dropdown-check .dropdown-item {
+  padding: 0.25rem 1rem !important;
+}
+.dropdown-check .dropdown-item span {
+  padding-left: 5px !important;
+}
+.dropdown-check .dropdown-item:active {
+  color: #212529 !important;
+  background-color: transparent !important
+}
+.sidebar li.active .parent {
+  font-weight: 600;
+}
+.sidebar .inside .active .child {
+  font-weight: 600;
 }

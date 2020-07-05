@@ -3,14 +3,19 @@
         <thead>
             <tr role="row">
                 <ng-container>
-                    <th scope="col">#</th>
-                    <th [ngClass]="{ 'sorting_desc': column.sort === 'desc', 'sorting_asc': column.sort === 'asc'}"
+                    <th scope="col">
+                        <div class="round">
+                            <input disabled type="checkbox" name="check_all" id="check_all">
+                            <label for="check_all"></label>
+                        </div>
+                    </th>
+                    <th width="{{ column.width ? column.width : '' }}" [ngClass]="{ 'sorting_desc': column.sort === 'desc', 'sorting_asc': column.sort === 'asc'}"
                         *ngFor="let column of columns" [ngTableSorting]="config" [column]="column"
                         (sortChanged)="onChangeTable($event)">
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-between">
                             <span>{{column.title}}</span>
-                            <!-- <i *ngIf="config && column.sort" class="float-right fa"
-                                [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i> -->
+                            <i *ngIf="config && column.sort" class="float-right fa"
+                                [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
                         </div>
                     </th>
                     <th scope="col">

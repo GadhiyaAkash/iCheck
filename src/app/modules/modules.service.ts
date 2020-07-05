@@ -21,8 +21,8 @@ export class ModulesService {
 
   iCheckSummariesColumns = [
     { title: 'Checklist ID', name: 'id' },
-    { title: 'Checklist Name', name: 'name', sort: 'asc' },
-    { title: 'Attachments', name: 'attachment' },
+    { title: 'Checklist Name', name: 'name', sort: 'asc', width: '350px' },
+    { title: 'Attachments', name: 'attachment', sort: false },
     { title: 'Status', name: 'status' },
     { title: 'Created', name: 'created_at' },
     { title: 'Last Updated', name: 'updated_at' }
@@ -87,7 +87,7 @@ export class ModulesService {
               text: [
                 { slug: 'satisfactory', title: 'Satisfactory', value: false },
                 { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                { slug: 'not_applicable', title: 'Not Applicable', value: false },
                 { slug: 'not_seen', title: 'Not Seen' },
               ]
             }],
@@ -118,7 +118,7 @@ export class ModulesService {
                 text: [
                   { slug: 'satisfactory', title: 'Satisfactory', value: false },
                   { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-                  { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                  { slug: 'not_applicable', title: 'Not Applicable', value: false },
                   { slug: 'not_seen', title: 'Not Seen' },
                 ]
               }],
@@ -146,7 +146,7 @@ export class ModulesService {
                 text: [
                   { slug: 'satisfactory', title: 'Satisfactory', value: false },
                   { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-                  { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                  { slug: 'not_applicable', title: 'Not Applicable', value: false },
                   { slug: 'not_seen', title: 'Not Seen' },
                 ]
               }],
@@ -174,7 +174,7 @@ export class ModulesService {
               text: [
                 { slug: 'satisfactory', title: 'Satisfactory', value: false },
                 { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                { slug: 'not_applicable', title: 'Not Applicable', value: false },
                 { slug: 'not_seen', title: 'Not Seen' },
               ]
             }],
@@ -200,7 +200,7 @@ export class ModulesService {
               text: [
                 { slug: 'satisfactory', title: 'Satisfactory', value: false },
                 { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-                { slug: 'half_satisfactory', title: 'Half Satisfactory', value: false },
+                { slug: 'not_applicable', title: 'Not Applicable', value: false },
                 { slug: 'not_seen', title: 'Not Seen' },
               ]
             }],
