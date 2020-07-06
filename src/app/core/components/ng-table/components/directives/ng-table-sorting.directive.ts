@@ -18,10 +18,9 @@ export class NgTableSortingDirective {
 
   @HostListener('click', ['$event', '$target'])
   public onToggleSort(event:any):void {
-    if (event) {
-      event.preventDefault();
+    if (event.target.type == 'button' || event.target.type == 'checkbox') {
+      return;
     }
-
     if (this.ngTableSorting && this.column && this.column.sort !== false) {
       switch (this.column.sort) {
         case 'asc':

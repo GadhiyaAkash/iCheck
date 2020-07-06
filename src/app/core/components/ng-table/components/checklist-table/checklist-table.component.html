@@ -1,0 +1,79 @@
+<div class="Datatable-2" id="datatable">
+    <table class="table table-striped mt-4 table-responsive w-100 mt-3" role="grid">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <div class="round">
+                        <input disabled type="checkbox" name="check_all" id="check_all">
+                        <label for="check_all"></label>
+                    </div>
+                </th>
+                <th scope="col" width="{{ column.width ? column.width : '' }}"
+                    [ngClass]="{ 'sorting_desc': column.sort === 'desc', 'sorting_asc': column.sort === 'asc'}"
+                    *ngFor="let column of columns" [ngTableSorting]="config" [column]="column"
+                    (sortChanged)="onChangeTable($event)">
+                    <div *ngIf="!column.dd" class="d-flex justify-content-between">
+                        <span>{{column.title}}</span>
+                        <i *ngIf="config && column.sort" class="float-right fa"
+                            [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+                    </div>
+                    <div *ngIf="column.dd" class="dropdown drp-normal">
+                        <button class=" pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{column.title}}
+                        </button>
+                        <div *ngIf="!column.checkbox" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" *ngFor="let ops of column.options" href="javascript:void(0);">
+                                {{ ops.title }}
+                            </a>
+                        </div>
+                        <div *ngIf="column.checkbox" class="dropdown-menu dropdown-check" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-item"  *ngFor="let ops of column.options">
+                                <input type="checkbox" name="check_{{ ops.slug }}" (change)="updateOption(ops, $event)" id="{{ops.slug}}"/>
+                                <span>{{ops.slug}}</span>
+                            </div>
+                        </div>
+                        <i *ngIf="config && column.sort" class="float-right fa"
+                            [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+                    </div>
+                </th>
+                <th scope="col">Download</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <td scope="row">
+                    <div class="round" [routerLink]="['/icheck-accessibility', row.id]">
+                        <input type="checkbox" id="{{ row.reference }}" />
+                        <label for="{{ row.reference }}"></label>
+                    </div>
+                </td>
+                <td scope="row">
+                    <a [routerLink]="['/icheck-accessibility', row.id]" class="view-link">
+                        {{ row.id }}
+                    </a>
+                </td>
+                <td>{{ row.reference }}</td>
+                <td>{{ row.question_number }}</td>
+                <td class="">{{ row.attachment_type }}</td>
+                <td>
+                    <a target="_blank" href="{{ row.attachment }}" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-download-cloud download-icon">
+                            <polyline points="8 17 12 21 16 17"></polyline>
+                            <line x1="12" y1="12" x2="12" y2="21"></line>
+                            <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
+                        </svg>
+                    </a>
+                </td>
+                <td>
+                    <a style="cursor: pointer;" (click)="deleteTableRow(row.id)">
+                        <i style="font-size: 20px;" class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

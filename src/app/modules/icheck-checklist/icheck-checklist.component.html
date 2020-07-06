@@ -36,122 +36,19 @@
             </div>
 
             <div>
-                <table class="table table-striped mt-4 table-responsive">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                <div class="round">
-                                    <input disabled type="checkbox" name="check_all" id="check_all">
-                                    <label for="check_all"></label>
-                                </div>
-                            </th>
-                            <th scope="col">
-                                <div class="dropdown drp-normal">
-                                    <button class=" pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Serial No.
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="javascript:void(0);">AANNNNAAA</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">00444800</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">SN0001CRN</a>
-                                    </div>
-                                </div>
-                            </th>
-                            <th scope="col">
-                                <div class="dropdown drp-normal">
-                                    <button class=" pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Reference No.
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="javascript:void(0);">00444800</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">SN0005CRN</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">SN0005CRN</a>
-                                    </div>
-                                </div>
-                            </th>
-                            <th scope="col">
-                                <div class="dropdown drp-normal">
-                                    <button class=" pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Question No.
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="javascript:void(0);">1</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">2</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">3</a>
-                                    </div>
-                                </div>
-                            </th>
-                            <th scope="col">
-                                <div class="dropdown drp-normal">
-                                    <button class=" pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Attachment Type
-                                    </button>
-                                    <div class="dropdown-menu dropdown-check" aria-labelledby="dropdownMenuButton">
-                                        <div class="dropdown-item">
-                                            <input type="checkbox" id="PDF" />
-                                            <span>PDF</span>
-                                        </div>
-                                        <div class="dropdown-item">
-                                            <input type="checkbox" id="PDF" />
-                                            <span>XLS</span>
-                                        </div>
-                                        <div class="dropdown-item">
-                                            <input type="checkbox" id="PDF" />
-                                            <span>MP4</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </th>
-                            <th scope="col">Download</th>
-                            <th scope="col">Delete</th>
+                <app-checklist-table 
+                    [config]="config" 
+                    (tableChanged)="onChangeTable(config)" 
+                    [rows]="rows" 
+                    [columns]="columns">
+                </app-checklist-table>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="" *ngFor="let details of checklistDetails.rows">
-                            <td scope="row">
-                                <div class="round" [routerLink]="['/icheck-accessibility', details.id]">
-                                    <input type="checkbox" id="{{ details.reference }}" />
-                                    <label for="{{ details.reference }}"></label>
-                                </div>
-                            </td>
-                            <td scope="row">
-                                <a [routerLink]="['/icheck-accessibility', details.id]" class="view-link">
-                                    {{ details.id }}
-                                </a>
-                            </td>
-                            <td>{{ details.reference }}</td>
-                            <td>{{ details.question_number }}</td>
-                            <td class="">{{ details.attachment_type }}</td>
-                            <td>
-                                <a target="_blank" href="{{ details.attachment }}" download>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-download-cloud download-icon">
-                                        <polyline points="8 17 12 21 16 17"></polyline>
-                                        <line x1="12" y1="12" x2="12" y2="21"></line>
-                                        <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
-                                    </svg>
-                                </a>
-                            </td>
-                            <td>
-                                <a style="cursor: pointer;" (click)="deleteTableRow(details.id)">
-                                    <i style="font-size: 20px;" class="fa fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ul class="pagination-custom list-inline d-flex align-items-center justify-content-center mt-5">
-                    <li><a href="javascript:void(0);"></a></li>
-                    <li><a href="javascript:void(0);"></a></li>
-                    <li><a href="javascript:void(0);"></a></li>
-
-                </ul>
+                <div class="table-footer">
+                    <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length"
+                        [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false"
+                        (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+                    </pagination>
+                </div>
             </div>
         </section>
     </section>

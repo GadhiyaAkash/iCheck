@@ -16,6 +16,7 @@ import { IcheckChecklistComponent } from './modules/icheck-checklist/icheck-chec
 import { IcheckAccessibilityComponent } from './modules/icheck-accessibility/icheck-accessibility.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgPipesModule } from 'ngx-pipes';
+import { ChecklistTableComponent } from './core/components/ng-table/components/checklist-table/checklist-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgPipesModule } from 'ngx-pipes';
     NG_TABLE_DIRECTIVES,
     IcheckInspectionComponent,
     IcheckChecklistComponent,
-    IcheckAccessibilityComponent
+    IcheckAccessibilityComponent,
+    ChecklistTableComponent
   ],
   imports: [
     BrowserModule,
