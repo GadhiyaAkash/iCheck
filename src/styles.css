@@ -1075,3 +1075,10 @@ th .dropdown .btn {
 .Datatable-2 th .fa {
   margin-top: 2px;
 }
+
+.swal2-actions .swal2-confirm {
+  background: transparent linear-gradient(90deg, #39C4A4 0%, #50ADEB 100%) 0% 0% no-repeat padding-box !important;
+  border: 1px solid #3CCDE0 !important;
+  border-radius: 5px !important;
+  color: #fff !important; 
+}
