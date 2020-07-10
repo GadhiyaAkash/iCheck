@@ -23,6 +23,7 @@ export class IcheckAccessibilityComponent implements OnInit {
     section: 0,
     question: 0
   }
+  showPreviousSubmission: boolean = false;
 
   constructor(
     private router: Router,
@@ -36,9 +37,6 @@ export class IcheckAccessibilityComponent implements OnInit {
   ngOnInit(): void {
     this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
     this.details = this.moduleService.getIAccessbilityDetails(this.accessbilityId);
-
-    console.log("this.details::", this.details);
-
     if (this.details && this.details.chapters) {
       this.getChapterDetails(this.details.chapters[0]);
     }
@@ -72,8 +70,6 @@ export class IcheckAccessibilityComponent implements OnInit {
     } else {
       this.transformQuestions(this.activeChapter.questions)
     }
-    console.log("activeChapter:", this.activeChapter);
-    console.log("activeSection:", this.activeSection);
   }
 
   questions: any = [];
@@ -190,5 +186,27 @@ export class IcheckAccessibilityComponent implements OnInit {
         this.router.navigate(['dashboard']);
       }
     });
+  }
+
+  previousSubmission: any = {};
+  getPreviousSubmitssion(id:any) {
+    this.showPreviousSubmission = !this.showPreviousSubmission;
+    this.previousSubmission = {
+      inspection_date: '11/04/2020',
+      reviewed_by: 'John Doe',
+      review_date: '15/04/2020',
+      approval_date: '18/04/2020',
+      attachments: [
+        { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
+        { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
+      ],
+      option: [
+        { slug: 'satisfactory', title: 'Satisfactory', value: false },
+        { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
+        { slug: 'not_applicable', title: 'Not Applicable', value: false },
+        { slug: 'not_seen', title: 'Not Seen' },
+      ],
+      remark: 'Submission Comments allows users to view all assignment submission comments sent and received within the last four weeks.'
+    } 
   }
 }

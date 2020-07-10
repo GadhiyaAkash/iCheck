@@ -535,7 +535,9 @@ color: #81858B;
 }
 .summery-img{
   width: 100px;margin-bottom: 15px;
-  margin: 0px auto
+  margin: 0px auto;
+  object-fit: scale-down;
+  position: relative;
 }
 .underline{
   text-decoration: underline;
@@ -1081,4 +1083,78 @@ th .dropdown .btn {
   border: 1px solid #3CCDE0 !important;
   border-radius: 5px !important;
   color: #fff !important; 
+}
+
+.modalacc .modal-dialog {
+  box-shadow: -3px 0px 6px rgba(242, 247, 250, 0.5);
+  border: 1px solid #F2F7FA;
+}
+
+.modal-open, .modaacc, .modal-dialog, .modal-open .modal {
+  overflow: auto;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    margin: 2rem auto;
+  }
+}
+
+.modalacc .modal-content {
+  border-color: transparent;
+}
+
+.modalacc .modal-header {
+  border-bottom: 0;
+}
+
+.modal-title-sm {
+  font-size: 16px;
+}
+
+.modalacc .modal-dialog:after,.modalacc .modal-dialog:before{
+  content:none !important;
+}
+.modalacc{
+  display: block !important; 
+  padding-right: 17px !important;
+}
+.close:focus {
+  outline: none; 
+}
+
+.summery-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .3s ease;
+	background-color: #fff;
+}
+
+.upload-box:hover .summery-overlay {
+	opacity: .8;
+}
+
+.upload-box .text-center {
+	position: relative;
+}
+
+.summery-overlay .icon i {
+	color: #0056b3;
+	font-size: 25px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+	z-index: 1;
+}
+
+.more-icon:hover {
+	cursor: pointer;
 }

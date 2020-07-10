@@ -158,7 +158,8 @@
                                 <a class="parent" (click)="nextChapter(chapter)">{{ chapter.title }}</a>
 
                                 <ul class="inside" id="" *ngIf="chapter.childrens">
-                                    <li *ngFor="let child of chapter.childrens" (click)="nextSection(child)" [ngClass]="{'active' : (activeSection.id == child.id) }">
+                                    <li *ngFor="let child of chapter.childrens" (click)="nextSection(child)"
+                                        [ngClass]="{'active' : (activeSection.id == child.id) }">
                                         <a class="child">{{ child.title }}</a>
                                     </li>
                                 </ul>
@@ -191,80 +192,177 @@
                                 </li>
                             </ol>
                         </nav>
-                        <div class="float-right">
-                            <i class="fa fa-step-backward d-inline-block mr-4" aria-hidden="true"
-                                style="opacity: .3"></i>
+                        <div class="row">
+                            <div class=""
+                                [ngClass]="{ 'col-sm-12': !showPreviousSubmission, 'col-sm-6': showPreviousSubmission }">
+                                <div class="float-right">
+                                    <i class="fa fa-step-backward d-inline-block mr-4" aria-hidden="true"
+                                        style="opacity: .3" (click)="getPreviousSubmitssion(question.id)"></i>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-more-horizontal" style="opacity: .3">
-                                <circle cx="12" cy="12" r="1"></circle>
-                                <circle cx="19" cy="12" r="1"></circle>
-                                <circle cx="5" cy="12" r="1"></circle>
-                            </svg>
-                        </div>
-                        <div class="question-list">
-                            <p>{{ question.title }}</p>
-                            <p *ngIf="question.guidance">
-                                <b>Guidance:</b>
-                                {{ question.guidance }}
-                            </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-more-horizontal"
+                                        style="opacity: .3">
+                                        <circle cx="12" cy="12" r="1"></circle>
+                                        <circle cx="19" cy="12" r="1"></circle>
+                                        <circle cx="5" cy="12" r="1"></circle>
+                                    </svg>
+                                </div>
+                                <div class="question-list">
+                                    <p>{{ question.title }}</p>
+                                    <p *ngIf="question.guidance">
+                                        <b>Guidance:</b>
+                                        {{ question.guidance }}
+                                    </p>
 
-                            <div class="mt-4">
-                                <div *ngFor="let option of question.options">
-                                    <div *ngIf="option.type == 'radio'">
-                                        <div *ngFor="let text of option.text" class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions_{{ text.slug }}"
-                                                id="inlineRadio1_{{ text.slug }}" [checked]="text.value"
-                                                (change)="updateSelectedQuetion(option.text, text.slug, $event)">
-                                            <label class="form-check-label" for="inlineRadio1_{{ text.slug }}">
-                                                {{ text.title }}
-                                            </label>
+                                    <div class="mt-4">
+                                        <div *ngFor="let option of question.options">
+                                            <div *ngIf="option.type == 'radio'">
+                                                <div *ngFor="let text of option.text"
+                                                    class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions_{{ text.slug }}"
+                                                        id="inlineRadio1_{{ text.slug }}" [checked]="text.value"
+                                                        (change)="updateSelectedQuetion(option.text, text.slug, $event)">
+                                                    <label class="form-check-label" for="inlineRadio1_{{ text.slug }}">
+                                                        {{ text.title }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="remarks-section mt-4">
+                                    <p class="mb-2"><b>Remarks</b></p>
+                                    <div class="box-remark">
+                                        <textarea rows="3" class="textarea" id="mailtext" required
+                                            [(ngModel)]="question.remark" name="mailtext"
+                                            #mailtextvalidityMsg="ngModel"></textarea>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <i class="fa fa-paperclip mr-2"></i>
+                                    <a href="javascript:void(0);" class="underline d-inline-block mr-4">
+                                        <small>Attachment</small>
+                                    </a>
+                                    <i>
+                                        <small class="link-mute"> Guidance for the type of Objective Evidence
+                                            required.</small>
+                                    </i>
+                                </div>
+                                <div class="d-flex flex-wrap">
+                                    <div class="upload-box mt-2" *ngFor="let attachment of question.attachments">
+                                        <div class="text-center">
+                                            <img [src]="attachment.thumbline_image" class="summery-img">
+                                            <div class="summery-overlay">
+                                                <a href="javascript:void(0)" class="icon" title="">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="p-2">
+                                            <a href="javascript:void(0)" class="underline upload-title">
+                                                {{ attachment.name }}
+                                            </a>
+                                            <p class=" mb-0">
+                                                <small class="link-mute">{{ attachment.size }}</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="showPreviousSubmission"
+                                class="modal-section col-sm-6 modal modalacc fade position-relative" id="previousmodal"
+                                tabindex="-1" role="dialog" aria-labelledby="previousmodal" aria-modal="true"
+                                [ngClass]="{ 'show': showPreviousSubmission }">
+                                <div class="modal-dialog mt-0">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title modal-title-sm">
+                                                Previous submission
+                                            </h5>
+                                            <button type="button"
+                                                (click)="showPreviousSubmission = !showPreviousSubmission" class="close"
+                                                data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="pb-1">
+                                                <p class="text-mute mb-2">
+                                                    Inspection date : {{ previousSubmission.inspection_date }}
+                                                </p>
+                                                <p class="text-mute mb-2">Reviewed by :
+                                                    {{ previousSubmission.reviewed_by }}</p>
+                                                <p class="text-mute mb-2">Review date :
+                                                    {{ previousSubmission.review_date }}</p>
+                                                <p class="text-mute mb-0">Approval date :
+                                                    {{ previousSubmission.approval_date }}</p>
+                                            </div>
+                                            <div class="mt-4">
+                                                <div *ngFor="let text of previousSubmission.option"
+                                                    class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions_{{ text.slug }}"
+                                                        id="inlineRadio1_{{ text.slug }}" [checked]="text.value"
+                                                        (change)="updateSelectedQuetion(option.text, text.slug, $event)">
+                                                    <label class="form-check-label" for="inlineRadio1_{{ text.slug }}">
+                                                        {{ text.title }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="remarks-section mt-4">
+                                                <p class="mb-2"><b>Remarks</b></p>
+                                                <div class="box-remark">
+                                                    <textarea rows="3" class="textarea" id="remarks" required
+                                                        [(ngModel)]="previousSubmission.remark" name="remarks"
+                                                        #remarks="ngModel" readonly></textarea>
+                                                </div>
+                                            </div>
+                                            <!---->
+                                            <div class="mt-3">
+                                                <a href="javascript:void(0)" class="underline d-inline-block mr-4"><i
+                                                        class="fa fa-paperclip mr-2 text-mute"></i><small>Attachment</small></a><i><small
+                                                        class="link-mute">Guidance for the type of Objective
+                                                        Evidence required.</small></i>
+                                            </div>
+                                            <!---->
+                                            <div class="d-flex flex-wrap">
+                                                <div class="upload-box mt-2" *ngFor="let attachment of previousSubmission.attachments">
+                                                    <div class="text-center">
+                                                        <img [src]="attachment.thumbline_image"
+                                                            class="summery-img">
+                                                        <div class="summery-overlay">
+                                                            <a href="javascript:void(0)" class="icon" title="">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-2">
+                                                        <a href="javascript:void(0)" class="underline upload-title">{{ attachment.name }}</a>
+                                                        <p class=" mb-0"><small class="link-mute">{{ attachment.size }}</small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="remarks-section mt-4">
-                            <p class="mb-2"><b>Remarks</b></p>
-                            <div class="box-remark">
-                                <textarea rows="3" class="textarea" id="mailtext" required [(ngModel)]="question.remark" name="mailtext" #mailtextvalidityMsg="ngModel"></textarea>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <i class="fa fa-paperclip mr-2"></i>
-                            <a href="javascript:void(0);" class="underline d-inline-block mr-4">
-                                <small>Attachment</small>
-                            </a>
-                            <i>
-                                <small class="link-mute"> Guidance for the type of Objective Evidence required.</small>
-                            </i>
-                        </div>
-                        <div class="d-flex flex-wrap">
-                            <div class="upload-box mt-2" *ngFor="let attachment of question.attachments">
-                                <div class="text-center">
-                                    <img [src]="attachment.thumbline_image" class="summery-img">
-                                </div>
-                                <div class="p-2">
-                                    <a href="javascript:void(0)" class="underline upload-title">
-                                        {{ attachment.name }}
-                                    </a>
-                                    <p class=" mb-0">
-                                        <small class="link-mute">{{ attachment.size }}</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-5">
-                            <button class="btn btn-previous float-left" *ngIf="indexes.chapter" (click)="previous()">Previous</button>
-                            <button class="btn btn-theme float-right" *ngIf="((details.chapters.length - 1) != indexes.chapter)" (click)="nextQuestion()">Next</button>
-                            <button class="btn btn-theme float-right" *ngIf="((details.chapters.length - 1) == indexes.chapter)" (click)="submitQuestion()">Submit</button>
+                        <div class="mt-3 pb-3">
+                            <button class="btn btn-previous float-left" *ngIf="indexes.chapter"
+                                (click)="previous()">Previous</button>
+                            <button class="btn btn-theme float-right"
+                                *ngIf="((details.chapters.length - 1) != indexes.chapter)"
+                                (click)="nextQuestion()">Next</button>
+                            <button class="btn btn-theme float-right"
+                                *ngIf="((details.chapters.length - 1) == indexes.chapter)"
+                                (click)="submitQuestion()">Submit</button>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!------>
         </div>
     </section>
 </div>
