@@ -217,7 +217,7 @@
 
                                     <div class="mt-4">
                                         <div *ngFor="let option of question.options">
-                                            <div class="row" *ngIf="option.type == 'radio'">
+                                            <div *ngIf="option.type == 'radio'">
                                                 <div *ngFor="let text of option.text"
                                                     class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
@@ -299,9 +299,9 @@
                                                 <p class="text-mute mb-0">Approval date :
                                                     {{ previousSubmission.approval_date }}</p>
                                             </div>
-                                            <div class="mt-4">
+                                            <div class="mt-4 row m-l-3">
                                                 <div *ngFor="let text of previousSubmission.option"
-                                                    class="form-check form-check-inline">
+                                                    class="col-sm-5 form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
                                                         name="inlineRadioOptions_{{ text.slug }}"
                                                         id="inlineRadio1_{{ text.slug }}" [checked]="text.value"

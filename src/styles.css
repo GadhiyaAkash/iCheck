@@ -1159,3 +1159,7 @@ th .dropdown .btn {
 .more-icon:hover {
 	cursor: pointer;
 }
+
+.m-l-3 {
+  margin-left: 3px !important;
+}
