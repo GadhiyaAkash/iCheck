@@ -196,7 +196,7 @@
                             <div class=""
                                 [ngClass]="{ 'col-sm-12': !showPreviousSubmission, 'col-sm-6': showPreviousSubmission }">
                                 <div class="float-right">
-                                    <i class="fa fa-step-backward d-inline-block mr-4" aria-hidden="true"
+                                    <i class="fa more-backward fa-step-backward d-inline-block mr-4" aria-hidden="true"
                                         style="opacity: .3" (click)="getPreviousSubmitssion(question.id)"></i>
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -217,7 +217,7 @@
 
                                     <div class="mt-4">
                                         <div *ngFor="let option of question.options">
-                                            <div *ngIf="option.type == 'radio'">
+                                            <div class="row" *ngIf="option.type == 'radio'">
                                                 <div *ngFor="let text of option.text"
                                                     class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
@@ -251,11 +251,11 @@
                                     </i>
                                 </div>
                                 <div class="d-flex flex-wrap">
-                                    <div class="upload-box mt-2" *ngFor="let attachment of question.attachments">
+                                    <div class="upload-box mt-2" *ngFor="let attachment of question.attachments;let i = index">
                                         <div class="text-center">
                                             <img [src]="attachment.thumbline_image" class="summery-img">
                                             <div class="summery-overlay">
-                                                <a href="javascript:void(0)" class="icon" title="">
+                                                <a (click)="deleteAttachment(i, question.attachments)" href="javascript:void(0)" class="icon" title="">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
@@ -305,7 +305,7 @@
                                                     <input class="form-check-input" type="radio"
                                                         name="inlineRadioOptions_{{ text.slug }}"
                                                         id="inlineRadio1_{{ text.slug }}" [checked]="text.value"
-                                                        (change)="updateSelectedQuetion(option.text, text.slug, $event)">
+                                                        (change)="updateSelectedQuetion(text, text.slug, $event)">
                                                     <label class="form-check-label" for="inlineRadio1_{{ text.slug }}">
                                                         {{ text.title }}
                                                     </label>
@@ -328,12 +328,12 @@
                                             </div>
                                             <!---->
                                             <div class="d-flex flex-wrap">
-                                                <div class="upload-box mt-2" *ngFor="let attachment of previousSubmission.attachments">
+                                                <div class="upload-box mt-2" *ngFor="let attachment of previousSubmission.attachments;let i = index">
                                                     <div class="text-center">
                                                         <img [src]="attachment.thumbline_image"
                                                             class="summery-img">
                                                         <div class="summery-overlay">
-                                                            <a href="javascript:void(0)" class="icon" title="">
+                                                            <a (click)="deleteAttachment(i)" href="javascript:void(0)" class="icon" title="">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>

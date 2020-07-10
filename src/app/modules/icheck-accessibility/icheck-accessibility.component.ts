@@ -189,7 +189,7 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   previousSubmission: any = {};
-  getPreviousSubmitssion(id:any) {
+  getPreviousSubmitssion(id: any) {
     this.showPreviousSubmission = !this.showPreviousSubmission;
     this.previousSubmission = {
       inspection_date: '11/04/2020',
@@ -207,6 +207,19 @@ export class IcheckAccessibilityComponent implements OnInit {
         { slug: 'not_seen', title: 'Not Seen' },
       ],
       remark: 'Submission Comments allows users to view all assignment submission comments sent and received within the last four weeks.'
-    } 
+    }
+  }
+
+  deleteAttachment(index, data: any = []) {
+    console.log("data::", data);
+    this.alertService.confirm('You are about to delete this attachments!').then((response) => {
+      if (response.isConfirmed) {
+        if (data.length) {
+          data.splice(index, 1);
+        } else {
+          this.previousSubmission.attachments.splice(index, 1);
+        }
+      }
+    });
   }
 }

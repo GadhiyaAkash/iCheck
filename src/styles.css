@@ -1027,6 +1027,7 @@ font-size: 14px;color: #8F8DB9}
   cursor: pointer;
 }
 
+.more-backward:hover,
 a:hover {
   cursor: pointer;
 }
