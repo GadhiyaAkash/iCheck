@@ -47,7 +47,6 @@ export class IcheckChecklistComponent implements OnInit {
   }
 
   public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
-    console.log("config::", config);
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }

@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
    * Login method
    */
   login() {
-    console.log("Login form", this.entity);
     this.baseService.login('/login', this.entity);
 
     // this.baseService.login('/login', this.entity).subscribe(() => {

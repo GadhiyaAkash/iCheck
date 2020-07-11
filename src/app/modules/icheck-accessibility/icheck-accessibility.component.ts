@@ -62,7 +62,6 @@ export class IcheckAccessibilityComponent implements OnInit {
     this.activeSection = {};
 
     this.activeChapter = this.moduleService.getChapterDetails(chapter.id);
-    console.log("this.activeChapter::", this.activeChapter);
     this.updateIndex('chapters', this.activeChapter.id)
     if (this.activeChapter && this.activeChapter.sections) {
       this.activeSection = this.activeChapter.sections[0];
@@ -165,7 +164,6 @@ export class IcheckAccessibilityComponent implements OnInit {
 
   nextSection(section) {
     this.activeChapter = this.moduleService.getChapterDetails(section.parent_id);
-    console.log("this.activeChapter::", this.activeChapter);
     this.updateIndex('chapters', this.activeChapter.id)
     if (this.activeChapter && this.activeChapter.sections) {
       let index = _.findIndex(this.activeChapter.sections, (ss: any) => ss.id == section.id);

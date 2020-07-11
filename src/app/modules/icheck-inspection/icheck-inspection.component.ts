@@ -26,7 +26,6 @@ export class IcheckInspectionComponent implements OnInit {
   }
 
   submit() {
-    console.log("entity::", this.entity);
     this.alertService.success('Successfully created I-Check Inspection.').then((response) => {
       if (response.isConfirmed) {
         this.router.navigate(['dashboard']);

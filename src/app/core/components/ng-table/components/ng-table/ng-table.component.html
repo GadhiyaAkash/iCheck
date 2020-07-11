@@ -14,8 +14,8 @@
                         (sortChanged)="onChangeTable($event)">
                         <div class="{{ column.class }}">
                             <span>{{column.title}}</span>
-                            <i *ngIf="config && column.sort" class="float-right fa"
-                                [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+                            <i *ngIf="config && column.sort" class="fa"
+                                [ngClass]="{ 'pl-5': column.name == 'name', 'float-right': column.name !== 'name', 'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
                         </div>
                     </th>
                     <th scope="col" class="text-center">

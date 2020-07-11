@@ -107,7 +107,6 @@ export class ChecklistTableComponent implements OnInit {
 
   selectedOptions:any = [];
   updateOption(ops:any, event:any) {
-    console.log("event::", event);
     if (event.target.checked) {
       this.selectedOptions.push(ops.slug);
     } else {
@@ -123,7 +122,6 @@ export class ChecklistTableComponent implements OnInit {
       let hasRow = _.filter(this.copyRows, (row) => {
         return row.attachment_type == option; 
       });
-      console.log("hasRow::", hasRow);
       if (hasRow && hasRow.length) {
         _.forEach(hasRow, (hr) => {
           _rows.push(hr);
