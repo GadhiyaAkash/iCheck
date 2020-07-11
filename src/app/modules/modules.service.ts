@@ -20,12 +20,12 @@ export class ModulesService {
   }
 
   iCheckSummariesColumns = [
-    { title: 'Checklist ID', name: 'id' },
-    { title: 'Checklist Name', name: 'name', sort: 'asc', width: '350px' },
-    { title: 'Attachments', name: 'attachment', sort: false },
-    { title: 'Status', name: 'status' },
-    { title: 'Created', name: 'created_at' },
-    { title: 'Last Updated', name: 'updated_at' }
+    { title: 'Checklist ID', name: 'id', class: 'text-center' },
+    { title: 'Checklist Name', name: 'name', sort: 'asc', width: '350px', class: '' },
+    { title: 'Attachments', name: 'attachment', sort: false, class: 'text-center' },
+    { title: 'Status', name: 'status', class: 'text-center' },
+    { title: 'Created', name: 'created_at', class: 'text-center' },
+    { title: 'Last Updated', name: 'updated_at', class: 'text-center' }
   ];
 
   iCheckSummariesRows = [
@@ -92,8 +92,7 @@ export class ModulesService {
               ]
             }],
             attachments: [
-              { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
-              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
+              { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' }
             ]
           }
         ],
@@ -152,7 +151,8 @@ export class ModulesService {
               }],
               attachments: [
                 { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
-                { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
+                { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' },
+                { name: 'accessbility.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '5kb', src: '' }
               ]
             }
           ],
@@ -180,7 +180,9 @@ export class ModulesService {
             }],
             attachments: [
               { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
-              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
+              { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' },
+              { name: 'evalution.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '48kb', src: '' },
+              { name: 'images.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '25kb', src: '' },
             ]
           }],
       },

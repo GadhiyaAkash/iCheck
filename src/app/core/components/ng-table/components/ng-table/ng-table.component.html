@@ -12,13 +12,13 @@
                     <th width="{{ column.width ? column.width : '' }}" [ngClass]="{ 'sorting_desc': column.sort === 'desc', 'sorting_asc': column.sort === 'asc'}"
                         *ngFor="let column of columns" [ngTableSorting]="config" [column]="column"
                         (sortChanged)="onChangeTable($event)">
-                        <div class="d-flex justify-content-between">
+                        <div class="{{ column.class }}">
                             <span>{{column.title}}</span>
                             <i *ngIf="config && column.sort" class="float-right fa"
                                 [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
                         </div>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-more-horizontal more-icon">
@@ -39,14 +39,18 @@
                         <label for="rows_{{ row.id }}"></label>
                     </div>
                 </td>
-                <td scope="row">#{{ row.id }}</td>
+                <td scope="row" class="text-center">
+                    <a [routerLink]="['/icheck-checklist', row.id]" class="view-link">
+                        #{{ row.id }}
+                    </a>
+                </td>
                 <td>{{ row.name }}</td>
-                <td>
+                <td class="text-center">
                     <a [routerLink]="['/icheck-checklist', row.id]" class="view-link">
                         {{ row.attachment }}
                     </a>
                 </td>
-                <td class="">
+                <td class="text-center">
                     <span class="stts stts-{{ row.statusClass }}">
                         <span>{{ row.status }}</span>
                     </span>
@@ -54,9 +58,9 @@
                         <i class="fa fa-unlock unlock" aria-hidden="true"></i>
                     </span>
                 </td>
-                <td>{{ row.created_at }}</td>
-                <td>{{ row.updated_at }}</td>
-                <td>
+                <td class="text-center">{{ row.created_at }}</td>
+                <td class="text-center">{{ row.updated_at }}</td>
+                <td class="text-center">
                     <span class="dropdown icheck-dropdown">
                         <button type="button" class="" data-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

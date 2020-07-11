@@ -14,6 +14,7 @@ export class IcheckAccessibilityComponent implements OnInit {
   accessbilityId: any = '';
   details: any;
   ranks: Array<any> = [];
+  previousSubmission: any = {};
 
   activeChapter: any;
   activeSection: any = {};
@@ -117,6 +118,7 @@ export class IcheckAccessibilityComponent implements OnInit {
         this.getChapterDetails(hasNextChapter);
       }
     }
+    this.resetPreviousSubmissionConfi();
   }
 
   nextQuestion() {
@@ -145,8 +147,16 @@ export class IcheckAccessibilityComponent implements OnInit {
         this.getChapterDetails(hasNextChapter);
       }
     }
-    console.log("indezxedd::", this.indexes);
+    this.resetPreviousSubmissionConfi();
   }
+  
+  /**
+   * Reset previous submission configuration
+   * @type Private
+   */
+  private resetPreviousSubmissionConfi() {
+    this.showPreviousSubmission = false;
+  }  
 
   nextChapter(chapter) {
     this.moduleService.updateChapter(this.activeChapter);
@@ -188,7 +198,6 @@ export class IcheckAccessibilityComponent implements OnInit {
     });
   }
 
-  previousSubmission: any = {};
   getPreviousSubmitssion(id: any) {
     this.showPreviousSubmission = !this.showPreviousSubmission;
     this.previousSubmission = {
@@ -211,7 +220,6 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   deleteAttachment(index, data: any = []) {
-    console.log("data::", data);
     this.alertService.confirm('You are about to delete this attachments!').then((response) => {
       if (response.isConfirmed) {
         if (data.length) {

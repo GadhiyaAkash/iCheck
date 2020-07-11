@@ -12,12 +12,12 @@
                     [ngClass]="{ 'sorting_desc': column.sort === 'desc', 'sorting_asc': column.sort === 'asc'}"
                     *ngFor="let column of columns" [ngTableSorting]="config" [column]="column"
                     (sortChanged)="onChangeTable($event)">
-                    <div *ngIf="!column.dd" class="d-flex justify-content-between">
+                    <div *ngIf="!column.dd" class="{{ column.class }}">
                         <span>{{column.title}}</span>
                         <i *ngIf="config && column.sort" class="float-right fa"
                             [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
                     </div>
-                    <div *ngIf="column.dd" class="dropdown drp-normal">
+                    <div *ngIf="column.dd" class="dropdown drp-normal {{ column.class }}">
                         <button class=" pl-0 btn dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{column.title}}
@@ -37,8 +37,8 @@
                             [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
                     </div>
                 </th>
-                <th scope="col">Download</th>
-                <th scope="col">Delete</th>
+                <th scope="col" class="text-center">Download</th>
+                <th scope="col" class="text-center">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -49,15 +49,15 @@
                         <label for="{{ row.reference }}"></label>
                     </div>
                 </td>
-                <td scope="row">
+                <td scope="row" class="text-center">
                     <a [routerLink]="['/icheck-accessibility', row.id]" class="view-link">
                         {{ row.id }}
                     </a>
                 </td>
-                <td>{{ row.reference }}</td>
-                <td>{{ row.question_number }}</td>
-                <td class="">{{ row.attachment_type }}</td>
-                <td>
+                <td class="text-center">{{ row.reference }}</td>
+                <td class="text-center">{{ row.question_number }}</td>
+                <td class="text-center">{{ row.attachment_type }}</td>
+                <td class="text-center">
                     <a target="_blank" href="{{ row.attachment }}" download>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -68,7 +68,7 @@
                         </svg>
                     </a>
                 </td>
-                <td>
+                <td class="text-center">
                     <a style="cursor: pointer;" (click)="deleteTableRow(row.id)">
                         <i style="font-size: 20px;" class="fa fa-trash"></i>
                     </a>

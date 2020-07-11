@@ -656,7 +656,7 @@ td:last-child {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-tr{
+tr {
    border-left: 5px solid transparent;
 }
 .table thead th,.table td, .table th{
@@ -683,7 +683,9 @@ table th,table th .btn{
   font-weight: bold;
   vertical-align: middle;
 }
-.table thead th{vertical-align: middle;}
+.table thead th {
+  vertical-align: middle !important;
+}
 .pagination-custom li a{
 background:#F5F4FB ;
 height: 10px;

@@ -112,10 +112,10 @@ export class IcheckChecklistComponent implements OnInit {
   
   get iCheckChecklistColumns() {
     return [
-      { title: 'Serial No.', name: 'id' },
-      { title: 'Reference No.', name: 'reference', sort: 'asc', dd: true, options: [{ title: 'AANNNNAAA', slug: 'aa' }, { title: '00444800', slug: 'bb' }, { title: 'SN0001CRN', slug: 'cc' }] },
-      { title: 'Question No.', name: 'question_number', dd: true, options: [{ title: '1' }, { title: '2' }, { title: '3' }] },
-      { title: 'Attachment Type', name: 'attachment_type', dd: true, checkbox: true, options: [{ title: 'PDF', slug: 'pdf' }, { title: 'XLS', slug: 'xls' }, { title: 'MP4', slug: 'mp4' }] }
+      { title: 'Serial No.', name: 'id', class: 'text-center' },
+      { title: 'Reference No.', name: 'reference', sort: 'asc', class: 'text-center', dd: true, options: [{ title: 'AANNNNAAA', slug: 'aa' }, { title: '00444800', slug: 'bb' }, { title: 'SN0001CRN', slug: 'cc' }] },
+      { title: 'Question No.', name: 'question_number', dd: true, class: 'text-center', options: [{ title: '1' }, { title: '2' }, { title: '3' }] },
+      { title: 'Attachment Type', name: 'attachment_type', dd: true, checkbox: true, class: 'text-center', options: [{ title: 'PDF', slug: 'pdf' }, { title: 'XLS', slug: 'xls' }, { title: 'MP4', slug: 'mp4' }] }
     ]; 
   }
 }
