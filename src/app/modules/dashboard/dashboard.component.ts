@@ -4,7 +4,6 @@ import { NgTableService } from 'src/app/core/components/ng-table/services/ng-tab
 import * as _ from 'lodash';
 import { ModulesService } from '../modules.service';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, SingleDataSet } from 'ng2-charts';
 import 'chart.piecelabel.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { AlertService } from 'src/app/core/services/alert.service';

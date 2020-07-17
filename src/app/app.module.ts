@@ -17,6 +17,10 @@ import { IcheckAccessibilityComponent } from './modules/icheck-accessibility/ich
 import { ChartsModule } from 'ng2-charts';
 import { NgPipesModule } from 'ngx-pipes';
 import { ChecklistTableComponent } from './core/components/ng-table/components/checklist-table/checklist-table.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { ChecklistTableComponent } from './core/components/ng-table/components/c
     FormsModule,
     PaginationModule.forRoot(),
     ChartsModule,
-    NgPipesModule
+    NgPipesModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    NgHttpLoaderModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

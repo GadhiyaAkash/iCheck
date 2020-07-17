@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from 'src/app/core/services/base.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ModulesService } from 'src/app/modules/modules.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,12 @@ import { ModulesService } from 'src/app/modules/modules.service';
 export class LoginComponent implements OnInit {
 
   entity: any = {
-    ship_id: '',
-    rank_id: '',
+    rank: {
+      id: ''
+    },
+    ship: {
+      id: ''
+    },
     password: ''
   };
   ships: Array<any> = [];
@@ -21,37 +26,46 @@ export class LoginComponent implements OnInit {
   constructor(
     private baseService: BaseService,
     private authService: AuthService,
-    private moduleService: ModulesService
-  ) { }
+    private moduleService: ModulesService,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit(): void {
-    this.ships = this.getShipsRecords();
-    this.ranks = this.moduleService.getRanksRecords();
+    this.getShipsRecords();
+    this.getRanksRecords();
   }
 
   /**
    * Return ships record
    */
   getShipsRecords() {
-    return [
-      { id: 1, name: 'MV Alexia' },
-      { id: 2, name: 'USS Alderamin (AK-116)' },
-      { id: 3, name: 'USS Ara (AK-136)' }
-    ]
+    this.moduleService.getShipsRecords().subscribe((response) => {
+      this.ships = response.details;
+    });
   }
+
+  /**
+   * Return ranks record
+   */
+  getRanksRecords() {
+    this.moduleService.getRanksDetails().subscribe((response) => {
+      this.ranks = response.details;
+    });
+  }
+
 
   /**
    * Login method
    */
   login() {
-    this.baseService.login('/login', this.entity);
-
-    // this.baseService.login('/login', this.entity).subscribe(() => {
-      //   this.authService.redirectAfterLogin();
-    // }, err => {
-    //   if (err && err.error) {
-    //     // this.toastr.error(err.error.message);
-    //   }
-    // });
+    this.baseService.login(this.entity).subscribe((response) => {
+      this.authService.setUser(response);
+      this.authService.saveToken(response.token);
+      this.authService.redirectAfterLogin();
+    }, err => {
+      if (err && err.error) {
+        this.toastr.error(err.error.details);
+      }
+    });
   }
 }

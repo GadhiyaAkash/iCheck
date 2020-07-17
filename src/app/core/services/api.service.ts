@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +10,7 @@ export class ApiService {
   constructor(
     private httpService: HttpService
   ) {
-    this.API_URL = '' //@TODO ADD YOUR API URL
+    this.API_URL = 'https://shrouded-fortress-32104.herokuapp.com/';
   }
 
 

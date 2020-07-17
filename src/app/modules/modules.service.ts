@@ -1,16 +1,35 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { ApiService } from '../core/services/api.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModulesService {
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService
+  ) { }
 
+  /**
+   * Get Ships Records
+   */
+  getShipsRecords() {
+    return this.apiService.get('ships').pipe(
+      map( response => response)
+    );
+  }
+  
   /**
    * Return ranks record
    */
+  getRanksDetails() {
+    return this.apiService.get('ranks').pipe(
+      map( response => response)
+    );
+  }
+  
   getRanksRecords() {
     return [
       { id: 1, name: 'Lieutenant General' },

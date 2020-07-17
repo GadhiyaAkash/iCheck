@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { ApiService } from './api.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +9,14 @@ import { AuthService } from './auth.service';
 export class BaseService {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private apiService: ApiService
   ) { }
 
-  login(URL:any, params:any) {
-    this.authService.setUser(params);
-    this.authService.redirectAfterLogin();
+  login(params:any) {
+    return this.apiService.post('login', params).pipe(
+      map( response => response)
+    );
   }
 
   /**

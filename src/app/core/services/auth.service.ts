@@ -20,8 +20,7 @@ export class AuthService {
   ) { }
 
   isLoggedIn(): boolean {
-    // return this.token && this.user ? true : false;
-    return this.user ? true : false;
+    return this.token && this.user ? true : false;
   }
 
   public get user() {
@@ -34,11 +33,11 @@ export class AuthService {
   }
 
   public get token() {
-    return '';
+    return this.localService.get('token');
   }
 
   saveToken(token: String) {
-    //
+    this.localService.set('token', token);
   }
 
   redirectAfterLogin() {
