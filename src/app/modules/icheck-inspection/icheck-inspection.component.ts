@@ -23,8 +23,14 @@ export class IcheckInspectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.iCheckInspectionList = this.baseService.IcheckInspectionList;
+    // this.getICheckOption();
   }
 
+  getICheckOption() {
+    this.baseService.getICheckOptions().subscribe((response) => {
+      console.log("response::", response);  
+    })
+  }
   submit() {
     this.alertService.success('Successfully created I-Check Inspection.').then((response) => {
       if (response.isConfirmed) {

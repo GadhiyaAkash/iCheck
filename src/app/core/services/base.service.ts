@@ -33,8 +33,13 @@ export class BaseService {
   }
 
   /**
-   * get Icheck Summary Inspection List
+   * get Icheck Summary Inspection Options
    */
+  getICheckOptions() {
+    return this.apiService.get('ichecksummaries/options').pipe(
+      map(response => response)
+    );
+  }
   public get IcheckInspectionList() {
     return [
       {id: 1, title: 'Pre-PSC', description: 'Duties of Port State Control', active: true},

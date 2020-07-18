@@ -17,10 +17,11 @@ import { IcheckAccessibilityComponent } from './modules/icheck-accessibility/ich
 import { ChartsModule } from 'ng2-charts';
 import { NgPipesModule } from 'ngx-pipes';
 import { ChecklistTableComponent } from './core/components/ng-table/components/checklist-table/checklist-table.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { HttpRequestInterceptor } from './core/interceptor/http-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,13 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     BrowserAnimationsModule,
     NgHttpLoaderModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
