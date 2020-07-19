@@ -40,11 +40,11 @@ export class ModulesService {
 
   iCheckSummariesColumns = [
     { title: 'Checklist ID', name: 'id', class: 'text-center' },
-    { title: 'Checklist Name', name: 'name', sort: 'asc', width: '350px', class: '' },
+    { title: 'Checklist Name', name: 'vessel', sort: 'asc', width: '300px', class: '' },
     { title: 'Attachments', name: 'attachment', sort: false, class: 'text-center' },
     { title: 'Status', name: 'status', class: 'text-center' },
-    { title: 'Created', name: 'created_at', class: 'text-center' },
-    { title: 'Last Updated', name: 'updated_at', class: 'text-center' }
+    { title: 'Created', name: 'createdAt', class: 'text-center' },
+    { title: 'Last Updated', name: 'updatedAt', class: 'text-center' }
   ];
 
   iCheckSummariesRows = [

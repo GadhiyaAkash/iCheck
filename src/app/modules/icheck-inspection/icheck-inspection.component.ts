@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from 'src/app/core/services/base.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-icheck-inspection',
@@ -11,8 +12,8 @@ import { Router } from '@angular/router';
 export class IcheckInspectionComponent implements OnInit {
 
   iCheckInspectionList: Array<any> = [];
-  entity:any = {
-    
+  entity: any = {
+    icheckSummaryMaster: ''
   }
 
   constructor(
@@ -22,27 +23,35 @@ export class IcheckInspectionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.iCheckInspectionList = this.baseService.IcheckInspectionList;
-    // this.getICheckOption();
+    this.getICheckOption();
   }
 
   getICheckOption() {
     this.baseService.getICheckOptions().subscribe((response) => {
-      console.log("response::", response);  
-    })
-  }
-  submit() {
-    this.alertService.success('Successfully created I-Check Inspection.').then((response) => {
-      if (response.isConfirmed) {
-        this.router.navigate(['dashboard']);
+      this.iCheckInspectionList = _.map(response.details, (res) => {
+        res.active = false;
+        return res;
+      });
+      let firstOptions = _.head(this.iCheckInspectionList);
+      if (firstOptions) {
+        firstOptions.active = true;
+        this.entity.icheckSummaryMaster = firstOptions.id;
       }
     });
   }
 
-  selectIcheckInspection(summary:any) {
+  submit() {
+    this.baseService.saveIcheckInspection(this.entity).subscribe((res) => {
+      this.alertService.success('Successfully created I-Check Inspection.').then((response) => {
+        this.router.navigate(['dashboard']);
+      });
+    })
+  }
+
+  selectIcheckInspection(summary: any) {
     this.iCheckInspectionList.forEach((s) => {
       s.active = (s.id == summary.id) ? true : false
     });
-    this.entity.check_summary_id = summary.id;
+    this.entity.icheckSummaryMaster = summary.id;
   }
 }

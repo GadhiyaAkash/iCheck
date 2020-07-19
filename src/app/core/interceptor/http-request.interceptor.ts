@@ -22,9 +22,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     request = request.clone({
-      setHeaders: {
-        // @TODO ENABLE WHEN IMPLMENT TOKEN 
-        // Authorization: `Bearer ${this.authService.token}`
+      setHeaders: { 
+        Authorization: `Bearer ${this.authService.token}`
       }
     });
     return next.handle(request)

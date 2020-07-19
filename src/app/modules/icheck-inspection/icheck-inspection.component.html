@@ -7,7 +7,7 @@
                 <div class="col-md-2" *ngFor="let summary of iCheckInspectionList">
                     <div class="box-summery text-center mb-md-0 mb-4" (click)="selectIcheckInspection(summary)" [ngClass]="{ 'active': summary.active }">
                         <div class="box-content">
-                            <h5 class="box-title mb-0">{{ summary.title }}</h5>
+                            <h5 class="box-title mb-0">{{ summary.name }}</h5>
                             <p class="box-text">{{ summary.description }}</p>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                                 <div class="form-group">
                                     <label for="">Vessel</label>
                                     <input type="text" class="form-control" placeholder="Name of the Vessel"
-                                        [(ngModel)]="entity.vessel_name" name="vessel_name" required
+                                        [(ngModel)]="entity.vessel" name="vessel_name" required
                                         #vessel_name="ngModel">
                                     <div *ngIf="entityForm.submitted && vessel_name.invalid"
                                         class="float-left required">
@@ -37,7 +37,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Flag</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.vessel_flag"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.flag"
                                         name="vessel_flag" required #vessel_flag="ngModel"
                                         placeholder="Flag of the Vessel">
                                     <div *ngIf="entityForm.submitted && vessel_flag.invalid"
@@ -79,7 +79,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Gross Tonnage</label>
-                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.gross_tonnage"
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.grossTonnage"
                                         name="gross_tonnage" required #gross_tonnage="ngModel"
                                         placeholder="Registered Gross Tonnage of the Vessel">
                                     <div *ngIf="entityForm.submitted && gross_tonnage.invalid"
@@ -111,7 +111,7 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Call Sign</label>
-                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.call_sign"
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.callSign"
                                         name="call_sign" required #call_sign="ngModel"
                                         placeholder="Call Sign of the Vessel">
                                     <div *ngIf="entityForm.submitted && call_sign.invalid"
@@ -124,7 +124,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Nett Tonnage</label>
-                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.nett_tonnage"
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.nettTonnage"
                                         name="nett_tonnage" required #nett_tonnage="ngModel"
                                         placeholder="Nett Registered Tonnage of the Vessel">
                                     <div *ngIf="entityForm.submitted && nett_tonnage.invalid"
@@ -137,7 +137,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Summer Draught</label>
-                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.summer_draught"
+                                    <input type="text" class="form-control" id="" [(ngModel)]="entity.summerDraught"
                                         name="summer_draught" required #summer_draught="ngModel"
                                         placeholder="Summer Draught of the Vessel">
                                     <div *ngIf="entityForm.submitted && summer_draught.invalid"
@@ -177,7 +177,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Chief Officer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.chief_officer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chiefOfficer"
                                         name="chief_officer" required #chief_officer="ngModel" id=""
                                         placeholder="Name of Chief Officer">
                                     <div *ngIf="entityForm.submitted && chief_officer.invalid"
@@ -190,7 +190,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">2nd Officer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.second_officer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.officer2"
                                         name="second_officer" required #second_officer="ngModel" id=""
                                         placeholder="Name of 2nd Officer">
                                     <div *ngIf="entityForm.submitted && second_officer.invalid"
@@ -203,7 +203,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">3rd Officer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.third_officer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.officer3"
                                         name="third_officer" required #third_officer="ngModel" id=""
                                         placeholder="Name of 3rd Officer">
                                     <div *ngIf="entityForm.submitted && third_officer.invalid"
@@ -221,7 +221,7 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Chief Engineer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.chief_engineer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chiefEngineer"
                                         name="chief_engineer" required #chief_engineer="ngModel" id=""
                                         placeholder="Name of Chief Engineer">
                                     <div *ngIf="entityForm.submitted && chief_engineer.invalid"
@@ -234,7 +234,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">2nd Engineer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.chilf_second_officer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.engineer2"
                                         name="chilf_second_officer" required #chilf_second_officer="ngModel" id=""
                                         placeholder="Name of the Master">
                                     <div *ngIf="entityForm.submitted && chilf_second_officer.invalid"
@@ -247,7 +247,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">3rd Engineer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.chilf_third_officer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.engineer3"
                                         name="chilf_third_officer" required #chilf_third_officer="ngModel" id=""
                                         placeholder="Name of 3rd Engineer">
                                     <div *ngIf="entityForm.submitted && chilf_third_officer.invalid"
@@ -260,7 +260,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">4th Engineer</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.chilf_fourth_officer"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.engineer4"
                                         name="chilf_fourth_officer" required #chilf_fourth_officer="ngModel" id=""
                                         placeholder="Name of the Master">
                                     <div *ngIf="entityForm.submitted && chilf_fourth_officer.invalid"
@@ -278,7 +278,7 @@
                             <div class="form-inspection">
                                 <div class="form-group">
                                     <label for="">Electro-Technical Officer (E.T.O.)</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.eto"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.electroTechnicalOfficer"
                                         name="eto" required #eto="ngModel" id=""
                                         placeholder="Name of E.T.O.">
                                     <div *ngIf="entityForm.submitted && eto.invalid"
@@ -291,7 +291,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">Chief Cook</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.chief_cook"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.chiefCook"
                                         name="chief_cook" required #chief_cook="ngModel" id=""
                                         placeholder="Name of Chief Officer">
                                     <div *ngIf="entityForm.submitted && chief_cook.invalid"
@@ -317,7 +317,7 @@
                                 <!----form-group--->
                                 <div class="form-group">
                                     <label for="">No.1 Oiler (Fitter)</label>
-                                    <input type="text" class="form-control" [(ngModel)]="entity.oiler"
+                                    <input type="text" class="form-control" [(ngModel)]="entity.fitter"
                                         name="oiler" required #oiler="ngModel" id=""
                                         placeholder="Name of No.1 Oiler">
                                     <div *ngIf="entityForm.submitted && oiler.invalid"

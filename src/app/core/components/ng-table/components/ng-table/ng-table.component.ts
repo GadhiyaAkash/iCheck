@@ -103,13 +103,8 @@ export class NgTableComponent implements OnInit {
   }
 
   deleteRow(row:any) {
-    this.alertService.confirm('You are about to delete this checklist!').then((response) => {
-      if (response.isConfirmed) {
-        let index = _.findIndex(this.rows, (r) => r.id == row.id);
-        if (index !== -1) {
-          this.rows.splice(index, 1);
-        }
-      }
-    });
+    if (this.config.deleteRow) {
+      this.config.deleteRow(row);
+    }
   }
 }

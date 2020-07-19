@@ -15,7 +15,7 @@
                         <div class="{{ column.class }}">
                             <span>{{column.title}}</span>
                             <i *ngIf="config && column.sort" class="fa"
-                                [ngClass]="{ 'pl-5': column.name == 'name', 'float-right': column.name !== 'name', 'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+                                [ngClass]="{ 'pl-5': column.name == 'vessel', 'float-right': column.name !== 'vessel', 'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
                         </div>
                     </th>
                     <th scope="col" class="text-center">
@@ -44,7 +44,7 @@
                         #{{ row.id }}
                     </a>
                 </td>
-                <td>{{ row.name }}</td>
+                <td>{{ row.vessel }}</td>
                 <td class="text-center">
                     <a [routerLink]="['/icheck-checklist', row.id]" class="">
                         {{ row.attachment }}
@@ -52,14 +52,14 @@
                 </td>
                 <td class="text-center">
                     <span class="stts stts-{{ row.statusClass }}">
-                        <span>{{ row.status }}</span>
+                        <span>{{ row.status | uppercase }}</span>
                     </span>
                     <span class="lock-unlock">
                         <i class="fa fa-unlock unlock" aria-hidden="true"></i>
                     </span>
                 </td>
-                <td class="text-center">{{ row.created_at }}</td>
-                <td class="text-center">{{ row.updated_at }}</td>
+                <td class="text-center">{{ row.createdAt | date: 'MMM dd,yyyy' }}</td>
+                <td class="text-center">{{ row.updatedAt | date: 'MMM dd,yyyy' }}</td>
                 <td class="text-center">
                     <span class="dropdown icheck-dropdown">
                         <button type="button" class="" data-toggle="dropdown">
@@ -75,11 +75,12 @@
                         <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' }">Edit</a>
                         <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' || row.status == 'SUBMITTED' }" (click)="deleteRow(row)">Delete</a>
                         <a class="dropdown-item">Communication Log</a>
-                        <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' || row.status == 'SUBMITTED' || row.status == 'IN PROGRESS' }">Send for review</a>
+                        <a class="dropdown-item" [ngClass]="{ 'disabled': row.status == 'COMPLETE' || row.status == 'SUBMITTED' || row.status == 'In Progress' }">Send for review</a>
                     </div>
                 </span>
                 </td>
             </tr>
+            <p class="no-record" *ngIf="rows.length == 0">No records found!</p>
         </tbody>
     </table>
 </div>

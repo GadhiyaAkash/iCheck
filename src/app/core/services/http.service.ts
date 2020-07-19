@@ -53,7 +53,7 @@ export class HttpService {
   }
 
   delete(path: string, params: URLSearchParams = new URLSearchParams(), hideLoader: boolean = false): Observable<any> {
-    const httpParams = Object.assign(this.getHeaders({ hideLoader: hideLoader }), {
+    const httpParams = Object.assign(this.getHeaders({ hideLoader: hideLoader }, true), {
       params: new HttpParams({ fromString: this.createGetParams(params) })
     });
     return this.http.delete(`${path}`, httpParams)
