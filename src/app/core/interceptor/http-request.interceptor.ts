@@ -32,10 +32,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           switch (error.status) {
             case 401:
               // handle 401 error - redirect to login
-              
+              this.authService.logout();
               break;
             case 403:
-              // handle 403 error
+              this.authService.logout();
               break;
             default:
               break;

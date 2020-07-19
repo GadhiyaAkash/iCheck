@@ -49,4 +49,8 @@ export class AuthService {
     }
   }
 
+  logout() {
+    this.localService.clear();
+    this.router.navigate(['login']);
+  }
 }
