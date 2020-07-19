@@ -74,10 +74,16 @@ export class DashboardComponent implements OnInit {
         
       this.iCheckSummaries = _.map(checkListOptions, (res) => {
         res.pieChartLabels = ['Complete', 'Submitted', 'In Progress'];
+        res.colors = [{ backgroundColor: ["#39C4A4", "#2396E3", "#F5B133"] }];
         res.active = false;
         let hasRecords = _.find(checklistCharts, (cc) => cc.optionId == res.id);
         if (hasRecords) {
           res.pieChartData = [hasRecords.Completed, hasRecords.Submitted, hasRecords.Inprogress];
+          if (_.sum(res.pieChartData) == 0) {
+            res.pieChartData = ['No Records']
+            res.pieChartLabels = ['No Records'];
+            res.colors = [{ backgroundColor: ["#49C4A7"] }];
+          }
         }
         return res;
       });

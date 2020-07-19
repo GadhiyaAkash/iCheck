@@ -59,7 +59,8 @@ export class ModulesService {
 
   getIchecklistDetails(id: any) {
     let checklistDetailTable = this.getChecklistDetailsTable(id);
-    let checklistDetails = _.find(this.iCheckSummariesRows, (row) => row.id == id);
+    let checklistDetails = this.iCheckSummariesRows[0];
+    checklistDetails.id = id;
     checklistDetails['rows'] = checklistDetailTable;
     return checklistDetails;
   }
