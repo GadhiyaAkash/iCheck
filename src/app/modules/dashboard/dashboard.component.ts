@@ -242,10 +242,10 @@ export class DashboardComponent implements OnInit {
   deleteSingleRow(row:any) {
     this.that.alertService.confirm('You are about to delete this checklist!').then((response) => {
         if (response.isConfirmed) {
-          // this.that.baseService.deleleteICheckSummary(row.id).subscribe((res) => {
-          //   // this.getSummaryData(); 
-          //   this.that.toaster.success('Checklist deleted successfully.');
-          // })
+          this.that.baseService.deleleteICheckSummary(row.id).subscribe((res) => {
+            this.that.getDatas(); 
+            this.that.toaster.success('Checklist deleted successfully.');
+          })
         }
       });
   }
