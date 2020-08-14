@@ -56,8 +56,9 @@
                         Location
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);">PACIFIC ADVENTURER</a>
-                        <a class="dropdown-item" href="javascript:void(0);">EEMS TRADER</a>
+                        <a class="dropdown-item" *ngFor="let loc of locations">
+                            {{ loc.location }}
+                        </a>
                     </div>
                 </div>
             </div>

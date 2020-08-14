@@ -25,6 +25,8 @@ export class IcheckAccessibilityComponent implements OnInit {
     question: 0
   }
   showPreviousSubmission: boolean = false;
+  locations: Array<any> = [];
+  chapterList: Array<any> = [];
 
   constructor(
     private router: Router,
@@ -36,12 +38,26 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getLocations();
     this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
+    this.getChapters();
     this.details = this.moduleService.getIAccessbilityDetails(this.accessbilityId);
     if (this.details && this.details.chapters) {
       this.getChapterDetails(this.details.chapters[0]);
     }
     this.ranks = this.moduleService.getRanksRecords();
+  }
+
+  getLocations() {
+    this.moduleService.getLocations().subscribe((res) => {
+      this.locations = res.details;
+    });
+  }
+
+  getChapters() {
+    this.moduleService.getChapters(this.accessbilityId).subscribe((res) => {
+      this.chapterList = res.details;
+    })
   }
 
   updateIndex(key, id) {
@@ -148,14 +164,14 @@ export class IcheckAccessibilityComponent implements OnInit {
     }
     this.resetPreviousSubmissionConfi();
   }
-  
+
   /**
    * Reset previous submission configuration
    * @type Private
    */
   private resetPreviousSubmissionConfi() {
     this.showPreviousSubmission = false;
-  }  
+  }
 
   nextChapter(chapter) {
     this.moduleService.updateChapter(this.activeChapter);

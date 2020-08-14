@@ -12,6 +12,30 @@ export class ModulesService {
     private apiService: ApiService
   ) { }
 
+  getChapters(id:any) {
+    return this.apiService.get('attachmentdata/getChaptersAndSections/' + id).pipe(
+      map( response => response)
+    );
+  }
+
+  getLocations() {
+    return this.apiService.get('locations').pipe(
+      map( response => response)
+    );
+  }
+
+  getAttachments(id) {
+    return this.apiService.get('ichecksummaries/getCheckListDetails/' + id).pipe(
+      map( response => response)
+    );
+  }
+
+  downloadAllAttachments(id) {
+    return this.apiService.get('attachment/downloadAll/' + id).pipe(
+      map( response => response)
+    );
+  }
+
   /**
    * Get Ships Records
    */

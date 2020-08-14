@@ -1,17 +1,20 @@
 <div class="container-fluid">
     <section class="isummery bg-white">
-        <h1 class="title">{{ checklistDetails.name }}<span> ({{ checklistDetails.rows.length }})</span></h1>
+        <h1 class="title">{{ checklistSummary.vessel }}<span> ({{ attachments.length }})</span></h1>
 
         <section class="summery-bottom mt-5 pt-2">
             <div class="d-md-flex justify-content-between">
                 <div class="d-md-flex align-items-center">
-                    <h5 class="title-sm mr-md-4">#{{ checklistDetails.id }} - {{ checklistDetails.id }}-1.1-01</h5>
-                    <span class="stts stts-{{ checklistDetails.statusClass }}">
-                        <span>{{ checklistDetails.status }}</span>
+                    <h5 class="title-sm mr-md-4">
+                        #{{ checklistSummary.id }}
+                        <span *ngIf="checklistSummary.lastRefereces">- {{ checklistSummary.lastRefereces }}</span>
+                    </h5>
+                    <span class="stts stts-{{ checklistSummary.statusClass }}">
+                        <span>{{ checklistSummary.status }}</span>
                     </span>
                 </div>
                 <div class="d-flex mt-3 justify-content-end">
-                    <a href="javascript:void(0);" class="underline d-inline-block">Download all</a>
+                    <a href="javascript:void(0);" class="underline d-inline-block" (click)="downloadAll()">Download all</a>
                     <a href="javascript:void(0);" class="list-icon-link active "><svg xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -36,10 +39,7 @@
             </div>
 
             <div>
-                <app-checklist-table 
-                    [config]="config" 
-                    (tableChanged)="onChangeTable(config)" 
-                    [rows]="rows" 
+                <app-checklist-table [config]="config" (tableChanged)="onChangeTable(config)" [rows]="rows"
                     [columns]="columns">
                 </app-checklist-table>
 

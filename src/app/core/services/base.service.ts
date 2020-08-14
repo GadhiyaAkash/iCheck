@@ -62,6 +62,6 @@ export class BaseService {
    * Delete i check summary 
    */
   deleleteICheckSummary(id):Observable<any> {
-    return this.apiService.delete('deleleteICheckSummary/' + id);
+    return this.apiService.get('ichecksummaries/' + id);
   }
 }
