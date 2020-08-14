@@ -68,7 +68,9 @@ export class IcheckChecklistComponent implements OnInit {
       }
       if (res.details && res.details['Attachments']) {
         this.attachments = res.details['Attachments'];
-        this.checklistSummary.lastRefereces = this.attachments[this.attachments.length - 1].referenceno;
+        if (this.attachments[this.attachments.length - 1]) {
+          this.checklistSummary.lastRefereces = this.attachments[this.attachments.length - 1].referenceno;
+        }
         this.data = this.attachments || [];
         this.length = this.data.length;
         this.onChangeTable(this.config);
