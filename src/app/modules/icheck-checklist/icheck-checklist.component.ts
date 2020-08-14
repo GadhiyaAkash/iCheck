@@ -29,7 +29,9 @@ export class IcheckChecklistComponent implements OnInit {
     paging: true,
     sorting: { columns: this.columns },
     filtering: { filterString: '' },
-    selectedRows: []
+    selectedRows: [],
+    deleteRow: this.deleteTableRow,
+    that: this
   };
   checklistSummary: any = {};
   attachments: any = [];
@@ -46,14 +48,10 @@ export class IcheckChecklistComponent implements OnInit {
     this.checkListId = this.activeRoute.snapshot.paramMap.get('id');
     this.getAttachments();
     this.checklistDetails = this.moduleService.getIchecklistDetails(this.checkListId);
-    // this.data = this.checklistDetails.rows;
-    // this.length = this.data.length;
-    this.onChangeTable(this.config);
   }
-
+  
   getAttachments() {
     this.moduleService.getAttachments(this.checkListId).subscribe((res) => {
-      console.log("res", res.details);
       if (res.details && res.details['I-Check Summry']) {
         this.checklistSummary = res.details['I-Check Summry'];
         switch (this.checklistSummary.status) {
@@ -73,6 +71,7 @@ export class IcheckChecklistComponent implements OnInit {
         this.checklistSummary.lastRefereces = this.attachments[this.attachments.length - 1].referenceno;
         this.data = this.attachments || [];
         this.length = this.data.length;
+        this.onChangeTable(this.config);
       }
     })
   }
@@ -127,16 +126,17 @@ export class IcheckChecklistComponent implements OnInit {
     });
   }
 
+  that:any;
   deleteTableRow(id: any) {
-    this.alertService.confirm('You are about to delete this checklist attachments!').then((response) => {
+    this.that.alertService.confirm('You are about to delete this checklist attachments!').then((response) => {
       if (response.isConfirmed) {
-        let index = _.findIndex(this.checklistDetails.rows, (row: any) => row.id == id);
-        if (index !== -1) {
-          this.checklistDetails.rows.splice(index, 1);
-        }
+        this.moduleService.deleteAttachment(id).subscribe((res) => {
+          this.that.getAttachments();
+        }, (error) => {
+          this.that.toster.error("Something went wrong!");
+        })
       }
     });
-
   }
 
   get iCheckChecklistColumns() {
@@ -144,7 +144,7 @@ export class IcheckChecklistComponent implements OnInit {
       { title: 'Serial No.', name: 'id', class: 'text-center' },
       { title: 'Reference No.', name: 'reference', sort: 'asc', class: 'text-center', dd: true, options: [{ title: 'AANNNNAAA', slug: 'aa' }, { title: '00444800', slug: 'bb' }, { title: 'SN0001CRN', slug: 'cc' }] },
       { title: 'Question No.', name: 'question_number', dd: true, class: 'text-center', options: [{ title: '1' }, { title: '2' }, { title: '3' }] },
-      { title: 'Attachment Type', name: 'attachment_type', dd: true, checkbox: true, class: 'text-center', options: [{ title: 'PDF', slug: 'pdf' }, { title: 'XLS', slug: 'xls' }, { title: 'MP4', slug: 'mp4' }] }
+      { title: 'Attachment Type', name: 'attachment_type', dd: true, checkbox: true, class: 'text-center', options: [{ title: 'PDF', slug: 'pdf' }, { title: 'XLSX', slug: 'xls' }, { title: 'MP4', slug: 'mp4' }] }
     ];
   }
 

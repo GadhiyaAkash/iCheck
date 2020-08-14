@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { AlertService } from 'src/app/core/services/alert.service';
 import * as _ from 'lodash';
+import { ModulesService } from 'src/app/modules/modules.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checklist-table',
@@ -49,9 +51,11 @@ export class ChecklistTableComponent implements OnInit {
   private _columns: Array<any> = [];
   private _config: any = {};
   private copyRows: any = [];
-  
+
   constructor(
-    private alertService: AlertService
+    private alertService: AlertService,
+    private toster: ToastrService,
+    private moduleService: ModulesService
   ) { }
 
 
@@ -92,8 +96,8 @@ export class ChecklistTableComponent implements OnInit {
     return propertyName.split('.').reduce((prev: any, curr: string) => prev[curr], row);
   }
 
-  selectRow(row:any, event:any) {
-    let index = _.findIndex(this.config.selectedRows, (r:any) => r.id == row.id);
+  selectRow(row: any, event: any) {
+    let index = _.findIndex(this.config.selectedRows, (r: any) => r.id == row.id);
     if (event.target.checked) {
       if (index == -1) {
         this.config.selectedRows.push(row);
@@ -105,22 +109,22 @@ export class ChecklistTableComponent implements OnInit {
     }
   }
 
-  selectedOptions:any = [];
-  updateOption(ops:any, event:any) {
+  selectedOptions: any = [];
+  updateOption(ops: any, event: any) {
     if (event.target.checked) {
       this.selectedOptions.push(ops.slug);
     } else {
-      let index = _.findIndex(this.selectedOptions, (so:any) => (so == ops.slug));
+      let index = _.findIndex(this.selectedOptions, (so: any) => (so == ops.slug));
       if (index !== -1) {
         this.selectedOptions.splice(index, 1);
       }
     }
     this.selectedOptions = _.uniq(this.selectedOptions);
 
-    let _rows:any = [];
+    let _rows: any = [];
     _.forEach(this.selectedOptions, (option) => {
       let hasRow = _.filter(this.copyRows, (row) => {
-        return row.attachment_type == option; 
+        return row.attachment_type == option;
       });
       if (hasRow && hasRow.length) {
         _.forEach(hasRow, (hr) => {
@@ -130,19 +134,26 @@ export class ChecklistTableComponent implements OnInit {
     });
 
     if (this.selectedOptions.length == 0) {
-      this.rows = this.copyRows; 
+      this.rows = this.copyRows;
     } else {
       this.rows = _.sortBy(_rows, o => o.id);
     }
   }
 
   deleteTableRow(id: any) {
-    this.alertService.confirm('You are about to delete this checklist attachments!').then((response) => {
+    if (this.config.deleteRow) {
+      this.config.deleteRow(id);
+    }
+  }
+
+  downloadSingleAttachment(row: any) {
+    this.alertService.confirm('You are about to download this checklist attachments!').then((response) => {
       if (response.isConfirmed) {
-        let index = _.findIndex(this.rows, (row: any) => row.id == id);
-        if (index !== -1) {
-          this.rows.splice(index, 1);
-        }
+        this.moduleService.downloadSingleAttachments(row.id).subscribe((res) => {
+          console.log("res::", res);
+        }, (error) => {
+          this.toster.error("Something went wrong!");
+        })
       }
     });
 

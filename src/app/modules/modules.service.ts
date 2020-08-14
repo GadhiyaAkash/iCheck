@@ -36,6 +36,18 @@ export class ModulesService {
     );
   }
 
+  downloadSingleAttachments(id) {
+    return this.apiService.get('attachment/download/' + id).pipe(
+      map( response => response)
+    );
+  }
+  
+  deleteAttachment(id) {
+    return this.apiService.get('attachment/' + id).pipe(
+      map( response => response)
+    );
+  }
+
   /**
    * Get Ships Records
    */

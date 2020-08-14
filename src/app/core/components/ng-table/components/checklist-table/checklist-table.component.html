@@ -27,10 +27,12 @@
                                 {{ ops.title }}
                             </a>
                         </div>
-                        <div *ngIf="column.checkbox" class="dropdown-menu dropdown-check" aria-labelledby="dropdownMenuButton">
-                            <div class="dropdown-item"  *ngFor="let ops of column.options">
-                                <input type="checkbox" name="check_{{ ops.slug }}" (change)="updateOption(ops, $event)" id="{{ops.slug}}"/>
-                                <span>{{ops.slug}}</span>
+                        <div *ngIf="column.checkbox" class="dropdown-menu dropdown-check"
+                            aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-item" *ngFor="let ops of column.options">
+                                <input type="checkbox" name="check_{{ ops.slug }}" (change)="updateOption(ops, $event)"
+                                    id="{{ops.slug}}" />
+                                <span>{{ops.title}}</span>
                             </div>
                         </div>
                         <i *ngIf="config && column.sort" class="float-right fa"
@@ -45,8 +47,8 @@
             <tr *ngFor="let row of rows">
                 <td scope="row">
                     <div class="round" [routerLink]="['/icheck-accessibility', row.id]">
-                        <input type="checkbox" id="{{ row.reference }}" />
-                        <label for="{{ row.reference }}"></label>
+                        <input type="checkbox" id="{{ row.referenceno }}" />
+                        <label for="{{ row.referenceno }}"></label>
                     </div>
                 </td>
                 <td scope="row" class="text-center">
@@ -54,11 +56,11 @@
                         {{ row.id }}
                     </a>
                 </td>
-                <td class="text-center">{{ row.reference }}</td>
-                <td class="text-center">{{ row.question_number }}</td>
-                <td class="text-center">{{ row.attachment_type }}</td>
+                <td class="text-center">{{ row.referenceno }}</td>
+                <td class="text-center">{{ row.questionno }}</td>
+                <td class="text-center">{{ row.attachmenttype }}</td>
                 <td class="text-center">
-                    <a target="_blank" href="{{ row.attachment }}" download>
+                    <a (click)="downloadSingleAttachment(row)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-download-cloud download-icon">
