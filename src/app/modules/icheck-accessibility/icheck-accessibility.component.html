@@ -3,14 +3,14 @@
         <div class=" d-md-flex justify-content-between align-items-start">
             <div class="d-md-flex">
                 <h2 class="font-normal mr-md-5 mb-md-0 pb-4">
-                    {{ details.title }}
+                    {{ checklistDetails.vessel }}
                 </h2>
                 <div class="d-flex justify-content-md-start justify-content-center">
                     <div class=" mr-3">
                         <div class="process-round">
                             <div class="c100 p12 small">
                                 <span style="background: transparent;">
-                                    {{ details.completed_chapter }}/<small>{{ details.chapters.length }}</small>
+                                    {{ metaData.completed_chapters }}/<small>{{ metaData.total_chapters }}</small>
                                 </span>
                                 <div class="slice" style="background: transparent;">
                                     <div class="bar"></div>
@@ -25,7 +25,7 @@
                         <div class="process-round">
                             <div class="c100 p12 small">
                                 <span style="background: transparent;">
-                                    {{ details.completion_percentage }}<small class="">%</small>
+                                    {{ metaData.completed_per }}<small class="">%</small>
                                 </span>
                                 <div class="slice" style="background: transparent;">
                                     <div class="bar"></div>
@@ -46,7 +46,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" *ngFor="let rank of ranks" href="javascript:void(0)">
-                            {{rank.name}}
+                            {{rank.rankName}}
                         </a>
                     </div>
                 </div>
@@ -71,22 +71,17 @@
                             <div class="line mt-1">
                             </div>
                         </div>
-                        <!------>
                         <div class="col-4">
                             <div class="line mt-1">
                             </div>
                         </div>
-                        <!------>
                         <div class="col-4">
                             <div class="line mt-1">
                             </div>
                         </div>
-                        <!------>
 
                     </div>
                 </div>
-                <!----->
-
                 <div class="col-2">
                     <div class="line-middle">
                         <div class="row">
@@ -94,25 +89,20 @@
                                 <div class="line bg-white">
                                 </div>
                             </div>
-                            <!------>
                             <div class="col-3">
                                 <div class="line">
                                 </div>
                             </div>
-                            <!------>
                             <div class="col-3">
                                 <div class="line">
                                 </div>
                             </div>
-                            <!------>
                             <div class="col-3">
                                 <div class="line">
                                 </div>
                             </div>
-                            <!------>
                         </div>
                     </div>
-                    <!----->
                 </div>
                 <div class="col-5">
                     <div class="row">

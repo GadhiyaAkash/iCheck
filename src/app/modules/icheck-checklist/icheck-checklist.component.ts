@@ -4,6 +4,7 @@ import { ModulesService } from '../modules.service';
 import * as _ from 'lodash';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { ToastrService } from 'ngx-toastr';
+import { LocalService } from 'src/app/core/services/local.service';
 
 @Component({
   selector: 'app-icheck-checklist',
@@ -13,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 export class IcheckChecklistComponent implements OnInit {
 
   checkListId: any = '';
-  checklistDetails: any = '';
 
   public rows: Array<any> = [];
   public columns: Array<any> = this.iCheckChecklistColumns;
@@ -41,13 +41,13 @@ export class IcheckChecklistComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private moduleService: ModulesService,
     private alertService: AlertService,
-    private toster: ToastrService
+    private toster: ToastrService,
+    private localService: LocalService
   ) { }
 
   ngOnInit(): void {
     this.checkListId = this.activeRoute.snapshot.paramMap.get('id');
     this.getAttachments();
-    this.checklistDetails = this.moduleService.getIchecklistDetails(this.checkListId);
   }
   
   getAttachments() {
@@ -65,6 +65,7 @@ export class IcheckChecklistComponent implements OnInit {
             this.checklistSummary.statusClass = "success"
             break;
         }
+        this.localService.set('checklist', this.checklistSummary);
       }
       if (res.details && res.details['Attachments']) {
         this.attachments = res.details['Attachments'];
@@ -77,6 +78,7 @@ export class IcheckChecklistComponent implements OnInit {
       }
     })
   }
+  
   public onChangeTable(config: any, page: any = { page: this.page, itemsPerPage: this.itemsPerPage }): any {
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);

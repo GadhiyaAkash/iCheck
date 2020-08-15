@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ModulesService } from '../modules.service';
 import * as _ from 'lodash';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { LocalService } from 'src/app/core/services/local.service';
 
 @Component({
   selector: 'app-icheck-accessibility',
@@ -27,25 +28,45 @@ export class IcheckAccessibilityComponent implements OnInit {
   showPreviousSubmission: boolean = false;
   locations: Array<any> = [];
   chapterList: Array<any> = [];
+  checklistDetails: any = '';
+  metaData: any = '';
 
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
     private moduleService: ModulesService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private localService: LocalService
   ) {
+    this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
     this.moduleService.allChapters();
+    this.getChapters();
+    this.getLocations();
+    this.getRanksRecords();
+    this.getChapterMeta();
   }
 
   ngOnInit(): void {
-    this.getLocations();
-    this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
-    this.getChapters();
+    this.checklistDetails = this.localService.get('checklist');
     this.details = this.moduleService.getIAccessbilityDetails(this.accessbilityId);
+    
     if (this.details && this.details.chapters) {
       this.getChapterDetails(this.details.chapters[0]);
     }
-    this.ranks = this.moduleService.getRanksRecords();
+  }
+
+  getChapterMeta() {
+    this.moduleService.getChapterStatus(this.accessbilityId).subscribe((response) => {
+      this.metaData = response.details || {};
+      if (this.metaData) {
+        this.metaData.completed_per = (100 * this.metaData.completed_chapters) / this.metaData.total_chapters;
+      }
+    });
+  }
+  getRanksRecords() {
+    this.moduleService.getRanksDetails().subscribe((response) => {
+      this.ranks = response.details;
+    });
   }
 
   getLocations() {
