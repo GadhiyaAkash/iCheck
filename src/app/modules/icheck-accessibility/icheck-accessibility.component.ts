@@ -4,6 +4,7 @@ import { ModulesService } from '../modules.service';
 import * as _ from 'lodash';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { LocalService } from 'src/app/core/services/local.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-icheck-accessibility',
@@ -36,7 +37,8 @@ export class IcheckAccessibilityComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private moduleService: ModulesService,
     private alertService: AlertService,
-    private localService: LocalService
+    private localService: LocalService,
+    private toster: ToastrService
   ) {
     this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
     this.getChapters();
@@ -177,27 +179,23 @@ export class IcheckAccessibilityComponent implements OnInit {
     this.resetPreviousSubmissionConfi();
   }
 
+  getAnswer() {
+    let answer = '';
+    _.forEach(this.activeQuestion.options, (ops) => {
+      let textA = _.find(ops.text, (r) => { return r.value == true; });
+      if (textA) {
+        answer = textA.slug;
+      }
+    });
+    return answer;
+  }
+
   nextQuestion() {
     let indexes = Object.assign({}, this.indexes)
     let hasNextQuestion = this.hasNext('question', ++indexes.question);
     if (hasNextQuestion) {
-      console.log("this.active:", this.activeQuestion);
-      let answer = ''; 
-      _.forEach(this.activeQuestion.options, (ops) => {
-        let textA = _.find(ops.text, (r) => { return r.value == true; });
-        console.log("textA::", textA);
-        if (textA) {
-          answer = textA.slug; 
-        }
-      });
-      console.log("answer::", answer);
-      
-      this.moduleService.saveQuestion(this.activeQuestion.id, {
-        answer: answer
-      }).subscribe((res) => {
-        ++this.indexes.question;
-        this.activeQuestion = hasNextQuestion;
-      });
+      let answer = this.getAnswer();
+      this.saveQuestion(answer, hasNextQuestion);
     } else if (this.activeSection.id) {
       let hasNextSection = this.hasNext('sections', ++indexes.section);
       if (hasNextSection) {
@@ -230,7 +228,6 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   nextChapter(chapter) {
-    this.moduleService.updateChapter(this.activeChapter);
     this.getChapterDetails(chapter);
   }
 
@@ -271,6 +268,14 @@ export class IcheckAccessibilityComponent implements OnInit {
 
   getPreviousSubmitssion(id: any) {
     this.showPreviousSubmission = !this.showPreviousSubmission;
+    this.moduleService.getPreviousSubmitssion(
+      this.activeChapter.chapterId,
+      this.activeSection.sectionId,
+      this.activeQuestion.id
+    ).subscribe( (res) => {
+      console.log("respojse::", res);
+      
+    })  
     this.previousSubmission = {
       inspection_date: '11/04/2020',
       reviewed_by: 'John Doe',
@@ -300,5 +305,17 @@ export class IcheckAccessibilityComponent implements OnInit {
         }
       }
     });
+  }
+
+  saveQuestion(answer, hasNextQuestion) {
+    // this.moduleService.saveQuestion(this.activeQuestion.id, {
+    //   answer: answer,
+    //   remark: this.activeQuestion.remark
+    // }).subscribe(() => {
+      ++this.indexes.question;
+      this.activeQuestion = hasNextQuestion;
+    // }, () => {
+    //   this.toster.error("Something went wrong!");
+    // });
   }
 }

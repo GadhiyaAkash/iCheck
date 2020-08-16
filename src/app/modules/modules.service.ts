@@ -42,6 +42,12 @@ export class ModulesService {
     );
   }
 
+  getPreviousSubmitssion(chapterID, sectionID, questionID) {
+    return this.apiService.get('attachmentdata/previousChapterSubmittion/' + chapterID + '/' + sectionID + '/' + questionID).pipe(
+      map(response => response)
+    );
+  }
+
   downloadSingleAttachments(id) {
     return this.apiService.get('attachment/download/' + id).pipe(
       map(response => response)
