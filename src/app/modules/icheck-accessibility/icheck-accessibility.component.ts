@@ -17,7 +17,7 @@ export class IcheckAccessibilityComponent implements OnInit {
   ranks: Array<any> = [];
   previousSubmission: any = {};
 
-  activeChapter: any;
+  activeChapter: any = {};
   activeSection: any = {};
   activeQuestion: any = {};
   indexes = {
@@ -39,7 +39,6 @@ export class IcheckAccessibilityComponent implements OnInit {
     private localService: LocalService
   ) {
     this.accessbilityId = this.activeRoute.snapshot.paramMap.get('id');
-    this.moduleService.allChapters();
     this.getChapters();
     this.getLocations();
     this.getRanksRecords();
@@ -49,10 +48,6 @@ export class IcheckAccessibilityComponent implements OnInit {
   ngOnInit(): void {
     this.checklistDetails = this.localService.get('checklist');
     this.details = this.moduleService.getIAccessbilityDetails(this.accessbilityId);
-    
-    if (this.details && this.details.chapters) {
-      this.getChapterDetails(this.details.chapters[0]);
-    }
   }
 
   getChapterMeta() {
@@ -63,6 +58,7 @@ export class IcheckAccessibilityComponent implements OnInit {
       }
     });
   }
+
   getRanksRecords() {
     this.moduleService.getRanksDetails().subscribe((response) => {
       this.ranks = response.details;
@@ -77,17 +73,20 @@ export class IcheckAccessibilityComponent implements OnInit {
 
   getChapters() {
     this.moduleService.getChapters(this.accessbilityId).subscribe((res) => {
-      this.chapterList = res.details;
+      this.chapterList = res.details || [];
+      console.log("this.chapterList::", this.chapterList);
+      this.getChapterDetails(this.chapterList[0]);
+
     })
   }
 
   updateIndex(key, id) {
     switch (key) {
       case 'chapters':
-        this.indexes.chapter = _.findIndex(this.details.chapters, (cp: any) => cp.id == id)
+        this.indexes.chapter = _.findIndex(this.chapterList, (cp: any) => cp.chapterId == id)
         break;
       case 'sections':
-        this.indexes.section = _.findIndex(this.activeChapter.sections, (cp: any) => cp.id == id);
+        this.indexes.section = _.findIndex(this.activeChapter.sections, (cp: any) => cp.sectionId == id);
         break;
       case 'question':
         this.indexes.question = _.findIndex(this.allQuetions, (cp: any) => cp.id == id);
@@ -97,16 +96,37 @@ export class IcheckAccessibilityComponent implements OnInit {
 
   getChapterDetails(chapter: any) {
     this.activeSection = {};
+    console.log("chapter::", chapter);
 
-    this.activeChapter = this.moduleService.getChapterDetails(chapter.id);
-    this.updateIndex('chapters', this.activeChapter.id)
+
+    this.activeChapter = chapter;
+    this.updateIndex('chapters', this.activeChapter.chapterId)
+
     if (this.activeChapter && this.activeChapter.sections) {
       this.activeSection = this.activeChapter.sections[0];
-      this.updateIndex('sections', this.activeSection.id)
-      this.transformQuestions(this.activeSection.questions)
+      this.updateIndex('sections', this.activeSection.sectionId)
+      this.getQuestions();
+      // this.transformQuestions(this.activeSection.questions)
     } else {
       this.transformQuestions(this.activeChapter.questions)
     }
+  }
+
+  getQuestions() {
+    this.moduleService.getQuestions(
+      this.activeChapter.chapterId,
+      this.activeSection.sectionId
+    ).subscribe((res) => {
+      console.log("res::", res.details);
+      this.activeSection.questions = res.details.data;
+      this.activeQuestion = this.activeSection.questions[0];
+      this.allQuetions = res.details.data || [];
+      this.allQuetions = _.map(this.allQuetions, (res) => {
+        res.options = this.moduleService.questionOptions();
+        return res;
+      })
+      this.updateIndex('question', this.activeQuestion.id)
+    })
   }
 
   questions: any = [];
@@ -161,8 +181,23 @@ export class IcheckAccessibilityComponent implements OnInit {
     let indexes = Object.assign({}, this.indexes)
     let hasNextQuestion = this.hasNext('question', ++indexes.question);
     if (hasNextQuestion) {
-      ++this.indexes.question;
-      this.activeQuestion = hasNextQuestion;
+      console.log("this.active:", this.activeQuestion);
+      let answer = ''; 
+      _.forEach(this.activeQuestion.options, (ops) => {
+        let textA = _.find(ops.text, (r) => { return r.value == true; });
+        console.log("textA::", textA);
+        if (textA) {
+          answer = textA.slug; 
+        }
+      });
+      console.log("answer::", answer);
+      
+      this.moduleService.saveQuestion(this.activeQuestion.id, {
+        answer: answer
+      }).subscribe((res) => {
+        ++this.indexes.question;
+        this.activeQuestion = hasNextQuestion;
+      });
     } else if (this.activeSection.id) {
       let hasNextSection = this.hasNext('sections', ++indexes.section);
       if (hasNextSection) {
@@ -211,6 +246,7 @@ export class IcheckAccessibilityComponent implements OnInit {
       this.transformQuestions(this.activeChapter.questions)
     }
   }
+
   hasNext(key, index) {
     switch (key) {
       case 'chapters':

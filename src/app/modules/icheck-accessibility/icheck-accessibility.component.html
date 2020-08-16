@@ -127,7 +127,7 @@
                 <!----->
             </div>
         </div>
-        <p class="text-center mt-1 font-normal mb-0">{{ activeChapter.title }}</p>
+        <p class="text-center mt-1 font-normal mb-0">{{ activeChapter.chaptername }}</p>
     </section>
     <section class="">
         <div class="d-md-flex">
@@ -144,14 +144,18 @@
                     </h4>
                     <div class="collapse show" id="collapseExample">
                         <ul>
-                            <li [ngClass]="{'active' : (activeChapter.id == chapter.id ), 'has_child':chapter.childrens }"
-                                *ngFor="let chapter of details.chapters">
-                                <a class="parent" (click)="nextChapter(chapter)">{{ chapter.title }}</a>
+                            <li [ngClass]="{'active' : (activeChapter.chapterId == chapter.chapterId ), 'has_child': chapter.sections }"
+                                *ngFor="let chapter of chapterList">
+                                <a class="parent" (click)="nextChapter(chapter)">
+                                    {{ chapter.chaptername }}
+                                </a>
 
-                                <ul class="inside" id="" *ngIf="chapter.childrens">
-                                    <li *ngFor="let child of chapter.childrens" (click)="nextSection(child)"
-                                        [ngClass]="{'active' : (activeSection.id == child.id) }">
-                                        <a class="child">{{ child.title }}</a>
+                                <ul class="inside" id="" *ngIf="chapter.sections">
+                                    <li *ngFor="let child of chapter.sections" (click)="nextSection(child)"
+                                        [ngClass]="{'active' : (activeSection.sectionId == child.sectionId) }">
+                                        <a class="child">
+                                            {{ child.sectionname }}
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
@@ -163,19 +167,19 @@
                 <div class="bg-white py-3 px-4 mt-3 pb-5 mb-4 isummery">
                     <div *ngFor="let question of allQuetions | filterBy: ['id']: activeQuestion.id ">
                         <h1 class="title">
-                            <span>{{ activeChapter.id }}</span>
-                            <span *ngIf="activeSection.id">.{{ activeSection.id }}</span>
+                            <span>{{ activeChapter.chapterId }}</span>
+                            <span *ngIf="activeSection.id">.{{ activeSection.sectionId }}</span>
                             <span *ngIf="activeQuestion.id">.{{ activeQuestion.id }}</span>
-                            : {{ activeSection.id ? activeSection.title : activeChapter.title }}
+                            : {{ activeSection.sectionId ? activeSection.sectionname : activeChapter.chaptername }}
                         </h1>
                         <nav aria-label=" breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="javascript:void(0);">Chapter {{ activeChapter.id }}</a>
+                                    <a href="javascript:void(0);">Chapter {{ activeChapter.chapterId }}</a>
                                 </li>
-                                <li class="breadcrumb-item" *ngIf="activeSection.id">
+                                <li class="breadcrumb-item" *ngIf="activeSection.sectionId">
                                     <a href="javascript:void(0);">
-                                        Section {{ activeSection.id }}
+                                        Section {{ activeSection.sectionId }}
                                     </a>
                                 </li>
                                 <li *ngIf="activeQuestion.id" class="breadcrumb-item active" aria-current="page">
@@ -200,7 +204,7 @@
                                     </svg>
                                 </div>
                                 <div class="question-list">
-                                    <p>{{ question.title }}</p>
+                                    <p>{{ question.question }}</p>
                                     <p *ngIf="question.guidance">
                                         <b>Guidance:</b>
                                         {{ question.guidance }}
@@ -242,11 +246,13 @@
                                     </i>
                                 </div>
                                 <div class="d-flex flex-wrap">
-                                    <div class="upload-box mt-2" *ngFor="let attachment of question.attachments;let i = index">
+                                    <div class="upload-box mt-2"
+                                        *ngFor="let attachment of question.attachments;let i = index">
                                         <div class="text-center">
                                             <img [src]="attachment.thumbline_image" class="summery-img">
                                             <div class="summery-overlay">
-                                                <a (click)="deleteAttachment(i, question.attachments)" href="javascript:void(0)" class="icon" title="">
+                                                <a (click)="deleteAttachment(i, question.attachments)"
+                                                    href="javascript:void(0)" class="icon" title="">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
@@ -319,19 +325,22 @@
                                             </div>
                                             <!---->
                                             <div class="d-flex flex-wrap">
-                                                <div class="upload-box mt-2" *ngFor="let attachment of previousSubmission.attachments;let i = index">
+                                                <div class="upload-box mt-2"
+                                                    *ngFor="let attachment of previousSubmission.attachments;let i = index">
                                                     <div class="text-center">
-                                                        <img [src]="attachment.thumbline_image"
-                                                            class="summery-img">
+                                                        <img [src]="attachment.thumbline_image" class="summery-img">
                                                         <div class="summery-overlay">
-                                                            <a (click)="deleteAttachment(i)" href="javascript:void(0)" class="icon" title="">
+                                                            <a (click)="deleteAttachment(i)" href="javascript:void(0)"
+                                                                class="icon" title="">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="p-2">
-                                                        <a href="javascript:void(0)" class="underline upload-title">{{ attachment.name }}</a>
-                                                        <p class=" mb-0"><small class="link-mute">{{ attachment.size }}</small>
+                                                        <a href="javascript:void(0)"
+                                                            class="underline upload-title">{{ attachment.name }}</a>
+                                                        <p class=" mb-0"><small
+                                                                class="link-mute">{{ attachment.size }}</small>
                                                         </p>
                                                     </div>
                                                 </div>

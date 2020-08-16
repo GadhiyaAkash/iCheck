@@ -17,6 +17,12 @@ export class ModulesService {
       map(response => response)
     );
   }
+  
+  getQuestions(chapterID: any, sectionID:any) {
+    return this.apiService.get('attachmentdata/getChapterDetails/' + chapterID + '/' + sectionID).pipe(
+      map(response => response)
+    );
+  }
 
   getLocations() {
     return this.apiService.get('locations').pipe(
@@ -239,6 +245,17 @@ export class ModulesService {
     ];
   }
 
+  questionOptions() {
+    return [{
+      type: 'radio',
+      text: [
+        { slug: 'satisfactory', title: 'Satisfactory', value: false },
+        { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
+        { slug: 'not_applicable', title: 'Not Applicable', value: false },
+        { slug: 'not_seen', title: 'Not Seen' },
+      ]
+    }]
+  }
   getIAccessbilityDetails(id: any) {
     return {
       id: id,
@@ -261,5 +278,11 @@ export class ModulesService {
       completion_percentage: 9,
       total_reading_time: '14h 30m'
     }
+  }
+
+  saveQuestion(id, params) {
+    return this.apiService.post('attachmentdata/saveAnswer/' + id, params).pipe(
+      map(response => response)
+    );
   }
 }
