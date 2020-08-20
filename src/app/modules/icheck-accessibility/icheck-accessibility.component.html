@@ -146,15 +146,15 @@
                         <ul>
                             <li [ngClass]="{'active' : (activeChapter.chapterId == chapter.chapterId ), 'has_child': chapter.sections }"
                                 *ngFor="let chapter of chapterList">
-                                <a class="parent" (click)="nextChapter(chapter)">
-                                    {{ chapter.chaptername }}
+                                <a class="parent truncate-text" (click)="nextChapter(chapter)">
+                                    <span class="">{{ chapter.chaptername || 'Untitled' }}</span>
                                 </a>
 
                                 <ul class="inside" id="" *ngIf="chapter.sections">
                                     <li *ngFor="let child of chapter.sections" (click)="nextSection(child)"
                                         [ngClass]="{'active' : ((activeSection.sectionId == child.sectionId) && (activeChapter.chapterId == chapter.chapterId)) }">
-                                        <a class="child">
-                                            {{ child.sectionname || 'Untitled' }}
+                                        <a class="child truncate-text">
+                                            <span class="">{{ child.sectionname || 'Untitled' }}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -290,11 +290,11 @@
                                                     Inspection date : {{ previousSubmission.inspection_date }}
                                                 </p>
                                                 <p class="text-mute mb-2">Reviewed by :
-                                                    {{ previousSubmission.reviewed_by }}</p>
+                                                    {{ previousSubmission.reviewed_by || '-' }}</p>
                                                 <p class="text-mute mb-2">Review date :
-                                                    {{ previousSubmission.review_date }}</p>
+                                                    {{ previousSubmission.review_date || '-' }}</p>
                                                 <p class="text-mute mb-0">Approval date :
-                                                    {{ previousSubmission.approval_date }}</p>
+                                                    {{ previousSubmission.approval_date || '-' }}</p>
                                             </div>
                                             <div class="mt-4 row m-l-3">
                                                 <div *ngFor="let text of previousSubmission.option"
@@ -316,15 +316,13 @@
                                                         #remarks="ngModel" readonly></textarea>
                                                 </div>
                                             </div>
-                                            <!---->
-                                            <div class="mt-3">
+                                            <div class="mt-3" *ngIf="previousSubmission.attachments">
                                                 <a href="javascript:void(0)" class="underline d-inline-block mr-4"><i
                                                         class="fa fa-paperclip mr-2 text-mute"></i><small>Attachment</small></a><i><small
                                                         class="link-mute">Guidance for the type of Objective
                                                         Evidence required.</small></i>
                                             </div>
-                                            <!---->
-                                            <div class="d-flex flex-wrap">
+                                            <div class="d-flex flex-wrap" *ngIf="previousSubmission.attachments">
                                                 <div class="upload-box mt-2"
                                                     *ngFor="let attachment of previousSubmission.attachments;let i = index">
                                                     <div class="text-center">

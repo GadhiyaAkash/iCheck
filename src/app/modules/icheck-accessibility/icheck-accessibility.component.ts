@@ -75,7 +75,8 @@ export class IcheckAccessibilityComponent implements OnInit {
 
   getChapters() {
     this.moduleService.getChapters(this.accessbilityId).subscribe((res) => {
-      this.chapterList = res.details || [];
+      res.details = res.details || [];
+      this.chapterList = _.sortBy(res.details, [(o) => { return +o.chapterId; }]);
       console.log("this.chapterList::", this.chapterList);
       this.getChapterDetails(this.chapterList[0]);
 
@@ -114,19 +115,29 @@ export class IcheckAccessibilityComponent implements OnInit {
     }
   }
 
+  transformQuestionsRes(questions) {
+    let data = [];
+    data = _.map(questions, (q) => {
+      q.question = q.question || {};
+      let filterObj = this.getOption(q.answer);
+      q.question.options = filterObj.options;
+      q.question.remark = filterObj.remark;
+      return q.question;
+    });
+    return data;
+  }
+
   getQuestions() {
     this.moduleService.getQuestions(
       this.activeChapter.chapterId,
       this.activeSection.sectionId
     ).subscribe((res) => {
-      console.log("res::", res.details);
-      this.activeSection.questions = res.details.data;
-      this.activeQuestion = this.activeSection.questions[0];
-      this.allQuetions = res.details.data || [];
-      this.allQuetions = _.map(this.allQuetions, (res) => {
-        res.options = this.moduleService.questionOptions();
-        return res;
-      })
+      console.log("res::", res.details.data);
+      let questions = this.transformQuestionsRes(res.details.data);
+      console.log("questions::", questions);
+      this.activeSection.questions = questions;
+      this.activeQuestion = this.activeSection.questions[0].question;
+      this.allQuetions = questions;
       this.updateIndex('question', this.activeQuestion.id)
     })
   }
@@ -272,27 +283,34 @@ export class IcheckAccessibilityComponent implements OnInit {
       this.activeChapter.chapterId,
       this.activeSection.sectionId,
       this.activeQuestion.id
-    ).subscribe( (res) => {
-      console.log("respojse::", res);
+    ).subscribe((res) => {
+      console.log("respojse::", res.details);
+      let response = res.details || {};
+      response.attachmentanswerdata = response.attachmentanswerdata || [];
       
-    })  
-    this.previousSubmission = {
-      inspection_date: '11/04/2020',
-      reviewed_by: 'John Doe',
-      review_date: '15/04/2020',
-      approval_date: '18/04/2020',
-      attachments: [
-        { name: 'document.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '12kb', src: '' },
-        { name: 'evidence.jpg', thumbline_image: 'https://via.placeholder.com/150', size: '24kb', src: '' }
-      ],
-      option: [
-        { slug: 'satisfactory', title: 'Satisfactory', value: false },
-        { slug: 'not_satisfactory', title: 'Not Satisfactory', value: false },
-        { slug: 'not_applicable', title: 'Not Applicable', value: false },
-        { slug: 'not_seen', title: 'Not Seen' },
-      ],
-      remark: 'Submission Comments allows users to view all assignment submission comments sent and received within the last four weeks.'
+      let filterObj = this.getOption(response.attachmentanswerdata);
+      this.previousSubmission = {
+        option: filterObj.options,
+        remark: filterObj.remark
+      }
+    })
+  }
+
+  getOption(answers: any = []) {
+    let latestAnswer = _.maxBy(answers, (o: any) => { return o.id; });
+    latestAnswer = latestAnswer || {};
+
+    var options = this.moduleService.questionOptions();
+    _.forEach(options[0].text, (opt) => {
+      if (opt.slug == latestAnswer.answer) {
+        opt.value = true;
+      }
+    });
+    var res = {
+      remark: latestAnswer.remarks,
+      options: options[0].text 
     }
+    return res;
   }
 
   deleteAttachment(index, data: any = []) {
@@ -308,14 +326,14 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   saveQuestion(answer, hasNextQuestion) {
-    // this.moduleService.saveQuestion(this.activeQuestion.id, {
-    //   answer: answer,
-    //   remark: this.activeQuestion.remark
-    // }).subscribe(() => {
+    this.moduleService.saveQuestion(this.activeQuestion.id, {
+      answer: answer,
+      remarks: this.activeQuestion.remark
+    }).subscribe(() => {
       ++this.indexes.question;
       this.activeQuestion = hasNextQuestion;
-    // }, () => {
-    //   this.toster.error("Something went wrong!");
-    // });
+    }, () => {
+      this.toster.error("Something went wrong!");
+    });
   }
 }

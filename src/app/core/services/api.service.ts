@@ -33,6 +33,10 @@ export class ApiService {
     return this.httpService.post(`${this.API_URL}${path}`, body, hideLoader);
   }
 
+  postParams(path: string, body: Object = {}, hideLoader: boolean = false, params: URLSearchParams = new URLSearchParams()): Observable<any> {
+    return this.httpService.postParams(`${this.API_URL}${path}`, body, hideLoader, params);
+  }
+
   /**
    * @description POST api call with application/x-www-form-urlencoded request
    * @param path API URL

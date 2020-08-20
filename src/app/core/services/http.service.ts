@@ -52,6 +52,17 @@ export class HttpService {
 
   }
 
+  postParams(path: string, body: Object = {}, hideLoader: boolean = false, params: Object = {}): Observable<any> {
+    const httpParams = Object.assign(this.getHeaders({ hideLoader: hideLoader }, true), {
+      params: params
+    });
+    return this.http.post(
+      `${path}`,
+      JSON.stringify(body),
+      httpParams
+    ).pipe(map((res: Response) => res));
+  }
+
   delete(path: string, params: URLSearchParams = new URLSearchParams(), hideLoader: boolean = false): Observable<any> {
     const httpParams = Object.assign(this.getHeaders({ hideLoader: hideLoader }, true), {
       params: new HttpParams({ fromString: this.createGetParams(params) })

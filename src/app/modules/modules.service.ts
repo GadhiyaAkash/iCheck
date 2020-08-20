@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { ApiService } from '../core/services/api.service';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -286,8 +287,8 @@ export class ModulesService {
     }
   }
 
-  saveQuestion(id, params) {
-    return this.apiService.post('attachmentdata/saveAnswer/' + id, params).pipe(
+  saveQuestion(id:any, params:any): Observable<any> {
+    return this.apiService.postParams('attachmentdata/saveAnswer/' + id, null, false, params).pipe(
       map(response => response)
     );
   }

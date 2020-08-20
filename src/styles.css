@@ -1165,3 +1165,10 @@ th .dropdown .btn {
 .m-l-3 {
   margin-left: 3px !important;
 }
+
+.truncate-text {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
