@@ -343,14 +343,14 @@ export class IcheckAccessibilityComponent implements OnInit {
   }
 
   saveQuestion(answer, hasNextQuestion) {
-    // this.moduleService.saveQuestion(this.activeQuestion.id, {
-    //   answer: answer,
-    //   remarks: this.activeQuestion.remark
-    // }).subscribe(() => {
+    this.moduleService.saveQuestion(this.activeQuestion.id, {
+      answer: answer,
+      remarks: this.activeQuestion.remark
+    }).subscribe(() => {
       ++this.indexes.question;
       this.activeQuestion = hasNextQuestion;
-    // }, () => {
-    //   this.toster.error("Something went wrong!");
-    // });
+    }, () => {
+      this.toster.error("Something went wrong!");
+    });
   }
 }
