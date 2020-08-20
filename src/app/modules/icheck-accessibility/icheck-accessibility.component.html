@@ -207,7 +207,7 @@
                                     <p>{{ question.question }}</p>
                                     <p *ngIf="question.guidance">
                                         <b>Guidance:</b>
-                                        {{ question.guidance }}
+                                        <span [innerHTML]="question.guidance"></span>
                                     </p>
 
                                     <div class="mt-4">
@@ -346,13 +346,13 @@
                             </div>
                         </div>
                         <div class="mt-3 pb-3">
-                            <button class="btn btn-previous float-left" *ngIf="indexes.question"
+                            <button class="btn btn-previous float-left" *ngIf="indexes.question || indexes.chapter"
                                 (click)="previous()">Previous</button>
                             <button class="btn btn-theme float-right"
-                                *ngIf="((chapterList.length - 1) != indexes.chapter)"
+                                *ngIf="!(((chapterList.length - 1) == indexes.chapter) && ((allQuetions.length - 1) == indexes.question) && ((activeChapter.sections.length - 1) == indexes.section))"
                                 (click)="nextQuestion()">Next</button>
                             <button class="btn btn-theme float-right"
-                                *ngIf="((chapterList.length - 1) == indexes.chapter)"
+                                *ngIf="(((chapterList.length - 1) == indexes.chapter) && ((allQuetions.length - 1) == indexes.question) && ((activeChapter.sections.length - 1) == indexes.section))"
                                 (click)="submitQuestion()">Submit</button>
                         </div>
                     </div>
