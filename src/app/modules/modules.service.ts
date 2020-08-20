@@ -263,30 +263,7 @@ export class ModulesService {
       ]
     }]
   }
-  getIAccessbilityDetails(id: any) {
-    return {
-      id: id,
-      title: 'I-Check: Version 1.0',
-      chapters: [
-        { id: 1, title: 'Accessibility: How to Design for All' },
-        {
-          id: 2,
-          title: 'Web Accessibility',
-          childrens: [
-            { id: 1, parent_id: 2, title: 'Captions for audio' },
-            { id: 2, parent_id: 2, title: 'Device independence' },
-          ]
-        },
-        { id: 3, title: 'Conformance to Standards' },
-        { id: 4, title: 'Responsibility of Web' }
-      ],
-      completed_chapter: 2,
-      total_chapter: 4,
-      completion_percentage: 9,
-      total_reading_time: '14h 30m'
-    }
-  }
-
+  
   saveQuestion(id:any, params:any): Observable<any> {
     return this.apiService.postParams('attachmentdata/saveAnswer/' + id, null, false, params).pipe(
       map(response => response)

@@ -211,19 +211,16 @@
                                     </p>
 
                                     <div class="mt-4">
-                                        <div *ngFor="let option of question.options">
-                                            <div *ngIf="option.type == 'radio'">
-                                                <div *ngFor="let text of option.text"
-                                                    class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions_{{ text.slug }}"
-                                                        id="inlineRadio1_{{ text.slug }}" [checked]="text.value"
-                                                        (change)="updateSelectedQuetion(option.text, text.slug, $event)">
-                                                    <label class="form-check-label" for="inlineRadio1_{{ text.slug }}">
-                                                        {{ text.title }}
-                                                    </label>
-                                                </div>
-                                            </div>
+                                        <div *ngFor="let option of question.options"
+                                            class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio"
+                                                name="inlineRadioOptions_{{ option.slug }}"
+                                                id="inlineRadio1_{{ option.slug }}" [checked]="option.value"
+                                                (change)="updateSelectedQuetion(question.options, option.slug, $event)">
+                                            <label class="form-check-label"
+                                                for="inlineRadio1_{{ question.options.slug }}">
+                                                {{ option.title }}
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -235,7 +232,7 @@
                                             #mailtextvalidityMsg="ngModel"></textarea>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-3" *ngIf="question.attachments">
                                     <i class="fa fa-paperclip mr-2"></i>
                                     <a href="javascript:void(0);" class="underline d-inline-block mr-4">
                                         <small>Attachment</small>
@@ -245,7 +242,7 @@
                                             required.</small>
                                     </i>
                                 </div>
-                                <div class="d-flex flex-wrap">
+                                <div class="d-flex flex-wrap" *ngIf="question.attachments">
                                     <div class="upload-box mt-2"
                                         *ngFor="let attachment of question.attachments;let i = index">
                                         <div class="text-center">
@@ -287,7 +284,7 @@
                                         <div class="modal-body">
                                             <div class="pb-1">
                                                 <p class="text-mute mb-2">
-                                                    Inspection date : {{ previousSubmission.inspection_date }}
+                                                    Inspection date : {{ previousSubmission.inspection_date || '-' }}
                                                 </p>
                                                 <p class="text-mute mb-2">Reviewed by :
                                                     {{ previousSubmission.reviewed_by || '-' }}</p>
@@ -352,10 +349,10 @@
                             <button class="btn btn-previous float-left" *ngIf="indexes.question"
                                 (click)="previous()">Previous</button>
                             <button class="btn btn-theme float-right"
-                                *ngIf="((details.chapters.length - 1) != indexes.chapter)"
+                                *ngIf="((chapterList.length - 1) != indexes.chapter)"
                                 (click)="nextQuestion()">Next</button>
                             <button class="btn btn-theme float-right"
-                                *ngIf="((details.chapters.length - 1) == indexes.chapter)"
+                                *ngIf="((chapterList.length - 1) == indexes.chapter)"
                                 (click)="submitQuestion()">Submit</button>
                         </div>
                     </div>
