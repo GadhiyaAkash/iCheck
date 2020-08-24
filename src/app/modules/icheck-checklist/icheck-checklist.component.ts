@@ -153,6 +153,10 @@ export class IcheckChecklistComponent implements OnInit {
   }
 
   downloadAll() {
+    if (this.rows.length == 0) {
+      this.toster.warning("No attachments available for download.");
+      return;
+    }
     this.alertService.confirm('You are about to download all attachments!').then((response) => {
       if (response.isConfirmed) {
         this.moduleService.downloadAllAttachments(this.checklistSummary.id).subscribe((res) => {

@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <section class="isummery bg-white">
-        <h1 class="title">{{ checklistSummary.vessel }}<span> ({{ attachments.length }})</span></h1>
+        <h1 class="title">{{ checklistSummary.vessel }}<span *ngIf="attachments.length"> ({{ attachments.length }})</span></h1>
 
         <section class="summery-bottom mt-5 pt-2">
             <div class="d-md-flex justify-content-between">
                 <div class="d-md-flex align-items-center">
                     <h5 class="title-sm mr-md-4 mb-0">
-                        #{{ checklistSummary.id }}
+                        <span *ngIf="checklistSummary.id">#{{ checklistSummary.id }}</span>
                         <span *ngIf="checklistSummary.lastRefereces">- {{ checklistSummary.lastRefereces }}</span>
                     </h5>
                     <span class="stts stts-{{ checklistSummary.statusClass }}">

@@ -21,7 +21,7 @@
                         <div class="form-group text-center mb-4">
                             <select name="ship" required class="form-control text-center"
                                 [(ngModel)]="entity.ship.id">
-                                <option value="">Select ship</option>
+                                <option value="" disabled>Select ship</option>
                                 <option *ngFor="let ship of ships" value={{ship.id}}>
                                     {{ ship.shipName }}
                                 </option>

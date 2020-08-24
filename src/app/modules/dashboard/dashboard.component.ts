@@ -78,7 +78,11 @@ export class DashboardComponent implements OnInit {
         res.active = false;
         let hasRecords = _.find(checklistCharts, (cc) => cc.optionId == res.id);
         if (hasRecords) {
-          res.pieChartData = [hasRecords.Completed, hasRecords.Submitted, hasRecords.Inprogress];
+          res.pieChartData = [
+            hasRecords.Completed || null, 
+            hasRecords.Submitted || null, 
+            hasRecords.Inprogress || null
+          ];
           if (_.sum(res.pieChartData) == 0) {
             res.pieChartData = ['No Records']
             res.pieChartLabels = ['No Records'];
